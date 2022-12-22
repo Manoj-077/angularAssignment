@@ -1,0 +1,53 @@
+<!-- <section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card bg-light text-dark" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+                    <div class="mb-md-5 mt-md-4 pb-5">
+                        <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                        <p class="text-dark-50 mb-5">Please enter your login and password!</p>
+        
+                        <div class="form-outline form-dark mb-4">
+                        <label class="form-label" for="typeEmailX">Email</label>
+                        <input type="email" id="typeEmailX" class="form-control form-control-lg" />
+                        </div>
+        
+                        <div class="form-outline form-dark mb-4">
+                        <label class="form-label" for="typePasswordX">Password</label>
+                        <input type="password" id="typePasswordX" class="form-control form-control-lg" />
+                        </div>
+                        <button class="btn btn-outline-dark btn-lg px-5" type="submit" (click)="login()">Login</button>
+                    </div>
+                    <div>
+                        <p class="mb-0">Don't have an account? <a class="text-dark-50 fw-bold" routerLink="/signup">Sign Up</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+         </div>
+      </div>
+    </div>
+  </section> -->
+
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+  
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <img src="https://career.gatech.edu/sites/default/files/images/itorizon_logo.png" id="icon" alt="User Icon" />
+      </div>
+  
+      <!-- Login Form -->
+      <form (ngSubmit)="login()" #f="ngForm">
+        <input type="text" id="login" class="fadeIn second" name="username" placeholder="login" ngModel>
+        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" ngModel>
+        <input type="submit" class="fadeIn fourth" value="Log In">
+      </form>
+      <div class="alert alert-danger" role="alert" *ngIf="showalert">
+       Invalid Username and password. Try again!
+      </div>
+      
+    </div>
+  </div>

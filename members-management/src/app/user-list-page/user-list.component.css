@@ -1,0 +1,26 @@
+#label{
+    background-color: rgb(116, 197, 255);
+   
+}
+svg{
+    display: inline;
+    position: relative;
+    bottom: 10px;height: 40px;width:50px; margin-left:15px
+}
+h1{
+    margin-left: 20px;
+    margin-bottom: 0;
+    display: inline-block;
+}
+#add{
+    display: inline-block;
+}
+#popup{
+    display:contents;
+    visibility: hidden;
+    position: absolute;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

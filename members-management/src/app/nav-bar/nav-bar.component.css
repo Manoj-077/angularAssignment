@@ -1,0 +1,10 @@
+@media (max-width: 900px) {
+    .navbar-nav{
+        width: 50%;
+    }
+    
+}
+
+#nav{
+    background-color: rgba(52, 52, 175, 0.956);
+}
