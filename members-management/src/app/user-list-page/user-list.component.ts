@@ -13,6 +13,7 @@ import { Subject } from 'rxjs';
 export class UserListComponent implements OnInit {
   @ViewChild('popup') pop :ElementRef;
   @ViewChild('username') username : ElementRef;
+  @ViewChild('Description') description : ElementRef;
   loggedUser : string;
   userExist : boolean =false;
   users : any
@@ -20,7 +21,7 @@ export class UserListComponent implements OnInit {
   roles : any;
   name : any;
   constructor(private http: HttpClient, private router: Router, private userService : UserService){
-   
+      
   }
   
   ngOnInit(): void {
@@ -39,32 +40,76 @@ export class UserListComponent implements OnInit {
   closePopup(){
     this.pop.nativeElement.style.visibility = 'hidden';
   }
+  clear(){
+    this.username.nativeElement.value = ""
+    this.description.nativeElement.value = "";
+  }
   addUser(){
     this.http.get("http://localhost:3000/users").subscribe((data)=>{
       this.users = data;
       for (let i=0;i< this.users.length;i++){
-        if(this.users[i].username === this.username.nativeElement.value){
+        if(this.users[i].userName === this.username.nativeElement.value){
           this.userExist = true
           break
         }
       }
-      if(this.userExist === false){
+      if(!this.userExist){
       this.router.navigate(['/main/userDetails'])
       }
       else{
         this.userExist=true;
-        this.closePopup();
+        
         setTimeout(()=>{
           this.userExist = false;
           this.router.navigate(['/main/userList'])
         }, 2000)
         
       }
-      
+      this.clear();
       // this.user = this.users.find((o:any)=>{o.username === this.username.nativeElement.value})
       // console.log(this.user)
     }
     )
     
   }
+
+
+  displayModal: boolean;
+
+    displayBasic: boolean;
+
+    displayBasic2: boolean;
+
+    displayMaximizable: boolean;
+
+    displayResponsive: boolean;
+
+    displayPosition: boolean;
+
+    position: string;
+
+    showModalDialog() {
+        this.displayModal = true;
+    }
+
+    showBasicDialog() {
+        this.displayBasic = true;
+    }
+
+    showBasicDialog2() {
+        this.displayBasic2 = true;
+    }
+
+    showMaximizableDialog() {
+        this.displayMaximizable = true;
+    }
+
+    showPositionDialog(position: string) {
+        this.position = position;
+        this.displayPosition = true;
+    }
+
+    showResponsiveDialog() {
+        this.displayResponsive = true;
+    }
 }

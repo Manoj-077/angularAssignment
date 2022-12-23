@@ -13,6 +13,12 @@ import { LoginComponent } from './login-page/login.component';
 import { SignupPageComponent } from './signup-page/signup-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDetailsPageComponent } from './user-details-page/user-details-page.component';
+import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
+import {ButtonModule} from 'primeng/button';             
+import {DialogModule} from 'primeng/dialog';
+import {CheckboxModule} from 'primeng/checkbox';
+import {DropdownModule} from 'primeng/dropdown';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -33,7 +39,12 @@ import { UserDetailsPageComponent } from './user-details-page/user-details-page.
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    
+    AccordionModule,
+    ButtonModule,
+    DialogModule,
+    BrowserAnimationsModule,
+    CheckboxModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

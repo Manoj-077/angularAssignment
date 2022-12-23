@@ -9,7 +9,8 @@
 <div class="container">
     <div class="row">
         <div class="col" >
-            <button class="btn btn-success mt-4 mb-2 mr-5" style="float: right;" id="add" (click)="openPop()" [disabled]="!roles.canAdd">Add +</button>
+          <p-button (click)="showResponsiveDialog()" class="mt-4 mb-2 mr-5"  id="add" icon="pi pi-external-link" label="Add+" [disabled]="!roles.canAdd"></p-button>
+            <!-- <button class="btn btn-success mt-4 mb-2 mr-5" style="float: right;" id="add" (click)="openPop()" >Add +</button> -->
         </div>
     </div>
     <hr>
@@ -19,7 +20,8 @@
         Username already exists!
     </div>
 </div>
-<div class="modal" tabindex="-1" id="popup" #popup>
+
+<!-- <div class="modal" tabindex="-1" id="popup" #popup>
     <div class="modal-dialog" >
       <div class="modal-content" >
         <div class="modal-header">
@@ -39,5 +41,33 @@
         </div>
       </div>
     </div>
-</div>
+</div> -->
     
+
+<div #popup id="primepop">
+  
+  <p-dialog header="" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}" [style]="{width: '600px'}"
+      [draggable]="false" [resizable]="false">
+      <div class="row">
+        <div class="col-md-4">
+          <label id="d1"><h5 >Enter Username:<span style="color: red;">*</span></h5></label>
+        </div>
+        <div class="col" id="d2">
+          <input class="form-control" name="username" #username>
+        </div>
+      </div>
+      <br><br>
+      <div class="row">
+        <div class="col-md-4">
+          <label id="d3"><h5>Description:</h5></label>
+        </div>
+        <div class="col" id="d4">
+          <textarea class="form-control"  type="text" rows="4" style="resize: none;" name="Description" #description></textarea>
+        </div>
+      </div>
+          <ng-template pTemplate="footer">
+          <p-button (click)="displayResponsive=false" label="Cancel" styleClass="p-button-text"></p-button>
+          <p-button (click)="displayResponsive=false;" (click)="addUser()" label="Ok" styleClass="p-button-text"></p-button>
+          </ng-template>
+  </p-dialog>
+</div>

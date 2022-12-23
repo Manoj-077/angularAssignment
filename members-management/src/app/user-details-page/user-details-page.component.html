@@ -1,1 +1,151 @@
-<p>user-details-page works!</p>
+<div class="container rounded bg-white mt-5 mb-5">
+   <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-4 border-right">
+
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" width="150px" >
+               
+                <label for="imageinput">upload image</label><br>
+                <input type="file" name="imageinput" id="imageinput" required ngModel>
+                    <!-- <span class="font-weight-bold">Edogaru</span>
+                    <span class="text-black-50">edogaru@mail.com.my</span>
+                    <span> </span> -->
+            </div>
+            
+        </div>
+        <div class="col-md-6 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">User Details</h4>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label>UserName</label>
+                        <input type="text" class="form-control" placeholder="username" value="" required name="username" ngModel>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label >First Name:</label>
+                        <input type="text" class="form-control" placeholder="first name" value="" required name="firstname" ngModel>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Last name:</label>
+                        <input type="text" class="form-control" value="" placeholder="last name" required name="lastname" ngModel>
+                    </div>
+                </div>
+                <div class="form-outline datepicker w-100">
+                    <label for="birthdayDate" >Birthday:</label>
+                    <input type="date" class="form-control" name="birthdayDate" id="birthdayDate" ngModel  required/>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label >Mobile Number:</label>
+                        <input type="text" class="form-control" placeholder="enter phone number" value="" required name="mobile" ngModel>
+                    </div>
+                    <div class="col-md-12">
+                        <label >Address :</label>
+                        <input type="text" class="form-control" placeholder="enter address" value="" required name="address" ngModel>
+                    </div>
+                    <div class="col-md-12">
+                        <label >zipcode</label>
+                        <input type="text" class="form-control" placeholder="zipcode" value="" required name="zipcode" ngModel>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 dropdown">
+                            <label>Country:</label>
+                            <select placeholder="Country" class="form-control" [(ngModel)]="selectedCountry" (change)="changeCountry($event)" required name="country" ngModel>
+                                <option>--Choose Country--</option>
+                                <option *ngFor="let country of Countries">{{country.name}}</option>
+                            </select>
+                            <!-- <input type="text" class="form-control" placeholder="country" value=""> -->
+                        </div>
+                        <div class="col-md-6">
+                            <label>State/Region:</label>
+                            <select placeholder="State" class="form-control" required name="state" ngModel>
+                                <option>--Choose State--</option>
+                                <option *ngFor="let state of states">{{state}}</option>
+                            </select>
+                            <!-- <input type="text" class="form-control" value="" placeholder="state"> -->
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label>Timezone:</label>
+                        <select class="form-control" name="timezones" required ngModel>
+                            <option selected>--Choose timezone--</option>
+                            <option value="AST" >AST</option>
+                            <option value="EST">EST</option>
+                            <option value="CST">CST</option>
+                            <option value="UTC+10">UTC+10</option>
+                        </select>
+                        <!-- <input type="text" class="form-control" placeholder="timezone" value=""> -->
+                    </div>
+                    <div class="col-md-12">
+                        <label>Locales:</label>
+                        <input type="text" class="form-control" placeholder="locales" value="" required name="locales" ngModel>
+                    </div>
+                    
+                    <div class="radio">
+                        <label>
+                        <!-- class="labels" -->
+                            Genders:
+                        </label>
+                        <br>
+                        <label class="g">
+                          <input type="radio" name="gender" ngModel value="male" required>
+                          Male
+                        </label>
+                        <br>
+                        <label class="g">
+                            <input type="radio" name="gender" ngModel value="female" required>
+                            Female
+                        </label>
+                    </div>
+                    <div class="col-md-12">
+                        <label >Email ID</label>
+                        <input type="text" class="form-control" placeholder="enter email id" value="" required name="email" ngModel>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label>password:</label>
+                    <input type="text" class="form-control" placeholder="password" value="" >
+                </div>
+                <div class="col-md-12">
+                    <label>confirm password:</label>
+                    <input type="text" class="form-control" placeholder="confirm password" value="" required name="password" ngModel>
+                </div>
+
+                
+                <label>Select Roles</label>
+                <div class="field-checkbox">
+                    <p-checkbox name="group1" value="Can Edit" [(ngModel)]="selectedCities" inputId="ny"  ngModel> </p-checkbox>
+                    <label class="r" for="ny">Can Edit</label>
+                </div>
+                <div class="field-checkbox">
+                    <p-checkbox name="group1" value="Can Delete" [(ngModel)]="selectedCities" inputId="sf" ngModel></p-checkbox>
+                    <label class="r" for="sf">Can Delete</label>
+                </div>
+                <div class="field-checkbox">
+                    <p-checkbox name="group1" value="Can Add" [(ngModel)]="selectedCities" inputId="la" ngModel></p-checkbox>
+                    <label class="r">Can Add</label>
+                </div>
+                <div class="col-md-12 dropdown">
+                    <label>Status</label>
+                    <select class="form-control" name="status" required ngModel>
+                        <option selected>--Choose status--</option>
+                        <option value="available">Available</option>
+                        <option value="unavailable">Unavailable</option>
+                    </select>
+                </div>
+                
+                <div class="mt-3 text-center">
+                    <button class="btn btn-primary profile-button m-3" type="submit">Save</button>
+                    <button class="btn btn-secondary profile-button" type="button">cancel</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+  </form>  
+</div>
