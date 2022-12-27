@@ -19,6 +19,7 @@ import {DialogModule} from 'primeng/dialog';
 import {CheckboxModule} from 'primeng/checkbox';
 import {DropdownModule} from 'primeng/dropdown';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { PasswordValidatorDirective } from './shared/password-validator.directive';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     RolesComponent,
     LoginComponent,
     SignupPageComponent,
-    UserDetailsPageComponent
+    UserDetailsPageComponent,
+    PasswordValidatorDirective
   ],
   imports: [
     BrowserModule,

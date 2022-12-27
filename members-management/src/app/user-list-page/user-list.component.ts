@@ -13,7 +13,7 @@ import { Subject } from 'rxjs';
 export class UserListComponent implements OnInit {
   @ViewChild('popup') pop :ElementRef;
   @ViewChild('username') username : ElementRef;
-  @ViewChild('Description') description : ElementRef;
+  @ViewChild('description') description : ElementRef;
   loggedUser : string;
   userExist : boolean =false;
   users : any
@@ -41,19 +41,19 @@ export class UserListComponent implements OnInit {
     this.pop.nativeElement.style.visibility = 'hidden';
   }
   clear(){
-    this.username.nativeElement.value = ""
+    this.username.nativeElement.value = "";
     this.description.nativeElement.value = "";
   }
   addUser(){
     this.http.get("http://localhost:3000/users").subscribe((data)=>{
       this.users = data;
       for (let i=0;i< this.users.length;i++){
-        if(this.users[i].userName === this.username.nativeElement.value){
+        if(this.users[i].username === this.username.nativeElement.value){
           this.userExist = true
           break
         }
       }
-      if(!this.userExist){
+      if(!this.userExist && this.username.nativeElement.value.length>0){
       this.router.navigate(['/main/userDetails'])
       }
       else{

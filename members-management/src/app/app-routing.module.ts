@@ -11,10 +11,10 @@ import { UserDetailsPageComponent } from './user-details-page/user-details-page.
 import { UserListComponent } from './user-list-page/user-list.component';
 
 const routes: Routes = [
-  {path : "" , redirectTo : "login", pathMatch: 'full'},
-  {path : "login", component : LoginComponent},
-  {path: "signup", component : SignupPageComponent},
-  {path: "main", component : MainComponent, canActivate: [AuthGuard],
+  // {path : "" , redirectTo : "login", pathMatch: 'full'},
+  // {path : "login", component : LoginComponent},
+  // {path: "signup", component : SignupPageComponent},
+  {path: "main", component : MainComponent,// canActivate: [AuthGuard],//
    children: [
     {path:"home",component: HomePageComponent},
     {path: "userList", component : UserListComponent},

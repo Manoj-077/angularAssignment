@@ -9,7 +9,7 @@
         {"id":0},
         {   
             "id":1,
-            "userName": "admin",
+            "username": "admin",
             "password": "admin",
             "roles": { "canEdit": true, "canDelete":true, "canAdd": true}
         }

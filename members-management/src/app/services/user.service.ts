@@ -22,7 +22,7 @@ export class UserService {
       this.usersData = data;
       this.username = localStorage.getItem('username');
       for(let i=0; i< this.usersData.length;i++){
-        if(this.username === this.usersData[i].userName){
+        if(this.username === this.usersData[i].username){
           
           this.role= this.usersData[i].roles;
         }

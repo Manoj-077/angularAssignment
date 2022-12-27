@@ -31,7 +31,7 @@ export class LoginComponent {
         this.enteredUsername = this.formData.value.username;
         this.enteredPassword = this.formData.value.password
         for (let i=0;i< this.usersArr.length;i++){
-        if(this.usersArr[i].userName === this.enteredUsername && this.usersArr[i].password === this.enteredPassword ){
+        if(this.usersArr[i].username === this.enteredUsername && this.usersArr[i].password === this.enteredPassword ){
           this.usernameCheck = true;
           this.passwordCheck = true
         }

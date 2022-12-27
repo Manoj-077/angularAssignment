@@ -55,3 +55,10 @@ p {
 :host ::ng-deep .p-dialog .p-button {
     min-width: 6rem;
 }
+
+#label{
+    font-family: 'Noto Sans', sans-serif;
+}
+#header{
+    font-family: 'Poppins', sans-serif;
+}
