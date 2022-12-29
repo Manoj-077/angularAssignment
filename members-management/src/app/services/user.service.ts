@@ -10,6 +10,7 @@ export class UserService {
   usersData:any
   username : any;
   role:any;
+  editMode = new Subject();
   constructor(private http: HttpClient) { }
   logSave(username: string){
     localStorage.setItem('username',username)

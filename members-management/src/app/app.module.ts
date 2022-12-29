@@ -10,7 +10,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { UserListComponent } from './user-list-page/user-list.component';
 import { RolesComponent } from './roles-page/roles.component';
 import { LoginComponent } from './login-page/login.component';
-import { SignupPageComponent } from './signup-page/signup-page.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { UserDetailsPageComponent } from './user-details-page/user-details-page.component';
 import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
@@ -21,6 +21,10 @@ import {DropdownModule} from 'primeng/dropdown';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { PasswordValidatorDirective } from './shared/password-validator.directive';
 import {TableModule} from 'primeng/table';
+import { DatePipe } from './shared/date.pipe';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 
 @NgModule({
@@ -33,9 +37,10 @@ import {TableModule} from 'primeng/table';
     UserListComponent,
     RolesComponent,
     LoginComponent,
-    SignupPageComponent,
     UserDetailsPageComponent,
-    PasswordValidatorDirective
+    PasswordValidatorDirective,
+    DatePipe,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
@@ -48,9 +53,11 @@ import {TableModule} from 'primeng/table';
     BrowserAnimationsModule,
     CheckboxModule,
     DropdownModule,
-    TableModule
+    TableModule,
+    ConfirmDialogModule,
+   
   ],
-  providers: [],
+  providers: [ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

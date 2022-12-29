@@ -42,10 +42,14 @@
       </div>
     </div>
 </div> -->
-    
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<!-- <button (click)="confirm()" pButton icon="pi pi-check" label="Confirm"></button>     -->
+
+
+
 
 <div #popup id="primepop">
-  
   <p-dialog header="" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}" [style]="{width: '600px'}"
       [draggable]="false" [resizable]="false">
       <div class="container text-center" style="width: 70%" *ngIf="userExist">
@@ -78,52 +82,65 @@
 </div>
 
 
-<p-table [value]="fetchedData" #dt2 styleClass="p-datatable-striped" [paginator]="true"  [tableStyle]="{'min-width': '50rem'}" 
-[rows]="rows" [showCurrentPageReport]="true" [(first)]="first"
-[globalFilterFields]="['username','firstname','lastname','email','status']" [tableStyle]="{'min-width': '50rem'}">  
-  <ng-template pTemplate="header">
-      <tr>
-          <th pSortableColumn="username" style="width:20%">Username<p-sortIcon field="username"></p-sortIcon></th>
-          <th pSortableColumn="firstname" style="width:20%">First name<p-sortIcon field="firstname"></p-sortIcon></th>
-          <th pSortableColumn="lastname" style="width:20%">Last name<p-sortIcon field="lastname"></p-sortIcon></th>
-          <th pSortableColumn="email" style="width:20%">email id<p-sortIcon field="email"></p-sortIcon></th>
-          <th pSortableColumn="status" style="width:20%">status<p-sortIcon field="status"></p-sortIcon></th>
+
+  <p-table [value]="fetchedData" #dt2 styleClass="p-datatable-striped" [paginator]="true"  [tableStyle]="{'min-width': '50rem'}" 
+  [rows]="rows" [showCurrentPageReport]="true" [(first)]="first"
+  [globalFilterFields]="['username','firstname','lastname','email','createdate','status']" [tableStyle]="{'min-width': '50rem'}">  
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="username" style="width:15%">Username<p-sortIcon field="username"></p-sortIcon></th>
+            <th pSortableColumn="firstname" style="width:15%">First name<p-sortIcon field="firstname"></p-sortIcon></th>
+            <th pSortableColumn="lastname" style="width:15%">Last name<p-sortIcon field="lastname"></p-sortIcon></th>
+            <th pSortableColumn="email" style="width:15%">Email id<p-sortIcon field="email"></p-sortIcon></th>
+            <th pSortableColumn="createdate" style="width:15%">Created Date<p-sortIcon field="createdate"></p-sortIcon></th>
+            <th pSortableColumn="status" style="width:15%">status<p-sortIcon field="status"></p-sortIcon></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+          <th>
+              <p-columnFilter type="text" field="username"></p-columnFilter>
+          </th>
+          <th>
+              <p-columnFilter type="text" field="firstname"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="lastname"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="email"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="createdate"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="status"></p-columnFilter>
+          </th>
+          <th></th>
           <th></th>
       </tr>
-      <tr>
-        <th>
-            <p-columnFilter type="text" field="username"></p-columnFilter>
-        </th>
-        <th>
-            <p-columnFilter type="text" field="firstname"></p-columnFilter>
-        </th>
-        <th>
-          <p-columnFilter type="text" field="lastname"></p-columnFilter>
-        </th>
-        <th>
-          <p-columnFilter type="text" field="email"></p-columnFilter>
-        </th>
-        <th>
-          <p-columnFilter type="text" field="status"></p-columnFilter>
-        </th>
-        <th></th>
-    </tr>
-  </ng-template>
-    <ng-template pTemplate="body" let-data>
+    </ng-template>
+      <ng-template pTemplate="body" let-data>
+          <tr>
+              <td>{{data.username}}</td>
+              <td>{{data.firstname}}</td>
+              <td>{{data.lastname}}</td>
+              <td>{{data.email}}</td>
+              <td>{{data.createdTime | datepipe}}</td>
+              <td>
+                <span [ngClass]="data.status==='available'?'good':'bad'">{{data.status}}</span>
+              </td>
+              <td><button pButton type="button" label="Details" (click)="gotoEdit(data)" class="p-button-info"></button></td>
+              <td><button pButton type="button" [disabled]="!roles.canDelete" (click)="deleteConfirm(data)" label="" icon="pi pi-trash"></button></td>
+              <!-- <button class="btn btn-info" (click)="details($event)">Details</button> -->
+              
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
         <tr>
-            <td>{{data.username}}</td>
-            <td>{{data.firstname}}</td>
-            <td>{{data.lastname}}</td>
-            <td>{{data.email}}</td>
-            <td>
-              <span class="good">{{data.status}}</span>
-            </td>
-            <td><button class="btn btn-info" (click)="details($event)">Details</button></td>
+            <td colspan="12" style="text-align:center">No record found.</td>
         </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage">
-      <tr>
-          <td colspan="5" style="text-align:center">No record found.</td>
-      </tr>
-  </ng-template>
-</p-table>
+  </p-table>
+  
+

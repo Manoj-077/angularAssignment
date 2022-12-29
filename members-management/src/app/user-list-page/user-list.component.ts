@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Subscription } from 'rxjs';
 import { Subject } from 'rxjs';
-
+import { DatePipe } from '../shared/date.pipe';
+import {ConfirmationService} from 'primeng/api';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -24,8 +26,11 @@ export class UserListComponent implements OnInit {
   fetchedData : any = [];
   rows = 5;
   first = 0;
-
-  constructor(private http: HttpClient, private router: Router, private userService : UserService){
+  cdata : any;
+  dobj:any;
+  date : Date = new Date();
+  constructor(private http: HttpClient, private router: Router, private userService : UserService,
+    private confirmationService: ConfirmationService, private route:ActivatedRoute){
       
   }
   
@@ -41,8 +46,7 @@ export class UserListComponent implements OnInit {
       this.fetchedData = data;
       this.fetchedData = this.fetchedData.slice(2)
     })
-    
-    
+
   }
 
   openPop(){
@@ -55,6 +59,41 @@ export class UserListComponent implements OnInit {
     this.username.nativeElement.value = "";
     this.description.nativeElement.value = "";
   }
+  deleteConfirm(data:any) {
+    this.cdata = data;
+    this.confirmationService.confirm({
+        message: 'Are you sure that you want to delete '+"'"+this.cdata.username+"'"+'?',
+        accept: () => {
+            //Actual logic to perform a confirmation
+            this.http.get("http://localhost:3000/users").subscribe((data)=>{
+              let arr:any = [];
+              arr = data;
+              
+              for (let i=0;i<arr.length;i++){
+                if(arr[i].username === this.cdata.username){
+                  this.dobj = arr[i]
+                  break
+                }
+              }
+              
+              this.http.delete('http://localhost:3000/users/'+this.dobj.id).subscribe((data)=>{
+                console.log("deleted");
+                setTimeout(()=>{
+                  this.http.get("http://localhost:3000/users").subscribe((data)=>{
+                    this.fetchedData = data;
+                    this.fetchedData = this.fetchedData.slice(2)
+                  })
+              },100)
+             })
+              
+              // let obj = arr.find((o:any)=>{
+              //   o.username=== this.cdata.username
+              // })
+              // console.log("this is obj"+obj)
+            })
+        }
+    });
+}
   addUser(){
     const exp = new RegExp("^[a-zA-Z0-9_]*$");
     if(this.username.nativeElement.value.match(exp) && this.username.nativeElement.value.length>0){
@@ -93,10 +132,15 @@ export class UserListComponent implements OnInit {
         }, 2000)  
     }
   }
-  details(event:any){
-    const c = event.target.parentElement.parentElement.cells[0].innerHTML;
-    console.log(c)
-  }
+
+
+
+  gotoEdit(data:any) {
+    
+    localStorage.setItem('userEdit',data.username)
+    
+    this.userService.editMode.next(true);
+}
 
 
   displayModal: boolean;

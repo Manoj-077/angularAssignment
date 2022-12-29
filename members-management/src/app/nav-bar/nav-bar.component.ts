@@ -8,13 +8,26 @@ import { UserService } from '../services/user.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent {
+export class NavBarComponent  {
+  date:Date = new Date();
+  d: any;
   constructor(private authService: AuthService, private router : Router, private userService : UserService){
-
+    console.log(this.date.getMinutes())
+  }
+  ngOnInit(){
+    this.timeUpdate();
+  }
+  
+  timeUpdate(){
+    setInterval(()=>{
+      this.date = new Date();
+      this.d = this.date.toString();
+    },1000)
   }
  logout(){
   this.userService.logDelete();
   this.authService.logout();
   this.router.navigate([''])
  }
+ 
 }

@@ -5,7 +5,10 @@
 svg{
     display: inline;
     position: relative;
-    bottom: 10px;height: 40px;width:50px; margin-left:15px
+    bottom: 10px;
+    height: 40px;
+    width:50px;
+     margin-left:10px
 }
 h1{
     margin-left: 20px;
@@ -68,5 +71,13 @@ p {
     border-radius: 15px;
     background-color: rgb(73, 207, 104);
     color: rgb(81, 81, 81);
+    font-weight: 600;
+}
+.bad{
+    padding: 9px 13px;
+    border-radius: 15px;
+    background-color: rgb(255, 65, 65);
+    color: rgb(81, 81, 81);
+    font-weight: 600;
 }
 

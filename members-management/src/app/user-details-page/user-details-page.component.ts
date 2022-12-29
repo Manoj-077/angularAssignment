@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { UserDetail } from '../shared/userDetail.model';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-user-details-page',
@@ -17,12 +18,14 @@ export class UserDetailsPageComponent {
   @ViewChild('username') usrname : ElementRef;
   user : any;
   pass: any;
+  editMode : boolean = false;
   description : any;
   passwordregexfail : boolean = false;
   image = 'https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg';
   nonImage : boolean = false;
+  createdTime : Date = new Date()
   // ig:any;
-  constructor(private title: Title, private http:HttpClient, private router : Router) {
+  constructor(private title: Title, private http:HttpClient, private router : Router, private userService: UserService) {
 
   }
 
@@ -31,6 +34,17 @@ export class UserDetailsPageComponent {
     this.user = localStorage.getItem('newUser')
     
     this.description = localStorage.getItem('description')
+
+    this.userService.editMode.subscribe((data)=>{
+      if(data === true){
+        this.editMode = true;
+        console.log(this.editMode)
+      }
+      else{
+        this.editMode = false;
+      }
+    }
+    )
     // console.log(this.usrname.nativeElement.value)
     // this.usrname.nativeElement.value= this.user;
     // this.form.patchValue({
@@ -94,7 +108,8 @@ export class UserDetailsPageComponent {
         },
     image : "" , 
     password: "",
-    description:""  
+    description:"",
+    createdTime: "" 
   }
   onSubmit(){
       this.tdata.username = this.user;
@@ -117,7 +132,7 @@ export class UserDetailsPageComponent {
       this.tdata.image = this.image;
       this.tdata.password = this.form.value.confirmpassword;
       this.tdata.description = this.description;
-      
+      this.tdata.createdTime = this.createdTime.toString();
       this.http.post("http://localhost:3000/users",this.tdata).subscribe((data)=>console.log(data))
       this.router.navigate(['main/userList'])
   }
