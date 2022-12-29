@@ -1,8 +1,10 @@
-#footer, #content::after{
-    /* padding: 0; 
+
+
+/* #footer, #content::after{
+   
+    display: block;
     width: 100%;
-    position: absolute; 
-    bottom: 0; */
-    display: inline-block;
-    width: 100%;
-}
+    position: absolute;
+    bottom: 0;
+} */
+

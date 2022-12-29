@@ -17,23 +17,31 @@ export class UserDetailsPageComponent {
   @ViewChild('username') usrname : ElementRef;
   user : any;
   pass: any;
+  description : any;
   passwordregexfail : boolean = false;
   image = 'https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg';
   nonImage : boolean = false;
+  // ig:any;
   constructor(private title: Title, private http:HttpClient, private router : Router) {
 
   }
 
 	ngOnInit() {
 		
-    this.user = localStorage.getItem('username')
+    this.user = localStorage.getItem('newUser')
     
-    
+    this.description = localStorage.getItem('description')
     // console.log(this.usrname.nativeElement.value)
     // this.usrname.nativeElement.value= this.user;
     // this.form.patchValue({
     //   username: this.user
     // })
+  //  this.http.get("http://localhost:3000/users").subscribe((data)=>{
+  //   let arr:any = []
+  //   arr = data;
+  //   this.ig = arr.find((o:any)=>o.username==="abcd")
+  //   console.log(this.ig.image)
+  //  })
    
 	}
   ngAfterViewChecked(){
@@ -85,10 +93,11 @@ export class UserDetailsPageComponent {
       canAdd :""
         },
     image : "" , 
-    password: ""  
+    password: "",
+    description:""  
   }
   onSubmit(){
-      this.tdata.username = this.form.value.username;
+      this.tdata.username = this.user;
       this.tdata.firstname = this.form.value.firstname;
       this.tdata.lastname = this.form.value.lastname;
       this.tdata.email = this.form.value.email;
@@ -107,17 +116,20 @@ export class UserDetailsPageComponent {
       this.tdata.roles.canAdd = this.form.value.canAdd;
       this.tdata.image = this.image;
       this.tdata.password = this.form.value.confirmpassword;
-      console.log(this.tdata)
+      this.tdata.description = this.description;
+      
+      this.http.post("http://localhost:3000/users",this.tdata).subscribe((data)=>console.log(data))
+      this.router.navigate(['main/userList'])
   }
  onCancel(){
    this.router.navigate(['main/userList']);
-   console.log(this.form.value)
+   
    this.form.reset();
  }
  
  onfileselected(event:any){
-  
-  if(event.target.files[0].type === "image/png" || event.target.files[0].type === "image/jpg"){
+  console.log(event.target.files[0].size)
+  if((event.target.files[0].type === "image/png" || event.target.files[0].type === "image/jpg") && event.target.files[0].size< 2000000){
     var reader = new FileReader()
   reader.readAsDataURL(event.target.files[0])
   reader.onload = (event:any)=> {

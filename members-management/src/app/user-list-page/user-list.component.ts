@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 import { Subscription } from 'rxjs';
 import { Subject } from 'rxjs';
 
+
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -20,6 +21,10 @@ export class UserListComponent implements OnInit {
   user: any;
   roles : any;
   name : any;
+  fetchedData : any = [];
+  rows = 5;
+  first = 0;
+
   constructor(private http: HttpClient, private router: Router, private userService : UserService){
       
   }
@@ -32,6 +37,12 @@ export class UserListComponent implements OnInit {
     //   console.log(this.name)
     // }
     // )
+    this.http.get("http://localhost:3000/users").subscribe((data)=>{
+      this.fetchedData = data;
+      this.fetchedData = this.fetchedData.slice(2)
+    })
+    
+    
   }
 
   openPop(){
@@ -45,32 +56,46 @@ export class UserListComponent implements OnInit {
     this.description.nativeElement.value = "";
   }
   addUser(){
-    this.http.get("http://localhost:3000/users").subscribe((data)=>{
-      this.users = data;
-      for (let i=0;i< this.users.length;i++){
-        if(this.users[i].username === this.username.nativeElement.value){
-          this.userExist = true
-          break
+    const exp = new RegExp("^[a-zA-Z0-9_]*$");
+    if(this.username.nativeElement.value.match(exp) && this.username.nativeElement.value.length>0){
+        this.http.get("http://localhost:3000/users").subscribe((data)=>{
+        this.users = data;
+        for (let i=0;i< this.users.length;i++){
+          if(this.users[i].username === this.username.nativeElement.value){
+            this.userExist = true
+            break
+          }
         }
-      }
-      if(!this.userExist && this.username.nativeElement.value.length>0){
-      this.router.navigate(['/main/userDetails'])
-      }
-      else{
+        if(!this.userExist){
+        this.router.navigate(['/main/userDetails'])
+        localStorage.setItem('newUser',this.username.nativeElement.value)
+        localStorage.setItem('description',this.description.nativeElement.value)
+        }
+        else{
+          this.userExist=true;
+        
+          setTimeout(()=>{
+            this.userExist = false;
+            
+          }, 2000) 
+        }
+        this.clear();
+        // this.user = this.users.find((o:any)=>{o.username === this.username.nativeElement.value})
+        // console.log(this.user)
+      })
+    }
+    else{
         this.userExist=true;
         
         setTimeout(()=>{
           this.userExist = false;
-          this.router.navigate(['/main/userList'])
-        }, 2000)
-        
-      }
-      this.clear();
-      // this.user = this.users.find((o:any)=>{o.username === this.username.nativeElement.value})
-      // console.log(this.user)
+         
+        }, 2000)  
     }
-    )
-    
+  }
+  details(event:any){
+    const c = event.target.parentElement.parentElement.cells[0].innerHTML;
+    console.log(c)
   }
 
 

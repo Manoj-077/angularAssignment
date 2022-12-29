@@ -62,3 +62,11 @@ p {
 #header{
     font-family: 'Poppins', sans-serif;
 }
+
+.good{
+    padding: 9px 13px;
+    border-radius: 15px;
+    background-color: rgb(73, 207, 104);
+    color: rgb(81, 81, 81);
+}
+

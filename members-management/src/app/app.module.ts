@@ -20,6 +20,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {DropdownModule} from 'primeng/dropdown';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { PasswordValidatorDirective } from './shared/password-validator.directive';
+import {TableModule} from 'primeng/table';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { PasswordValidatorDirective } from './shared/password-validator.directiv
     DialogModule,
     BrowserAnimationsModule,
     CheckboxModule,
-    DropdownModule
+    DropdownModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
