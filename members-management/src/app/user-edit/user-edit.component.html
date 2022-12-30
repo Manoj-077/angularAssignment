@@ -1,18 +1,20 @@
 <div class="container rounded bg-white mt-5 mb-5" class="d1">
-    <form #f="ngForm" >
+    <form #f="ngForm" (ngSubmit)="onSubmit()" >
         <div class="row" >
             <div class="col-md-5 border-right">
-
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <img class="rounded-circle mt-5"  width="150px" height="150px">
+                    <img class="rounded-circle mt-5" *ngIf="!newImg"  width="150px" height="150px" src="{{image}}">
+                    <img *ngIf="newImg" class="rounded-circle mt-5"  width="150px" height="150px" src="{{newImage}}">
                     <label class="form-label" for="customFile">only .jpg and .png images allowed</label>
-                    <input type="file" style="width: 50%;" class="form-control" id="customFile" name="image" 
-                    
-                    accept="image/png , image/jpg" #img
-                    ngModel/>
-                            
+                    <input type="file" style="width: 50%;" (change)="onfileselected($event)" 
+                    accept="image/png , image/jpg"  class="form-control" id="customFile" name="image" />
+                    <span *ngIf="nonImage"> 
+                        <br>
+                        <div class="alert alert-danger" style="width: 300px"  role="alert">
+                            Unsupported file
+                        </div> 
+                    </span>             
                 </div>
-                
             </div>
             <div class="col-md-6 border-right" id="title">
                 <div class="p-3 py-5">
@@ -22,31 +24,31 @@
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <label>UserName<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control"  name="username" ngModel>
+                            <input type="text" disabled class="form-control"  name="username" ngModel>
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <label >First Name:<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control"  placeholder="firstname" 
+                            <input type="text" disabled class="form-control"  placeholder="firstname" 
                             maxlength="30" value="" name="firstname" ngModel>
                         </div>
                         <div class="col-md-6">
                             <label>Last name:</label>
-                            <input type="text" class="form-control" value="" placeholder="lastname" maxlength="30" name="lastname" ngModel>
+                            <input type="text" disabled class="form-control" value="" placeholder="lastname" maxlength="30" name="lastname" ngModel>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-outline datepicker w-100 col-md-12">
                             <label for="birthdayDate">Birthday:</label>
-                            <input type="date" class="form-control" name="birthday" id="birthdayDate" ngModel/>
+                            <input type="date" disabled class="form-control" name="birthday" id="birthdayDate" ngModel/>
                     </div>    
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <label >Mobile Number (+91):<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" maxlength="10"  
+                            <input type="text" disabled class="form-control" maxlength="10"  
                             placeholder="enter phone number" value="" 
                             required name="mobile" ngModel>
                         </div>
@@ -65,9 +67,10 @@
                         </div>
                             <div class="col-md-6 dropdown">
                                 <label>Country:</label>
-                                <select placeholder="Country" class="form-select" name="country" ngModel>
+                                <select placeholder="Country" class="form-select" (change)="changeCountry($event)" name="country" ngModel>
                                     <!-- <option>--Choose Country--</option> -->
-                                    
+                                    <option value="USA">USA</option>
+                                    <option value="India">India</option>
                                 </select>
                                 <!-- <input type="text" class="form-control" placeholder="country" value=""> -->
                             </div>
@@ -75,7 +78,7 @@
                                 <label>State/Region:</label>
                                 <select placeholder="State" class="form-select" name="state" ngModel>
                                     <option value="">--Choose State--</option>
-                                 
+                                    <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
                                 </select>
                                 <!-- <input type="text" class="form-control" value="" placeholder="state"> -->
                             </div>
@@ -110,25 +113,25 @@
                             </label>
                             <br>
                             <label class="g">
-                            <input type="radio" name="gender" ngModel value="male">
+                            <input type="radio" disabled name="gender" ngModel value="male">
                                 Male
                             </label>
                             
                             <label class="g">
-                                <input type="radio" name="gender" ngModel value="female" style="margin-left: 10px;">
+                                <input type="radio" disabled name="gender" ngModel value="female" style="margin-left: 10px;">
                                 Female
                             </label>
                         </div>
                         <div class="col-md-12">
                             <label >Email ID: <span style="color: red;">*</span></label>
-                            <input type="text" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" class="form-control" maxlength="100" 
+                            <input type="text" disabled pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" class="form-control" maxlength="100" 
                              placeholder="enter email id" value="" 
                             name="email" ngModel>
                         </div>
 
                         <div class="col-md-12">
                             <label>password:<span style="color: red;">*</span></label>
-                            <input  class="form-control"
+                            <input type="password" disabled class="form-control"
                              placeholder="password"
                             
                            name="password" value="" ngModel>
@@ -136,7 +139,7 @@
 
                         <div class="col-md-12">
                             <label>confirm password:<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" PasswordValidator="password" minlength="8" maxlength="20"
+                            <input type="password" class="form-control" disabled PasswordValidator="password" minlength="8" maxlength="20"
                               placeholder="confirm password"
                              value="" name="confirmpassword" 
                              ngModel>

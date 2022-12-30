@@ -1,0 +1,9 @@
+#welcome{
+    background-color: rgb(255, 222, 35);
+    width: 100%;
+    font-family: 'Kanit', sans-serif;
+}
+
+#graph{
+    width: 80%;
+}

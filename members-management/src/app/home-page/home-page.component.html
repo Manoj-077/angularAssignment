@@ -1,1 +1,12 @@
-<p>home-page works!</p>
+
+<div class="container-fluid pt-3 pb-3" id="welcome">
+    <div class="row text-center">
+        <h1>Welcome {{username}}</h1>
+    </div>
+</div>
+
+<div class="container-fluid" id="graph">
+<div class="card">
+    <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
+</div>
+</div>

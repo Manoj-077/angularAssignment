@@ -25,6 +25,7 @@ import { DatePipe } from './shared/date.pipe';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import {ChartModule} from 'primeng/chart';
 
 
 @NgModule({
@@ -55,7 +56,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     DropdownModule,
     TableModule,
     ConfirmDialogModule,
-   
+    ChartModule
   ],
   providers: [ConfirmationService],
   bootstrap: [AppComponent]

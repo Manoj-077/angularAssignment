@@ -82,18 +82,18 @@
 </div>
 
 
-
+<div class="container-fluid" id='table'>
   <p-table [value]="fetchedData" #dt2 styleClass="p-datatable-striped" [paginator]="true"  [tableStyle]="{'min-width': '50rem'}" 
   [rows]="rows" [showCurrentPageReport]="true" [(first)]="first"
-  [globalFilterFields]="['username','firstname','lastname','email','createdate','status']" [tableStyle]="{'min-width': '50rem'}">  
+  [globalFilterFields]="['username','firstname','lastname','email','status','createdate']" [tableStyle]="{'min-width': '50rem'}">  
     <ng-template pTemplate="header">
         <tr>
             <th pSortableColumn="username" style="width:15%">Username<p-sortIcon field="username"></p-sortIcon></th>
             <th pSortableColumn="firstname" style="width:15%">First name<p-sortIcon field="firstname"></p-sortIcon></th>
             <th pSortableColumn="lastname" style="width:15%">Last name<p-sortIcon field="lastname"></p-sortIcon></th>
             <th pSortableColumn="email" style="width:15%">Email id<p-sortIcon field="email"></p-sortIcon></th>
-            <th pSortableColumn="createdate" style="width:15%">Created Date<p-sortIcon field="createdate"></p-sortIcon></th>
             <th pSortableColumn="status" style="width:15%">status<p-sortIcon field="status"></p-sortIcon></th>
+            <th pSortableColumn="createdate" style="width:15%">Created Date</th>
             <th></th>
             <th></th>
         </tr>
@@ -111,11 +111,12 @@
             <p-columnFilter type="text" field="email"></p-columnFilter>
           </th>
           <th>
-            <p-columnFilter type="text" field="createdate"></p-columnFilter>
-          </th>
-          <th>
             <p-columnFilter type="text" field="status"></p-columnFilter>
           </th>
+          <!-- <th>
+            <p-columnFilter type="text" field="createdate"></p-columnFilter>
+          </th> -->
+          <th></th>
           <th></th>
           <th></th>
       </tr>
@@ -126,12 +127,13 @@
               <td>{{data.firstname}}</td>
               <td>{{data.lastname}}</td>
               <td>{{data.email}}</td>
-              <td>{{data.createdTime | datepipe}}</td>
               <td>
                 <span [ngClass]="data.status==='available'?'good':'bad'">{{data.status}}</span>
               </td>
-              <td><button pButton type="button" label="Details" (click)="gotoEdit(data)" class="p-button-info"></button></td>
-              <td><button pButton type="button" [disabled]="!roles.canDelete" (click)="deleteConfirm(data)" label="" icon="pi pi-trash"></button></td>
+              <td>{{data.createdTime | datepipe}}</td>
+              
+              <td><button pButton type="button" routerLink="/main/userEdit" label="Details" [disabled]="!roles.canEdit" (click)="gotoEdit(data)" class="p-button-info"></button></td>
+              <td><button pButton type="button" [disabled]="!roles.canDelete" (click)="deleteConfirm(data)" [disabled]="!roles.canDelete" label="" icon="pi pi-trash"></button></td>
               <!-- <button class="btn btn-info" (click)="details($event)">Details</button> -->
               
           </tr>
@@ -142,5 +144,5 @@
         </tr>
     </ng-template>
   </p-table>
-  
+</div>  
 
