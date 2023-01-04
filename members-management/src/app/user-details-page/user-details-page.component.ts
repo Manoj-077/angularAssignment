@@ -1,17 +1,24 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { UserDetail } from '../shared/userDetail.model';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import {MultiSelectFilterOptions} from 'primeng/multiselect';
+import { AutoLogoutService } from '../services/auto-logout.service';
+
+interface Roles {
+  name: string,
+  code: string
+}
 
 @Component({
   selector: 'app-user-details-page',
   templateUrl: './user-details-page.component.html',
   styleUrls: ['./user-details-page.component.css']
 })
-export class UserDetailsPageComponent {
+export class UserDetailsPageComponent implements OnInit {
 
   @ViewChild('f') form : NgForm;
   @ViewChild('img') inputImage : ElementRef;
@@ -24,12 +31,21 @@ export class UserDetailsPageComponent {
   image = 'https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg';
   nonImage : boolean = false;
   createdTime : Date = new Date()
+  roles: Roles[];
+  selectedRolesCode: string[];
+ 
+  
   // ig:any;
-  constructor(private title: Title, private http:HttpClient, private router : Router, private userService: UserService) {
-
+  constructor(private title: Title, private http:HttpClient, private router : Router, private userService: UserService,
+    private autoLogoutService: AutoLogoutService) {
+    this.roles = [
+      {name: 'Can Edit', code: 'CE'},
+      {name: 'Can Delete', code: 'CD'},
+      {name: 'Can Add', code: 'CA'},
+        ];
   }
 
-	ngOnInit() {
+  ngOnInit() {
 		
     this.user = localStorage.getItem('newUser')
     
@@ -56,11 +72,10 @@ export class UserDetailsPageComponent {
   //   this.ig = arr.find((o:any)=>o.username==="abcd")
   //   console.log(this.ig.image)
   //  })
-   
-	}
-  ngAfterViewChecked(){
-   
   }
+  
+   
+  
   validatepassword(){
     const expression = new RegExp('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$');
     if(this.pass.match(expression)){
@@ -126,17 +141,39 @@ export class UserDetailsPageComponent {
       this.tdata.timezone = this.form.value.timezone;
       this.tdata.locale = this.form.value.locale;
       this.tdata.gender = this.form.value.gender;
-      this.tdata.roles.canEdit = this.form.value.canEdit;
-      this.tdata.roles.canDelete = this.form.value.canDelete;
-      this.tdata.roles.canAdd = this.form.value.canAdd;
+
+      for (let x of this.selectedRolesCode){
+        if(x==='CE'){
+          this.tdata.roles.canEdit = "true";
+        }
+        else if(x === 'CD'){
+          this.tdata.roles.canDelete = "true";
+        }
+        else if(x === 'CA'){
+          this.tdata.roles.canAdd = "true";
+        }
+      }
+
+      // this.tdata.roles.canEdit = this.form.value.canEdit;
+      // this.tdata.roles.canDelete = this.form.value.canDelete;
+      // this.tdata.roles.canAdd = this.form.value.canAdd;
       this.tdata.image = this.image;
       this.tdata.password = this.form.value.confirmpassword;
       this.tdata.description = this.description;
       this.tdata.createdTime = this.createdTime.toString();
-      this.http.post("http://localhost:3000/users",this.tdata).subscribe((data)=>console.log(data))
+      this.http.post("http://localhost:3000/users",this.tdata).subscribe(data=>{
+        
+        
+      })
+      this.userService.userCreated.next(true);
+        this.userService.userCreated.complete();
+        console.log("usercreated=true")
+     
       this.router.navigate(['main/userList'])
+      
   }
  onCancel(){
+  
    this.router.navigate(['main/userList']);
    
    this.form.reset();
@@ -160,7 +197,10 @@ export class UserDetailsPageComponent {
     },3000)
   }
  
-}
+  }
 
+  autologout(){
+    this.autoLogoutService.logout()
+  }
 	
 }

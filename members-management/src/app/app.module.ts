@@ -26,7 +26,10 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import {ChartModule} from 'primeng/chart';
-
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,8 @@ import {ChartModule} from 'primeng/chart';
     UserDetailsPageComponent,
     PasswordValidatorDirective,
     DatePipe,
-    UserEditComponent
+    UserEditComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,
@@ -56,9 +60,11 @@ import {ChartModule} from 'primeng/chart';
     DropdownModule,
     TableModule,
     ConfirmDialogModule,
-    ChartModule
+    ChartModule,
+    ToastModule,
+    MultiSelectModule
   ],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService,MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

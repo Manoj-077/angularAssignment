@@ -1,7 +1,5 @@
 
-body{
-    background-color: rgb(139, 244, 209);
-}
+
 .form-control:focus {
     box-shadow: none;
     border-color: #BA68C8
@@ -74,7 +72,7 @@ input{
 	margin-top: 16px;
 }
 .d1,body{
-    background-color: aquamarine;
+    background-image: linear-gradient(rgb(162, 246, 254),rgb(201, 254, 255));
 }
 #f1{
     background-color: aqua;

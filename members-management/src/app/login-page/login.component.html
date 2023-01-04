@@ -41,9 +41,34 @@
   
       <!-- Login Form -->
       <form (ngSubmit)="login()" #f="ngForm">
-        <input type="text" id="login" class="fadeIn second" name="username" placeholder="login" ngModel>
-        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" ngModel>
-        <input type="submit" class="fadeIn fourth" value="Log In">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-1"> 
+            </div>
+            <div class="col-sm-2"> 
+              <label>Username:</label>
+              
+            </div>
+            <div class="col-sm-12">
+              <input type="text" id="login" class="fadeIn second" name="username" placeholder="login" ngModel>
+            </div>
+          </div> 
+          
+          <div class="row">
+            <div class="col-sm-1"> 
+            </div>
+            <div class="col-sm-2"> 
+              <label >Password:</label>
+            </div>
+            <div class="col-sm-12">
+              <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" ngModel>
+            </div>
+            <br>
+            <div class="col-sm-12">
+              <input type="submit" class="fadeIn fourth" value="Log In">
+            </div>
+          </div> 
+        </div>
       </form>
       <div class="alert alert-danger" role="alert" *ngIf="showalert">
        Invalid Username and password. Try again!

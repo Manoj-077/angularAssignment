@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AutoLogoutService } from '../services/auto-logout.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -19,7 +20,7 @@ export class UserEditComponent {
   nonImage : boolean = false;
   userId:any = "";
   editedDetails : any;
-  constructor(private http: HttpClient, private router:Router){
+  constructor(private http: HttpClient, private router:Router, private autoLogoutService: AutoLogoutService){
 
   }
 
@@ -132,5 +133,9 @@ export class UserEditComponent {
   cancel(){
     
     this.router.navigate(['main/userList'])
+  }
+
+  autologout(){
+    this.autoLogoutService.logout()
   }
 }

@@ -1,7 +1,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
-<div class="container rounded bg-white mt-5 mb-5" class="d1">
+<div class="container rounded bg-white mt-5 mb-5" class="d1" (mouseover)="autologout()">
     <form #f="ngForm" (ngSubmit)="onSubmit()">
         <div class="row" >
             <div class="col-md-5 border-right">
@@ -69,7 +69,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label >Mobile Number (+91):<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" maxlength="10" #mobile="ngModel" 
+                            <input type="text" class="form-control" minlength="10" maxlength="10" #mobile="ngModel" 
                             placeholder="enter phone number" value="" 
                             [ngClass]="{'is-invalid': mobile.invalid && mobile.touched}"
                             required name="mobile" ngModel>
@@ -85,10 +85,9 @@
                         </div>
                         <div class="col-md-12">
                             <label>zipcode:</label>
-                            <input type="text" class="form-control" #zipcode="ngModel" 
+                            <input type="text" class="form-control" 
                             maxlength="20" placeholder="zipcode" value="" name="zipcode"
                              ngModel>
-                            
                         </div>
                         
                             <div class="col-md-6 dropdown">
@@ -200,14 +199,18 @@
                         
                         <label>Select Roles:</label>
                         <div class="field-checkbox">
-                            <p-checkbox value="true"  name="canEdit" inputId="ny" ngModel> </p-checkbox>
+                            <!-- <p-checkbox value="true"  name="canEdit" inputId="ny" ngModel> </p-checkbox>
                             <label class="r" for="ny">Can Edit</label>
                             <p-checkbox  value="true" name="canDelete" inputId="sf" ngModel [style]="{'margin-left': '10px'}"></p-checkbox>
                             <label class="r" for="sf">Can Delete</label>
                             <p-checkbox value="true"  name="canAdd" inputId="la" [style]="{'margin-left': '10px'}" ngModel></p-checkbox>
-                            <label class="r">Can Add</label>
+                            <label class="r">Can Add</label> -->
+                            <p-multiSelect [options]="roles" [(ngModel)]="selectedRolesCode" name="roles" optionLabel="name" optionValue="code"></p-multiSelect>
                         </div>
                         
+
+
+
                         <div class="col-md-12 dropdown">
                             <label>Status:<span style="color: red;">*</span></label>
                             <select class="form-select" name="status" #status="ngModel" required ngModel>

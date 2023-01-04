@@ -1,0 +1,125 @@
+<div class="full" (mouseover)="autologout()">
+    <div class="container-fluid text-center" style="width: 90%;">
+        <img src="{{userImage}}" class="rounded-circle m-4" style="width: 200px;height: 200px;">
+        <div class="row mb-5">
+            <div class="col-sm-4" style="text-align: left;">
+                <div>
+                    <label style="margin-left: 2px;">UserName:</label>
+                    <br>
+                    <input disabled class="form-control" [placeholder]='username'>
+                    <br>
+                </div>
+                
+                <div *ngIf="username!=='admin'">
+                    <label style="margin-left: 2px;">DOB:</label>
+                    <br>
+                    <input disabled class="form-control" [placeholder]='loggedInUserInfo.birthday'>
+                    <br>
+                </div>
+                
+                <div *ngIf="username!=='admin'">
+                    <label style="margin-left: 2px;">Zipcode:</label>
+                    <br>
+                    <input disabled class="form-control" [placeholder]='loggedInUserInfo.zipcode'>
+                    <br>
+                </div>
+                
+                <div *ngIf="username!=='admin'">
+                    <label style="margin-left: 2px;">Timezone:</label>
+                    <br>
+                    <input disabled class="form-control" [placeholder]='loggedInUserInfo.timezone'>
+                    <br>
+                </div>
+                
+                <div *ngIf="username!=='admin'">
+                    <label style="margin-left: 2px;">Email:</label>
+                    <br>
+                    <input disabled class="form-control" [placeholder]='loggedInUserInfo.email'>
+                    <br>
+                </div>
+                
+                <div *ngIf="username!=='admin'">
+                    <label style="margin-left: 2px;">Status:</label>
+                    <br>
+                    <input disabled class="form-control" [placeholder]='loggedInUserInfo.status'>
+                </div>
+            </div>
+            <div class="col-sm-4" style="text-align: left;">
+                <div *ngIf="username!=='admin'">
+                    <label style="margin-left: 2px;">First name:</label>
+                    <br>
+                    <input disabled class="form-control" [placeholder]='loggedInUserInfo.firstname'>
+                    <br>
+                </div>
+                
+                <div *ngIf="username!=='admin'">
+                    <label style="margin-left: 2px;">Mobile:</label>
+                    <br>
+                    <input disabled class="form-control" [placeholder]='loggedInUserInfo.mobile'>
+                    <br>
+                </div>
+                
+                <div *ngIf="username!=='admin'">
+                    <label style="margin-left: 2px;">Country:</label>
+                    <br>
+                    <input disabled class="form-control" [placeholder]='loggedInUserInfo.country'>
+                    <br>
+                </div>
+                
+                <div *ngIf="username!=='admin'">
+                    <label style="margin-left: 2px;">Locale:</label>
+                    <br>
+                    <input disabled class="form-control" [placeholder]='loggedInUserInfo.locale'>
+                    <br>
+                </div>
+                
+                <div>
+                    <label style="margin-left: 2px;">Password:</label>
+                    <br>
+                    <input disabled class="form-control" [placeholder]='loggedInUserInfo.password'>
+                </div>
+                
+            </div>
+            <div class="col-sm-4" style="text-align: left;">
+                <div *ngIf="username!=='admin'">
+                    <label style="margin-left: 2px;">Last name:</label>
+                    <br>
+                    <input disabled class="form-control" [placeholder]='loggedInUserInfo.lastname'>
+                    <br>
+                </div>
+                
+                <div *ngIf="username!=='admin'">    
+                    <label style="margin-left: 2px;">Address:</label>
+                    <br>
+                    <input disabled class="form-control" [placeholder]='loggedInUserInfo.address'>
+                    <br>
+                </div>
+                
+                <div *ngIf="username!=='admin'">
+                    <label style="margin-left: 2px;">State:</label>
+                    <br>
+                    <input disabled class="form-control" [placeholder]='loggedInUserInfo.state'>
+                    <br>
+                </div>
+                
+                <div *ngIf="username!=='admin'">
+                    <label style="margin-left: 2px;">Gender:</label>
+                    <br>
+                    <input disabled class="form-control" [placeholder]='loggedInUserInfo.gender'>
+                    <br>
+                </div>
+                
+                <div>
+                    <label style="margin-left: 2px;">Roles/Permissions:</label>
+                    
+                    <!-- <input disabled class="form-control" [placeholder]='loggedInUserInfo.zipcode'> -->
+                    <label disabled style="background-color: rgba(238, 238, 238, 0.958);" class="form-control"><span *ngIf="roles.canEdit">Can Edit: {{roles.canEdit}}<br></span>
+                        <span *ngIf="roles.canDelete">Can Delete : {{roles.canDelete}}<br></span>
+                        <span *ngIf="roles.canAdd">Can Add : {{roles.canAdd}}</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button pButton label="Back" type="button" routerLink="/main/home" class="p-button-raised mb-3"></button>
+    </div>
+</div>

@@ -5,6 +5,7 @@ import { AuthGuard } from './gaurd/auth.guard';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginComponent } from './login-page/login.component';
 import { MainComponent } from './main-page/main.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { RolesComponent } from './roles-page/roles.component';
 
 import { UserDetailsPageComponent } from './user-details-page/user-details-page.component';
@@ -12,15 +13,16 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserListComponent } from './user-list-page/user-list.component';
 
 const routes: Routes = [
-  // {path : "" , redirectTo : "login", pathMatch: 'full'},
-  // {path : "login", component : LoginComponent},
+  {path : "" , redirectTo : "login", pathMatch: 'full'},
+  {path : "login", component : LoginComponent},
   
-  {path: "main", component : MainComponent,//canActivate: [AuthGuard],//
+  {path: "main", component : MainComponent,canActivate: [AuthGuard],
    children: [
     {path:"home",component: HomePageComponent},
     {path: "userList", component : UserListComponent},
     {path:"userDetails", component: UserDetailsPageComponent},
     {path:"userEdit",component: UserEditComponent},
+    {path:"userProfile",component: ProfilePageComponent},
     {path : "roles", component : RolesComponent}
   ]}
   

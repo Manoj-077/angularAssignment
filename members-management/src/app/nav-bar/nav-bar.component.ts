@@ -12,7 +12,7 @@ export class NavBarComponent  {
   date:Date = new Date();
   d: any;
   constructor(private authService: AuthService, private router : Router, private userService : UserService){
-    console.log(this.date.getMinutes())
+    
   }
   ngOnInit(){
     this.timeUpdate();

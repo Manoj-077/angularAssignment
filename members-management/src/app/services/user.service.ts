@@ -11,6 +11,7 @@ export class UserService {
   username : any;
   role:any;
   editMode = new Subject();
+  userCreated = new Subject();
   constructor(private http: HttpClient) { }
   logSave(username: string){
     localStorage.setItem('username',username)

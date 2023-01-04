@@ -1,9 +1,13 @@
 #welcome{
-    background-color: rgb(255, 222, 35);
+    background-color: rgb(78, 228, 255);
     width: 100%;
     font-family: 'Kanit', sans-serif;
 }
 
 #graph{
     width: 80%;
+    padding: 40px 0 40px 0;
+}
+#graph-home{
+    background-color: rgb(255, 255, 255);
 }

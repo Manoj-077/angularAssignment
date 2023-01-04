@@ -1,5 +1,6 @@
+
 #label{
-    background-color: rgb(116, 197, 255);
+    background-color:  rgb(78, 228, 255);
    
 }
 svg{
@@ -15,6 +16,12 @@ h1{
     margin-bottom: 0;
     display: inline-block;
 }
+#page{
+    display: inline-block;
+    float: right;
+    margin-right: 50px;
+}
+
 #add{
     display: inline-block;
     float: right;
@@ -83,4 +90,8 @@ p {
 
 #table{
     width: 90%;
+    padding-bottom: 50px;
+}
+.user-list-content{
+    background-color: rgb(255, 255, 255);
 }

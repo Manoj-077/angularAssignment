@@ -22,7 +22,7 @@ export class PasswordValidatorDirective implements Validator {
     
    
     if(controlToCompare && control.value !== controlToCompare.value){
-      console.log(control.errors)
+        
       return {'notEqual': true};
     }
     if(!control.value?.match(expression)){

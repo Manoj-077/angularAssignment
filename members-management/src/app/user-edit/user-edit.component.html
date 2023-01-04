@@ -1,4 +1,4 @@
-<div class="container rounded bg-white mt-5 mb-5" class="d1">
+<div class="container rounded bg-white mt-5 mb-5" class="d1" (mouseover)="autologout()">
     <form #f="ngForm" (ngSubmit)="onSubmit()" >
         <div class="row" >
             <div class="col-md-5 border-right">
@@ -26,7 +26,6 @@
                             <label>UserName<span style="color: red;">*</span></label>
                             <input type="text" disabled class="form-control"  name="username" ngModel>
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="col-md-6">

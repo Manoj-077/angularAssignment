@@ -7,12 +7,21 @@ import { Subject } from 'rxjs';
 import { DatePipe } from '../shared/date.pipe';
 import {ConfirmationService} from 'primeng/api';
 import { ActivatedRoute } from '@angular/router';
+import {MessageService} from 'primeng/api';
+import {DropdownModule} from 'primeng/dropdown';
+import { AutoLogoutService } from '../services/auto-logout.service';
 
+interface Page {
+  name: string;
+  records: number;
+}
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
+
+
 export class UserListComponent implements OnInit {
   @ViewChild('popup') pop :ElementRef;
   @ViewChild('username') username : ElementRef;
@@ -24,14 +33,24 @@ export class UserListComponent implements OnInit {
   roles : any;
   name : any;
   fetchedData : any = [];
-  rows = 5;
+  rows = 10;
   first = 0;
   cdata : any;
   dobj:any;
+  i = false;
   date : Date = new Date();
+ 
+  pageNums: Page[];
+  pageNumSelected: Page;
+
   constructor(private http: HttpClient, private router: Router, private userService : UserService,
-    private confirmationService: ConfirmationService, private route:ActivatedRoute){
-      
+    private confirmationService: ConfirmationService, private route:ActivatedRoute, private messageService: MessageService,
+    private autoLogoutService : AutoLogoutService){
+      this.pageNums = [
+        { name: '10', records: 10 },
+        { name: '15', records: 15 },
+        { name: '20', records: 20 }
+    ];
   }
   
   ngOnInit(): void {
@@ -45,12 +64,52 @@ export class UserListComponent implements OnInit {
     this.http.get("http://localhost:3000/users").subscribe((data)=>{
       this.fetchedData = data;
       this.fetchedData = this.fetchedData.slice(2)
-    })
+     
+    });
+   this.userService.userCreated.subscribe({
+    next: (data) => { 
+      
+      
+        
+        console.log(data)
 
+     }, 
+    error: () => {},
+    complete: () => {
+      this.showSuccess()
+      console.log("success message");
+    }
+
+  })
+}
+  
+  //     if(data===true){
+  //       console.log("success message");
+  //       // this.showSuccess();  
+  //     }
+  //  },)
+
+  
+  
+ 
+onSelected(value:any){
+  if(this.pageNumSelected===undefined){
+
+  }else{
+    this.rows = this.pageNumSelected.records;
   }
+  console.log(this.pageNumSelected)
+  
+}
+
+showSuccess() {
+  this.messageService.add({severity:'success', summary: 'Success', detail: 'User Created'});
+}
+
 
   openPop(){
     this.pop.nativeElement.style.visibility = 'visible';
+    
   }
   closePopup(){
     this.pop.nativeElement.style.visibility = 'hidden';
@@ -133,6 +192,9 @@ export class UserListComponent implements OnInit {
     }
   }
 
+  autologout(){
+    this.autoLogoutService.logout()
+  }
 
 
   gotoEdit(data:any) {
@@ -180,5 +242,6 @@ export class UserListComponent implements OnInit {
 
     showResponsiveDialog() {
         this.displayResponsive = true;
+        console.log(this.pageNumSelected)
     }
 }

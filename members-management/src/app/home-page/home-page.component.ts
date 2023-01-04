@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AutoLogoutService } from '../services/auto-logout.service';
+import { AuthService } from '../gaurd/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -13,27 +16,29 @@ export class HomePageComponent {
   fetchedData: any;
   arr:any = [];
   currentDate: Date = new Date();
-  todayDate : number;
+  todayDate : any;
   counts:any = {}
-  constructor(private http:HttpClient){
+  constructor(private http:HttpClient, private autoLogoutService : AutoLogoutService,
+    private authService : AuthService, private router:Router){
 
   }
   ngOnInit(){
     this.username =localStorage.getItem('username');
-    this.todayDate = this.currentDate.getDate()
+    this.todayDate = this.currentDate;
     this.http.get("http://localhost:3000/users").subscribe((data)=>{
         this.fetchedData = data;
         for(let i=2;i<this.fetchedData.length;i++){
           let fullDate = new Date(this.fetchedData[i].createdTime)
-          let createdDate = fullDate.getDate()
-          if((this.todayDate - createdDate)<7){
-              this.arr.push(this.todayDate - createdDate) // getting and pushing data of last 7 days
+          let createdDate:any = fullDate;
+          if(Math.round((this.todayDate - createdDate)/(1000*60*60*24))<7){
+              this.arr.push(Math.round((this.todayDate - createdDate)/(1000*60*60*24))) // getting and pushing data of last 7 days
           }
         }
-        this.arr = this.arr.sort((a:any, b:any) => b - a); //  sorting desecending
+        
+        this.arr = this.arr.sort((a:any, b:any) => b - a); 
         console.log(this.arr)
         for (const num of this.arr) {
-          this.counts[num] = this.counts[num] ? this.counts[num] + 1 : 1; // getting counts
+          this.counts[num] = this.counts[num] ? this.counts[num] + 1 : 1; 
         }
         console.log(this.counts)
         this.basicData = {
@@ -48,8 +53,12 @@ export class HomePageComponent {
               },
           ]
       };
-    })
+   })
+  }
 
+  autologout(){
     
+    //  
+    // this.autoLogoutService.logout()
   }
 }

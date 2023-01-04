@@ -1,11 +1,6 @@
-@media (max-width: 900px) {
-    .navbar-nav{
-        width: 50%;
-    }
-    
-}
+
 
 #nav{
-    background-color: rgba(43, 102, 191, 0.956);
+    background-color: rgba(24, 102, 219, 0.956);
     font-family: 'Noto Sans', sans-serif;
 }
