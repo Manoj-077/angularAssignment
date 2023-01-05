@@ -30,6 +30,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {MultiSelectModule} from 'primeng/multiselect';
+import { BnNgIdleService } from 'bn-ng-idle'
 
 @NgModule({
   declarations: [
@@ -64,7 +65,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
     ToastModule,
     MultiSelectModule
   ],
-  providers: [ConfirmationService,MessageService],
+  providers: [ConfirmationService,MessageService,BnNgIdleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

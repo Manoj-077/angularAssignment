@@ -1,7 +1,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
-<div class="container rounded bg-white mt-5 mb-5" class="d1" (mouseover)="autologout()">
+<div class="container rounded bg-white mt-5 mb-5" class="d1">
     <form #f="ngForm" (ngSubmit)="onSubmit()">
         <div class="row" >
             <div class="col-md-5 border-right">
@@ -14,7 +14,7 @@
                     <label class="form-label" for="customFile">only .jpg and .png images allowed</label>
                     <input type="file" style="width: 50%;" class="form-control" id="customFile" name="image" 
                     (change)="onfileselected($event)" 
-                    accept="image/png , image/jpg" #img
+                    accept="image/jpg, image/png" #img
                     ngModel/>
                         <!-- <span class="font-weight-bold">Edogaru</span>
                         <span class="text-black-50">edogaru@mail.com.my</span>

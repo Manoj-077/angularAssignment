@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import {MessageService} from 'primeng/api';
 import {DropdownModule} from 'primeng/dropdown';
 import { AutoLogoutService } from '../services/auto-logout.service';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 interface Page {
   name: string;
@@ -45,15 +46,20 @@ export class UserListComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router, private userService : UserService,
     private confirmationService: ConfirmationService, private route:ActivatedRoute, private messageService: MessageService,
-    private autoLogoutService : AutoLogoutService){
+    private autoLogoutService : AutoLogoutService, private bnIdle: BnNgIdleService){
       this.pageNums = [
         { name: '10', records: 10 },
         { name: '15', records: 15 },
         { name: '20', records: 20 }
     ];
   }
-  
+  x = this.autoLogoutService.logoutTime;
   ngOnInit(): void {
+    this.bnIdle.startWatching(this.x).subscribe((isTimedOut: boolean) => {
+      if(isTimedOut){
+      this.autoLogoutService.logout() 
+      }
+    });
     this.roles = localStorage.getItem('roles');
     this.roles = JSON.parse(this.roles)
     // this.userService.loggedIn.subscribe((data)=>{
@@ -98,7 +104,7 @@ onSelected(value:any){
   }else{
     this.rows = this.pageNumSelected.records;
   }
-  console.log(this.pageNumSelected)
+  // console.log(this.pageNumSelected)
   
 }
 
@@ -192,9 +198,7 @@ showSuccess() {
     }
   }
 
-  autologout(){
-    this.autoLogoutService.logout()
-  }
+  
 
 
   gotoEdit(data:any) {
@@ -242,6 +246,13 @@ showSuccess() {
 
     showResponsiveDialog() {
         this.displayResponsive = true;
-        console.log(this.pageNumSelected)
+        // console.log(this.pageNumSelected)
+    }
+
+
+
+    ngOnDestroy(){
+      this.bnIdle.stopTimer();
+      console.log('destroyed userlist')
     }
 }

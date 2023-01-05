@@ -894,6 +894,32 @@
       "description": "",
       "createdTime": "Tue Jan 03 2023 15:23:30 GMT+0530 (India Standard Time)",
       "id": 41
+    },
+    {
+      "username": "hktyi",
+      "firstname": "yirti",
+      "lastname": "yutu",
+      "email": "fgjfgjf@yfuy",
+      "country": "",
+      "state": "",
+      "mobile": "1811100013",
+      "status": "available",
+      "birthday": "",
+      "address": "fgjfg",
+      "zipcode": "",
+      "timezone": "",
+      "locale": "",
+      "gender": "",
+      "roles": {
+        "canEdit": "true",
+        "canDelete": "",
+        "canAdd": ""
+      },
+      "image": "https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg",
+      "password": "Abcabcabc1",
+      "description": "",
+      "createdTime": "Thu Jan 05 2023 11:52:28 GMT+0530 (India Standard Time)",
+      "id": 42
     }
   ]
 }

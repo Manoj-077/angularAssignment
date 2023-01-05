@@ -1,4 +1,4 @@
-<div class="container rounded bg-white mt-5 mb-5" class="d1" (mouseover)="autologout()">
+<div class="container rounded bg-white mt-5 mb-5" class="d1" >
     <form #f="ngForm" (ngSubmit)="onSubmit()" >
         <div class="row" >
             <div class="col-md-5 border-right">
@@ -7,7 +7,7 @@
                     <img *ngIf="newImg" class="rounded-circle mt-5"  width="150px" height="150px" src="{{newImage}}">
                     <label class="form-label" for="customFile">only .jpg and .png images allowed</label>
                     <input type="file" style="width: 50%;" (change)="onfileselected($event)" 
-                    accept="image/png , image/jpg"  class="form-control" id="customFile" name="image" />
+                    accept="image/png , image/jpg"  class="form-control" id="customFile" name="image" #img/>
                     <span *ngIf="nonImage"> 
                         <br>
                         <div class="alert alert-danger" style="width: 300px"  role="alert">

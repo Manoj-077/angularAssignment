@@ -1,8 +1,13 @@
 #table{
-    width : 90%
+    border-style: groove;
+    padding: 0;
+    
     
 }
-.roles-table{
-    padding: 20px;
+body{
     background-color: rgb(186, 244, 255);
+}
+.roles-table{
+   margin: 40px 35px 30px 35px;
+
 }

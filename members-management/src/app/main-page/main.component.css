@@ -8,3 +8,14 @@
     bottom: 0;
 } */
 
+html{
+    height: 100%;
+}
+body{
+    min-height: 100vh;
+    
+}
+footer{
+    position: sticky;
+    top: 100%;
+}

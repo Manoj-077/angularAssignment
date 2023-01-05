@@ -1,8 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AutoLogoutService } from '../services/auto-logout.service';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @Component({
   selector: 'app-user-edit',
@@ -11,6 +12,7 @@ import { AutoLogoutService } from '../services/auto-logout.service';
 })
 export class UserEditComponent {
   @ViewChild('f') form : NgForm;
+  @ViewChild('img') inputImage : ElementRef;
   username:any;
   detailsObj: any;
   image : any;
@@ -20,7 +22,8 @@ export class UserEditComponent {
   nonImage : boolean = false;
   userId:any = "";
   editedDetails : any;
-  constructor(private http: HttpClient, private router:Router, private autoLogoutService: AutoLogoutService){
+  constructor(private http: HttpClient, private router:Router, private autoLogoutService: AutoLogoutService,
+    private bnIdle:BnNgIdleService){
 
   }
 
@@ -38,9 +41,16 @@ export class UserEditComponent {
     }
 		
 	}
-  
+  x = this.autoLogoutService.logoutTime;
 
   ngOnInit(){
+
+    this.bnIdle.startWatching(this.x).subscribe((isTimedOut: boolean) => {
+      if(isTimedOut){
+      this.autoLogoutService.logout() 
+      }
+    });
+
     this.username = localStorage.getItem('userEdit')
     console.log(this.username)
     this.http.get("http://localhost:3000/users").subscribe((data)=>{
@@ -85,6 +95,10 @@ export class UserEditComponent {
     })
   }
 
+  ngOnDestroy(){
+    this.bnIdle.stopTimer();
+    console.log('destroyed edit user')
+  }
   
  onfileselected(event:any){
   console.log(event.target.files[0].size)
@@ -99,6 +113,7 @@ export class UserEditComponent {
   }
   else{
     this.nonImage = true
+    this.inputImage.nativeElement.value = "";
     this.newImg = false;
     setTimeout(()=>{
       this.nonImage = false;
@@ -135,7 +150,5 @@ export class UserEditComponent {
     this.router.navigate(['main/userList'])
   }
 
-  autologout(){
-    this.autoLogoutService.logout()
-  }
+  
 }

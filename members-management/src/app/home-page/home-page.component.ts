@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AutoLogoutService } from '../services/auto-logout.service';
 import { AuthService } from '../gaurd/auth.service';
 import { Router } from '@angular/router';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @Component({
   selector: 'app-home-page',
@@ -19,10 +20,19 @@ export class HomePageComponent {
   todayDate : any;
   counts:any = {}
   constructor(private http:HttpClient, private autoLogoutService : AutoLogoutService,
-    private authService : AuthService, private router:Router){
+    private authService : AuthService, private router:Router, private bnIdle: BnNgIdleService){
 
   }
+  x = this.autoLogoutService.logoutTime;
   ngOnInit(){
+    this.bnIdle.startWatching(this.x).subscribe((isTimedOut: boolean) => {
+      
+      if(isTimedOut){
+       
+      this.autoLogoutService.logout() 
+      }
+    });
+    // console.log('on init')
     this.username =localStorage.getItem('username');
     this.todayDate = this.currentDate;
     this.http.get("http://localhost:3000/users").subscribe((data)=>{
@@ -36,11 +46,11 @@ export class HomePageComponent {
         }
         
         this.arr = this.arr.sort((a:any, b:any) => b - a); 
-        console.log(this.arr)
+        // console.log(this.arr)
         for (const num of this.arr) {
           this.counts[num] = this.counts[num] ? this.counts[num] + 1 : 1; 
         }
-        console.log(this.counts)
+        // console.log(this.counts)
         this.basicData = {
           labels: ['lastSeventhDay', 'lastSixthDay', 'lastFifthDay', 'lastFourthDay', 'lastThirdDay', 'yesterday', 'today'],
           datasets: [
@@ -60,5 +70,9 @@ export class HomePageComponent {
     
     //  
     // this.autoLogoutService.logout()
+  }
+  ngOnDestroy(){
+    this.bnIdle.stopTimer();
+    console.log('destroyed home c')
   }
 }

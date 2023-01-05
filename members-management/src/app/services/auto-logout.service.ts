@@ -6,13 +6,13 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AutoLogoutService {
-
+  logoutTime = 600;
   constructor(private authService: AuthService, private router:Router) { }
 
   logout(){
-    setTimeout(()=>{
+
       this.authService.logout();
       this.router.navigate(['login'])
-    },10000)
+  
   }
 }

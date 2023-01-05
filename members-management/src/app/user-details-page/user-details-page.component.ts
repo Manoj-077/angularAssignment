@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import {MultiSelectFilterOptions} from 'primeng/multiselect';
 import { AutoLogoutService } from '../services/auto-logout.service';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 interface Roles {
   name: string,
@@ -37,20 +38,24 @@ export class UserDetailsPageComponent implements OnInit {
   
   // ig:any;
   constructor(private title: Title, private http:HttpClient, private router : Router, private userService: UserService,
-    private autoLogoutService: AutoLogoutService) {
+    private autoLogoutService: AutoLogoutService, private bnIdle:BnNgIdleService) {
     this.roles = [
       {name: 'Can Edit', code: 'CE'},
       {name: 'Can Delete', code: 'CD'},
       {name: 'Can Add', code: 'CA'},
         ];
   }
-
+  x = this.autoLogoutService.logoutTime;
   ngOnInit() {
 		
-    this.user = localStorage.getItem('newUser')
-    
-    this.description = localStorage.getItem('description')
+    this.bnIdle.startWatching(this.x).subscribe((isTimedOut: boolean) => {
+      if(isTimedOut){
+      this.autoLogoutService.logout() 
+      }
+    });
 
+    this.user = localStorage.getItem('newUser')
+    this.description = localStorage.getItem('description')
     this.userService.editMode.subscribe((data)=>{
       if(data === true){
         this.editMode = true;
@@ -202,5 +207,8 @@ export class UserDetailsPageComponent implements OnInit {
   autologout(){
     this.autoLogoutService.logout()
   }
-	
+	ngOnDestroy(){
+    this.bnIdle.stopTimer();
+    console.log('destroyed adduser')
+  }
 }

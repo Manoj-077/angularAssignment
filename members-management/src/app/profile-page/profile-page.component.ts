@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AutoLogoutService } from '../services/auto-logout.service';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @Component({
   selector: 'app-profile-page',
@@ -13,10 +14,18 @@ export class ProfilePageComponent {
   username : any;
   userImage :any;
   roles: any ="";
-  constructor(private http: HttpClient, private autoLogoutService: AutoLogoutService){
+  constructor(private http: HttpClient, private autoLogoutService: AutoLogoutService,
+     private bnIdle:BnNgIdleService){
 
   }
+  x = this.autoLogoutService.logoutTime;
   ngOnInit() {
+    this.bnIdle.startWatching(this.x).subscribe((isTimedOut: boolean) => {
+      if(isTimedOut){
+      this.autoLogoutService.logout() 
+      }
+    });
+
     this.username = localStorage.getItem('username');
     this.roles = localStorage.getItem('roles');
     this.roles = JSON.parse(this.roles)
@@ -34,7 +43,9 @@ export class ProfilePageComponent {
       console.log(this.roles)
     })
   }
-  autologout(){
-    this.autoLogoutService.logout()
-  }
+  ngOnDestroy(){
+    this.bnIdle.stopTimer();
+    console.log('destroyed profile')
+  }  
+
 }
