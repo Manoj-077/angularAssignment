@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../gaurd/auth.service';
 import { UserService } from '../services/user.service';
 
+
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -11,11 +12,15 @@ import { UserService } from '../services/user.service';
 export class NavBarComponent  {
   date:Date = new Date();
   d: any;
+  checked: boolean;
   constructor(private authService: AuthService, private router : Router, private userService : UserService){
     
   }
   ngOnInit(){
     this.timeUpdate();
+  }
+  dis(){
+    console.log(this.checked)
   }
   
   timeUpdate(){

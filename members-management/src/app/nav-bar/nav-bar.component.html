@@ -10,6 +10,7 @@
         <h4 style="display: inline-block;font-size: medium;margin-top: 10px;">{{d | datepipe}}</h4>
         <div class="collapse navbar-collapse "  id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto " >
+            <p-inputSwitch [(ngModel)]="checked" [style]="{'margin-top': '7px', 'margin-right': '10px'}" (onChange)="dis()"></p-inputSwitch>
             <li class="nav-item" >
               <a class="nav-link " aria-current="page" routerLink="home" routerLinkActive = "active text-warning" style="color: aliceblue;">Home</a>
             </li>

@@ -1,11 +1,11 @@
 
-<div class="container-fluid pt-3 pb-3" id="welcome" >
+<div class="container-fluid pt-3 pb-3" [ngClass]="{'welcome-dark':darkMode, 'welcome':dayMode}" >
     <div class="row text-center">
         <h1>Welcome {{username}}</h1>
     </div>
 </div>
-<div id="graph-home">
-    <div class="container-fluid" id="graph">
+<div id="graph-home" [ngClass]="{'dark-m':darkMode}">
+    <div class="container-fluid" id="graph" >
         <div class="card">
             <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
         </div>

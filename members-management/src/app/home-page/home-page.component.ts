@@ -4,6 +4,7 @@ import { AutoLogoutService } from '../services/auto-logout.service';
 import { AuthService } from '../gaurd/auth.service';
 import { Router } from '@angular/router';
 import { BnNgIdleService } from 'bn-ng-idle';
+import { DarkModeService } from 'angular-dark-mode';
 
 @Component({
   selector: 'app-home-page',
@@ -11,6 +12,8 @@ import { BnNgIdleService } from 'bn-ng-idle';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent {
+  darkMode: boolean = false;
+  dayMode :boolean = !this.darkMode;
   basicData: any;
   basicOptions: any;
   username: any;
@@ -20,11 +23,14 @@ export class HomePageComponent {
   todayDate : any;
   counts:any = {}
   constructor(private http:HttpClient, private autoLogoutService : AutoLogoutService,
-    private authService : AuthService, private router:Router, private bnIdle: BnNgIdleService){
+    private authService : AuthService, private router:Router, private bnIdle: BnNgIdleService,
+    private darkModeService: DarkModeService){
 
   }
   x = this.autoLogoutService.logoutTime;
   ngOnInit(){
+
+    
     this.bnIdle.startWatching(this.x).subscribe((isTimedOut: boolean) => {
       
       if(isTimedOut){

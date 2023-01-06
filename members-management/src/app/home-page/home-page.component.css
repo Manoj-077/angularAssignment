@@ -1,5 +1,16 @@
-#welcome{
+.dark-m{
+    background-color: #545a5c;
+    
+}
+.welcome{
     background-color: rgb(78, 228, 255);
+    width: 100%;
+    font-family: 'Kanit', sans-serif;
+}
+
+.welcome-dark{
+    background-color: rgb(86, 86, 86);
+    color: rgb(255, 255, 255);
     width: 100%;
     font-family: 'Kanit', sans-serif;
 }
@@ -8,6 +19,21 @@
     width: 80%;
     padding: 40px 0 40px 0;
 }
-#graph-home{
+
+/* #graph-home{
+    background-color: blue;
+} */
+/* #graph-home{
     background-color: rgb(255, 255, 255);
-}
+} */
+
+/* body.dark-mode {
+    background-color: #2d3436;
+    color: #dfe6e9;
+  }
+  
+  body.light-mode {
+    background-color: #dfe6e9;
+    color: #2d3436;
+  } */
+

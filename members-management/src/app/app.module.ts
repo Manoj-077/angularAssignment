@@ -31,6 +31,8 @@ import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { BnNgIdleService } from 'bn-ng-idle'
+import { DarkModeService } from 'angular-dark-mode';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -63,9 +65,10 @@ import { BnNgIdleService } from 'bn-ng-idle'
     ConfirmDialogModule,
     ChartModule,
     ToastModule,
-    MultiSelectModule
+    MultiSelectModule,
+    InputSwitchModule
   ],
-  providers: [ConfirmationService,MessageService,BnNgIdleService],
+  providers: [ConfirmationService,MessageService,BnNgIdleService, DarkModeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
