@@ -13,10 +13,12 @@ export class NavBarComponent  {
   date:Date = new Date();
   d: any;
   checked: boolean;
+  username : any = "";
   constructor(private authService: AuthService, private router : Router, private userService : UserService){
     
   }
   ngOnInit(){
+    this.username = localStorage.getItem('username');
     this.timeUpdate();
   }
   dis(){

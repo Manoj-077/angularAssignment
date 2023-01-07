@@ -1,4 +1,20 @@
+#greet{
+    height: 150px;
+    width: 100%;
+    position: relative;
+    background-color: rgb(59, 200, 255)
+    
+}
+.d1{
+    background-color: white;
+    position: relative;
+    z-index: 1;
+    bottom: 50px;
 
+    -webkit-box-shadow: 0 0 10px  lightblue;
+    box-shadow: 0 0 10px  lightblue;
+
+}
 
 .form-control:focus {
     box-shadow: none;
@@ -71,9 +87,7 @@ input{
 	justify-content: center;
 	margin-top: 16px;
 }
-.d1,body{
-    background-image: linear-gradient(rgb(162, 246, 254),rgb(201, 254, 255));
-}
+
 #f1{
     background-color: aqua;
 }
@@ -83,4 +97,25 @@ input{
 #title{
     font-family: 'Cairo', sans-serif;
     font-weight:normal;
+    padding-left: 20px;
+    margin-left: 75px;
 }
+#buttons{
+    text-align: right;
+    margin-bottom: 10px;
+    padding-right: 50px;
+}
+#imageSection{
+    padding-left: 40px;
+    margin-top: 40px;
+}
+.leftFields{
+    
+    margin-left: 30px;
+}
+#phnNum{
+    margin-top: 15px;
+}
+/* #dp{
+    z-index: ;
+} */

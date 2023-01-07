@@ -1,7 +1,8 @@
 
 #label{
-    background-color:  rgb(78, 228, 255);
-   
+    background-color:  rgb(59, 200, 255);
+    height: 150px;
+    position: sticky;
 }
 svg{
     display: inline;
@@ -68,6 +69,8 @@ p {
 
 #label{
     font-family: 'Noto Sans', sans-serif;
+    padding-left: 40px;
+    padding-top: 30px;
 }
 #header{
     font-family: 'Poppins', sans-serif;
@@ -89,9 +92,21 @@ p {
 }
 
 #table{
-    width: 90%;
-    padding-bottom: 50px;
+    width: 95%;
+    padding: 0;
+    position: relative;
+    bottom: 50px;
+    -webkit-box-shadow: 0 0 10px  lightblue;
+    box-shadow: 0 0 10px  lightblue;
+
+}
+#addSection{
+    background-color: white;
 }
 .user-list-content{
     background-color: rgb(255, 255, 255);
+}
+hr{
+    margin-left: 10px;
+    margin-right: 10px;
 }

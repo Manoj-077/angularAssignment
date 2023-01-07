@@ -15,10 +15,32 @@
     font-family: 'Kanit', sans-serif;
 }
 
-#graph{
+/* #graph{
     width: 80%;
     padding: 40px 0 40px 0;
+    
+} */
+#greet{
+    height: 150px;
+    background-color: rgb(59, 200, 255)
 }
+.card{
+    width: 90%;
+    
+left: 50%;
+transform: translateX(-50%);
+    text-align: center;
+    bottom: 50px;
+}
+#welcome{
+    /* display: inline-block; */
+    /* width: 50%; */
+    
+    color: white;
+    margin-top: 20px;
+    /* margin-left: 70px; */
+}
+
 
 /* #graph-home{
     background-color: blue;

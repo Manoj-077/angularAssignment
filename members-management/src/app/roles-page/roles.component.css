@@ -1,13 +1,25 @@
 #table{
-    border-style: groove;
-    padding: 0;
     
+    padding: 0;  
+    -webkit-box-shadow: 0 0 10px  lightblue;
+    box-shadow: 0 0 10px  lightblue;
+ 
+}
+#greet{
+    height: 150px;
+    width: 100%;
+    position: absolute;
+    background-color: rgb(59, 200, 255)
     
 }
 body{
     background-color: rgb(186, 244, 255);
 }
 .roles-table{
-   margin: 40px 35px 30px 35px;
-
+   margin: 90px 35px 40px 35px;
+    
+}
+#roles{
+    padding-left: 20px;
+    padding-top: 20px;
 }

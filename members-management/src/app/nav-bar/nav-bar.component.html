@@ -1,7 +1,7 @@
 <!-- <div class="row" style="height: 50px; background-color: rgb(70, 205, 250);">
 
 </div> -->
- 
+<!--  
 <div id="navbar">
     <nav class="navbar navbar-expand-lg  navbar-light static-top " id="nav" style=" font-weight: bold;" >
       <a style="margin-left: 20px;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL0HkojmDwvFeNvVqEBEU0LOeBfYgUKIitDQ&usqp=CAU" style="height: 60px; border-radius: 15px;"></a>
@@ -10,7 +10,7 @@
         <h4 style="display: inline-block;font-size: medium;margin-top: 10px;">{{d | datepipe}}</h4>
         <div class="collapse navbar-collapse "  id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto " >
-            <!-- <p-inputSwitch [(ngModel)]="checked" [style]="{'margin-top': '7px', 'margin-right': '10px'}" (onChange)="dis()"></p-inputSwitch> -->
+            
             <li class="nav-item" >
               <a class="nav-link " aria-current="page" routerLink="home" routerLinkActive = "active text-warning" style="color: aliceblue;">Home</a>
             </li>
@@ -34,4 +34,38 @@
       </div>
     </nav>
 </div>
-  
+   -->
+
+
+
+<div class="container-fluid">
+  <a><img id="logo" src="https://career.gatech.edu/sites/default/files/images/itorizon_logo.png" style="height: 50px; width: 150px;"></a>
+  <!-- <a id="menu">Menu</a> -->
+  <div class="dropdown" id="menu" >
+    <a class="btn btn-secondary dropdown-toggle" style="margin-left:10px"  role="menu" data-bs-toggle="dropdown" aria-expanded="false">
+      {{username}}
+    </a>
+    <ul class="dropdown-menu" >
+      <li><a class="dropdown-item" routerLink="userProfile" >Profile</a></li>
+      <li><a class="dropdown-item" (click)="logout()" style="cursor: pointer;">LogOut</a></li>
+    </ul>
+  </div>  
+</div>
+<nav id="navbar" class="navbar navbar-expand-lg navbar-dark p-0">
+  <div class="collapse navbar-collapse " style="margin-left: 50px;" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto ">
+      <li class="nav-item " style="margin-left: 20px;">
+        <a class="nav-link letter navPaths" routerLink="home" routerLinkActive = "act" style="padding:18px 25px 18px 25px">Home</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link letter navPaths" routerLink="userList" routerLinkActive = "act"  style="padding:18px 25px 18px 25px" >User List</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link letter  navPaths" routerLink="roles" routerLinkActive = "act" style="padding:18px 25px 18px 25px">Roles</a>
+      </li>
+    </ul>
+    <div class="col" style="text-align: right;">
+      <p id="dateTime" style="margin-right: 30px;">{{d | datepipe}}</p>
+    </div>
+  </div>
+</nav>
