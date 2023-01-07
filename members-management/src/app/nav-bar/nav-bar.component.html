@@ -1,8 +1,8 @@
 <!-- <div class="row" style="height: 50px; background-color: rgb(70, 205, 250);">
 
 </div> -->
-
-<div>
+ 
+<div id="navbar">
     <nav class="navbar navbar-expand-lg  navbar-light static-top " id="nav" style=" font-weight: bold;" >
       <a style="margin-left: 20px;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL0HkojmDwvFeNvVqEBEU0LOeBfYgUKIitDQ&usqp=CAU" style="height: 60px; border-radius: 15px;"></a>
       
@@ -10,7 +10,7 @@
         <h4 style="display: inline-block;font-size: medium;margin-top: 10px;">{{d | datepipe}}</h4>
         <div class="collapse navbar-collapse "  id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto " >
-            <p-inputSwitch [(ngModel)]="checked" [style]="{'margin-top': '7px', 'margin-right': '10px'}" (onChange)="dis()"></p-inputSwitch>
+            <!-- <p-inputSwitch [(ngModel)]="checked" [style]="{'margin-top': '7px', 'margin-right': '10px'}" (onChange)="dis()"></p-inputSwitch> -->
             <li class="nav-item" >
               <a class="nav-link " aria-current="page" routerLink="home" routerLinkActive = "active text-warning" style="color: aliceblue;">Home</a>
             </li>
@@ -33,4 +33,5 @@
         </div>
       </div>
     </nav>
+</div>
   

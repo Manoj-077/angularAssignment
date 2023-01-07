@@ -40,7 +40,7 @@ export class UserListComponent implements OnInit {
   dobj:any;
   i = false;
   date : Date = new Date();
- 
+  userCreated : any;
   pageNums: Page[];
   pageNumSelected: Page;
 
@@ -52,9 +52,18 @@ export class UserListComponent implements OnInit {
         { name: '15', records: 15 },
         { name: '20', records: 20 }
     ];
+    console.log("hello")
+    this.userService.userCreated.subscribe((data)=>{
+      this.userCreated = data;
+      this.showSuccess();
+      // console.log(data)
+      // this.router.navigate(["main/userList"])
+    })
   }
   x = this.autoLogoutService.logoutTime;
   ngOnInit(): void {
+    
+    
     this.bnIdle.startWatching(this.x).subscribe((isTimedOut: boolean) => {
       if(isTimedOut){
       this.autoLogoutService.logout() 
@@ -72,21 +81,20 @@ export class UserListComponent implements OnInit {
       this.fetchedData = this.fetchedData.slice(2)
      
     });
-   this.userService.userCreated.subscribe({
-    next: (data) => { 
-      
-      
-        
-        console.log(data)
+  //  this.userService.userCreated.subscribe({
+  //   next: (data) => { 
+  //     console.log(data)
+  //     }, 
+  //   error: () => {},
+  //   complete: () => {
+  //     this.showSuccess()
+  //     console.log("success message");
+  //   }})
+  
+}
 
-     }, 
-    error: () => {},
-    complete: () => {
-      this.showSuccess()
-      console.log("success message");
-    }
-
-  })
+addSingle() {
+  this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
 }
   
   //     if(data===true){

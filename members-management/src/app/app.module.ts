@@ -34,6 +34,7 @@ import { BnNgIdleService } from 'bn-ng-idle'
 import { DarkModeService } from 'angular-dark-mode';
 import {InputSwitchModule} from 'primeng/inputswitch';
 
+
 @NgModule({
   declarations: [
     AppComponent,

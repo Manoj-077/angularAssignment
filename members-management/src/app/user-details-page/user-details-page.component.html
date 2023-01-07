@@ -51,9 +51,9 @@
                             <label >First Name:<span style="color: red;">*</span></label>
                             <input type="text" class="form-control" #firstname="ngModel" placeholder="firstname" 
                             maxlength="30" value=""
-                            [ngClass]="{'is-invalid': firstname.invalid && firstname.touched}" 
-                            required name="firstname" ngModel>
-                            <span *ngIf="firstname.invalid && firstname.touched"  style="color: red;">enter valid username</span>
+                            [ngClass]="{'is-invalid': firstnameFail && firstname.touched}" 
+                            required name="firstname" [(ngModel)]="fn" (keyup)="validateFirstname()" ngModel>
+                            <span *ngIf="firstnameFail && firstname.touched"  style="color: red;">enter valid username</span>
                         </div>
                         <div class="col-md-6">
                             <label>Last name:</label>
@@ -71,9 +71,9 @@
                             <label >Mobile Number (+91):<span style="color: red;">*</span></label>
                             <input type="text" class="form-control" minlength="10" maxlength="10" #mobile="ngModel" 
                             placeholder="enter phone number" value="" 
-                            [ngClass]="{'is-invalid': mobile.invalid && mobile.touched}"
+                            [ngClass]="{'is-invalid': phnNumFail && mobile.touched}" [(ngModel)]="phnNum" (keyup)="validatePhnNum()"
                             required name="mobile" ngModel>
-                            <span *ngIf="mobile.invalid && mobile.touched" style="color: red;">enter valid mobile number</span>
+                            <span *ngIf="phnNumFail && mobile.touched" style="color: red;">enter valid mobile number</span>
                         </div>
                         <div class="col-md-12">
                             <label >Address :<span style="color: red;">*</span></label>
@@ -148,12 +148,13 @@
                         </div>
                         <div class="col-md-12">
                             <label >Email ID: <span style="color: red;">*</span></label>
-                            <input type="text" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" class="form-control" maxlength="100" 
-                            #email="ngModel" placeholder="enter email id" value="" 
+                            <input type="text" class="form-control" maxlength="100" 
+                            #email="ngModel" placeholder="enter email id" value="" [(ngModel)]="emailId"
                             [ngClass]="{'is-invalid': email.invalid && email.touched}"
-                            required name="email" ngModel>
-                            <span *ngIf="email.invalid && email.touched && email.errors?.['pattern']" style="color: red;">enter a valid email id</span>
-                        </div>
+                            required name="email" (keyup)="validateEmail()" ngModel>
+                            <!-- <span *ngIf="email.invalid && email.touched && email.errors?.['pattern']" style="color: red;">enter a valid email id</span> -->
+                            <span *ngIf="emailFail && email.touched" style="color: red;">enter a valid email id</span>
+                        </div>  
 
                         <div class="col-md-12">
                             <label>password:<span style="color: red;">*</span></label>

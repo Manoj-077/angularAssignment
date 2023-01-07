@@ -25,7 +25,7 @@ export class UserDetailsPageComponent implements OnInit {
   @ViewChild('img') inputImage : ElementRef;
   @ViewChild('username') usrname : ElementRef;
   user : any;
-  pass: any;
+  pass: any = ""
   editMode : boolean = false;
   description : any;
   passwordregexfail : boolean = false;
@@ -33,8 +33,13 @@ export class UserDetailsPageComponent implements OnInit {
   nonImage : boolean = false;
   createdTime : Date = new Date()
   roles: Roles[];
-  selectedRolesCode: string[];
- 
+  selectedRolesCode: any = "";
+  fn : any = ""
+  firstnameFail : any = false;
+  emailId : any = "";
+  emailFail : any = false;
+  phnNum : any = "";
+  phnNumFail : any = false;
   
   // ig:any;
   constructor(private title: Title, private http:HttpClient, private router : Router, private userService: UserService,
@@ -45,9 +50,9 @@ export class UserDetailsPageComponent implements OnInit {
       {name: 'Can Add', code: 'CA'},
         ];
   }
+
   x = this.autoLogoutService.logoutTime;
   ngOnInit() {
-		
     this.bnIdle.startWatching(this.x).subscribe((isTimedOut: boolean) => {
       if(isTimedOut){
       this.autoLogoutService.logout() 
@@ -79,7 +84,35 @@ export class UserDetailsPageComponent implements OnInit {
   //  })
   }
   
-   
+  validatePhnNum(){
+    const expression = new RegExp('^[0-9]{10}$');
+    if(this.phnNum.match(expression)){
+      this.phnNumFail = false
+    }
+    else{
+      this.phnNumFail = true;
+    }
+  }
+  
+  validateFirstname(){
+    const expression = new RegExp('^[a-zA-Z\s]+$');
+    if(this.fn.match(expression)){
+        this.firstnameFail = false
+    }
+    else{
+      this.firstnameFail = true;
+    }
+  }
+
+  validateEmail(){
+    const expression = new RegExp('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$');
+    if(this.emailId.match(expression)){
+        this.emailFail = false
+    }
+    else{
+      this.emailFail = true;
+    }
+  }
   
   validatepassword(){
     const expression = new RegExp('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$');
@@ -146,18 +179,25 @@ export class UserDetailsPageComponent implements OnInit {
       this.tdata.timezone = this.form.value.timezone;
       this.tdata.locale = this.form.value.locale;
       this.tdata.gender = this.form.value.gender;
-
-      for (let x of this.selectedRolesCode){
-        if(x==='CE'){
-          this.tdata.roles.canEdit = "true";
-        }
-        else if(x === 'CD'){
-          this.tdata.roles.canDelete = "true";
-        }
-        else if(x === 'CA'){
-          this.tdata.roles.canAdd = "true";
-        }
+      console.log(this.selectedRolesCode)
+      if(this.selectedRolesCode.length === 0){
+        this.tdata.roles.canEdit = "";
+        this.tdata.roles.canDelete = "";
+        this.tdata.roles.canAdd = "";
       }
+      else{
+        for (let x of this.selectedRolesCode){
+          if(x==='CE'){
+            this.tdata.roles.canEdit = "true";
+          }
+          else if(x === 'CD'){
+            this.tdata.roles.canDelete = "true";
+          }
+          else if(x === 'CA'){
+            this.tdata.roles.canAdd = "true";
+          }
+      }
+    }
 
       // this.tdata.roles.canEdit = this.form.value.canEdit;
       // this.tdata.roles.canDelete = this.form.value.canDelete;
@@ -166,15 +206,13 @@ export class UserDetailsPageComponent implements OnInit {
       this.tdata.password = this.form.value.confirmpassword;
       this.tdata.description = this.description;
       this.tdata.createdTime = this.createdTime.toString();
-      this.http.post("http://localhost:3000/users",this.tdata).subscribe(data=>{
-        
-        
-      })
-      this.userService.userCreated.next(true);
-        this.userService.userCreated.complete();
-        console.log("usercreated=true")
-     
+      this.http.post("http://localhost:3000/users",this.tdata).subscribe(data=>{})
+      
       this.router.navigate(['main/userList'])
+      setTimeout(()=>{
+        this.userService.userCreated.next(true);
+      },2000)
+      
       
   }
  onCancel(){

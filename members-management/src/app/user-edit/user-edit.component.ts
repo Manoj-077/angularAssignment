@@ -97,7 +97,7 @@ export class UserEditComponent {
 
   ngOnDestroy(){
     this.bnIdle.stopTimer();
-    console.log('destroyed edit user')
+    console.log('destroyed edit')
   }
   
  onfileselected(event:any){
