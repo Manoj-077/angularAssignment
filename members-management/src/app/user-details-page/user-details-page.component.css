@@ -101,8 +101,8 @@ input{
 #title{
     font-family: 'Cairo', sans-serif;
     font-weight:normal;
-    padding-left: 20px;
-    margin-left: 50px;
+    padding-left: 40px;
+    margin-left: 30px;
 }
 #buttons{
     text-align: right;
@@ -110,9 +110,9 @@ input{
     padding-right: 50px;
 }
 #imageSection{
-    padding-left: 40px;
+    padding: 0;
     margin-top: 100px;
-    margin-left: 20px;
+    margin-left: 60px;
 }
 .leftFields{
     

@@ -21,7 +21,7 @@ export class UserService {
   logDelete(){
     localStorage.clear();
   }
-  roles(){
+  rolesSave(){
     this.http.get("http://localhost:3000/users").subscribe((data)=>{
       this.usersData = data;
       this.username = localStorage.getItem('username');
@@ -49,7 +49,7 @@ export class UserService {
       localStorage.setItem("permissions",JSON.stringify(this.permissions))
     })
     })
-    
+
   }
   getUsers(){
     return this.http.get("http://localhost:3000/users").subscribe((data)=>{

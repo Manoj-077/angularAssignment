@@ -40,7 +40,7 @@ export class LoginComponent {
       // this.userService.loggedIn.next(this.enteredUsername);
       this.authService.login();
       this.userService.logSave(this.enteredUsername)
-      this.userService.roles()
+      this.userService.rolesSave()
       // this.userService.loggedIn.next(this.userService.roles())
       }else{
         this.showalert = true;

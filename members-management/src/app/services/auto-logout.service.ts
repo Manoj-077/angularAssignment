@@ -12,6 +12,7 @@ export class AutoLogoutService {
   logout(){
 
       this.authService.logout();
+      localStorage.clear();
       this.router.navigate(['login'])
   
   }

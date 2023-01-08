@@ -23,13 +23,18 @@ export class NavBarComponent  {
     console.log(this.ITOuser)
     this.username = localStorage.getItem('username');
     this.timeUpdate();
-    this.role = localStorage.getItem('roles');
-    this.role = JSON.parse(this.role)
-    console.log(this.role)
+    
+    
     // if(this.role === 'ITOuser'){
     //   this.ITOuser = true;
     //   console.log(this.ITOuser)
     // }
+    setTimeout(()=>{
+      this.role = localStorage.getItem('roles');
+      this.role = JSON.parse(this.role)
+      console.log(this.role)
+      this.router.navigate(['main/home'])
+    },100)
   }
   dis(){
     console.log(this.checked)

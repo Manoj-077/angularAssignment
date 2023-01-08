@@ -34,12 +34,19 @@ export class UserDetailsPageComponent implements OnInit {
   createdTime : Date = new Date()
   roles: Roles[];
   selectedRolesCode: any = "";
+  selectedRolesCodeFail : any = false;
   fn : any = ""
   firstnameFail : any = false;
   emailId : any = "";
   emailFail : any = false;
   phnNum : any = "";
   phnNumFail : any = false;
+  addres:any=""
+  addresFail:any= false;
+  selectedStatus : any = "";
+  selectedStatusFail : any = false;
+  confirmpass : any = "";
+
   
   // ig:any;
   constructor(private title: Title, private http:HttpClient, private router : Router, private userService: UserService,
@@ -103,6 +110,24 @@ export class UserDetailsPageComponent implements OnInit {
     }
   }
 
+  validateAddress(){
+    if(this.addres.length < 1){
+      this.addresFail = true;
+    }
+    else{
+      this.addresFail = false;
+    }
+  }
+
+  validateStatus(){
+    if(this.selectedStatus.length === 0){
+      this.selectedStatusFail = true;
+    }
+    else{
+      this.selectedStatusFail = false;
+    }
+  }
+
   validateEmail(){
     const expression = new RegExp('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$');
     if(this.emailId.match(expression)){
@@ -113,6 +138,15 @@ export class UserDetailsPageComponent implements OnInit {
     }
   }
   
+  validateRoles(){
+    if(!this.selectedRolesCode){
+        this.selectedRolesCodeFail = true;
+    }
+    else{
+      this.selectedRolesCodeFail = false;
+    }
+  }
+
   validatepassword(){
     const expression = new RegExp('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$');
     if(this.pass.match(expression)){
@@ -160,55 +194,46 @@ export class UserDetailsPageComponent implements OnInit {
     createdTime: "" 
   }
   onSubmit(){
-      this.tdata.username = this.user;
-      this.tdata.firstname = this.form.value.firstname;
-      this.tdata.lastname = this.form.value.lastname;
-      this.tdata.email = this.form.value.email;
-      this.tdata.country = this.form.value.country;
-      this.tdata.state = this.form.value.state;
-      this.tdata.mobile = this.form.value.mobile;
-      this.tdata.status = this.form.value.status;
-      this.tdata.birthday = this.form.value.birthday;
-      this.tdata.address = this.form.value.address;
-      this.tdata.zipcode = this.form.value.zipcode;
-      this.tdata.timezone = this.form.value.timezone;
-      this.tdata.locale = this.form.value.locale;
-      this.tdata.gender = this.form.value.gender;
-      this.tdata.roles = this.selectedRolesCode;
-      console.log(this.selectedRolesCode)
-    //   if(this.selectedRolesCode.length === 0){
-    //     this.tdata.roles.canEdit = "";
-    //     this.tdata.roles.canDelete = "";
-    //     this.tdata.roles.canAdd = "";
-    //   }
-    //   else{
-    //     for (let x of this.selectedRolesCode){
-    //       if(x==='CE'){
-    //         this.tdata.roles.canEdit = "true";
-    //       }
-    //       else if(x === 'CD'){
-    //         this.tdata.roles.canDelete = "true";
-    //       }
-    //       else if(x === 'CA'){
-    //         this.tdata.roles.canAdd = "true";
-    //       }
-    //   }
-    // }
+      this.validatePhnNum();
+      this.validateFirstname();
+      this.validateAddress();
+      this.validateStatus();
+      this.validateEmail();
+      this.validatepassword();
+      this.validateRoles();
 
-      // this.tdata.roles.canEdit = this.form.value.canEdit;
-      // this.tdata.roles.canDelete = this.form.value.canDelete;
-      // this.tdata.roles.canAdd = this.form.value.canAdd;
-      this.tdata.image = this.image;
-      this.tdata.password = this.form.value.confirmpassword;
-      this.tdata.description = this.description;
-      this.tdata.createdTime = this.createdTime.toString();
-      console.log(this.tdata)
-      this.http.post("http://localhost:3000/users",this.tdata).subscribe(data=>{})
-      
-      this.router.navigate(['main/userList'])
-      setTimeout(()=>{
-        this.userService.userCreated.next(true);
-      },2000)
+      if(!this.phnNumFail && !this.firstnameFail && !this.addresFail && !this.selectedStatusFail && !this.emailFail && !this.passwordregexfail && !this.selectedRolesCodeFail){
+        this.tdata.username = this.user;
+        this.tdata.firstname = this.form.value.firstname;
+        this.tdata.lastname = this.form.value.lastname;
+        this.tdata.email = this.form.value.email;
+        this.tdata.country = this.form.value.country;
+        this.tdata.state = this.form.value.state;
+        this.tdata.mobile = this.form.value.mobile;
+        this.tdata.status = this.form.value.status;
+        this.tdata.birthday = this.form.value.birthday;
+        this.tdata.address = this.form.value.address;
+        this.tdata.zipcode = this.form.value.zipcode;
+        this.tdata.timezone = this.form.value.timezone;
+        this.tdata.locale = this.form.value.locale;
+        this.tdata.gender = this.form.value.gender;
+        this.tdata.roles = this.selectedRolesCode;
+        console.log(this.selectedRolesCode)
+        this.tdata.image = this.image;
+        this.tdata.password = this.form.value.confirmpassword;
+        this.tdata.description = this.description;
+        this.tdata.createdTime = this.createdTime.toString();
+        console.log(this.tdata)
+        this.http.post("http://localhost:3000/users",this.tdata).subscribe(data=>{})
+        
+        this.router.navigate(['main/userList'])
+        setTimeout(()=>{
+          this.userService.userCreated.next(true);
+        },2000)
+      }
+      else{
+          
+      }
       
       
   }
