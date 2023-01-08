@@ -20,12 +20,16 @@ export class NavBarComponent  {
     
   }
   ngOnInit(){
+    console.log(this.ITOuser)
     this.username = localStorage.getItem('username');
     this.timeUpdate();
     this.role = localStorage.getItem('roles');
-    if(this.role === 'ITOuser'){
-      this.ITOuser = true;
-    }
+    this.role = JSON.parse(this.role)
+    console.log(this.role)
+    // if(this.role === 'ITOuser'){
+    //   this.ITOuser = true;
+    //   console.log(this.ITOuser)
+    // }
   }
   dis(){
     console.log(this.checked)

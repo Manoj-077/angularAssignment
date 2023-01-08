@@ -34,8 +34,7 @@ export class UserService {
 
       // return this.role
       localStorage.setItem('roles',JSON.stringify(this.role))
-    })
-    this.http.get("http://localhost:3000/roles").subscribe((data)=>{
+      this.http.get("http://localhost:3000/roles").subscribe((data)=>{
       this.rolesData = data;
       console.log(this.role)
       console.log(this.rolesData)
@@ -49,6 +48,8 @@ export class UserService {
       console.log(this.permissions)
       localStorage.setItem("permissions",JSON.stringify(this.permissions))
     })
+    })
+    
   }
   getUsers(){
     return this.http.get("http://localhost:3000/users").subscribe((data)=>{

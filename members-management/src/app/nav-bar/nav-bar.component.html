@@ -42,7 +42,7 @@
   <a><img id="logo" src="https://career.gatech.edu/sites/default/files/images/itorizon_logo.png" style="height: 50px; width: 170px;"></a>
   <!-- <a id="menu">Menu</a> -->
   <div class="dropdown" id="menu" >
-    <a class="btn btn-secondary dropdown-toggle" style="margin-left:10px"  role="menu" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="btn btn-secondary dropdown-toggle" style="margin-left:10px"  role="menu" data-bs-toggle="dropdown">
       {{username}}
     </a>
     <ul class="dropdown-menu" >
@@ -60,7 +60,7 @@
       <li class="nav-item" >
         <a class="nav-link letter navPaths" routerLink="userList" routerLinkActive = "act"  style="padding:18px 25px 18px 25px" >User List</a>
       </li>
-      <li class="nav-item" >
+      <li class="nav-item" [ngStyle]="{'display': this.role === 'ITOuser' ? 'none': 'list-item'}">
         <a class="nav-link letter  navPaths"  routerLink="roles" routerLinkActive = "act" style="padding:18px 25px 18px 25px">Roles</a>
       </li>
     </ul>
