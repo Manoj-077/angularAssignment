@@ -43,7 +43,7 @@ export class UserListComponent implements OnInit {
   userCreated : any;
   pageNums: Page[];
   pageNumSelected: Page;
-
+  permissions: any = "";
   constructor(private http: HttpClient, private router: Router, private userService : UserService,
     private confirmationService: ConfirmationService, private route:ActivatedRoute, private messageService: MessageService,
     private autoLogoutService : AutoLogoutService, private bnIdle: BnNgIdleService){
@@ -63,14 +63,16 @@ export class UserListComponent implements OnInit {
   x = this.autoLogoutService.logoutTime;
   ngOnInit(): void {
     
+    this.permissions = localStorage.getItem('permissions');
+    this.permissions = JSON.parse(this.permissions)
     
     this.bnIdle.startWatching(this.x).subscribe((isTimedOut: boolean) => {
       if(isTimedOut){
       this.autoLogoutService.logout() 
       }
     });
-    this.roles = localStorage.getItem('roles');
-    this.roles = JSON.parse(this.roles)
+    // this.roles = localStorage.getItem('roles');
+    // this.roles = JSON.parse(this.roles)
     // this.userService.loggedIn.subscribe((data)=>{
     //   this.name = data
     //   console.log(this.name)

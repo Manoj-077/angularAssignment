@@ -85,7 +85,7 @@
       <div class="row" >
           <div class="col" >
             <p-button (onClick)="showResponsiveDialog()" class="mt-4 mb-2 mr-5"  id="add" icon="pi pi-external-link"
-            label="Add+" [disabled]="!roles.canAdd" [style]="{'margin-right': '30px'}"></p-button>
+            label="Add+" [disabled]="!permissions.canAdd" [style]="{'margin-right': '30px'}"></p-button>
             <p-dropdown [options]="pageNums" class="mt-4 mb-2 mr-3" id="page" [(ngModel)]="pageNumSelected"
              placeholder="Number of Records" optionLabel="name" (click)="onSelected($event)"></p-dropdown>
             
@@ -143,8 +143,8 @@
                 </td>
                 <td>{{data.createdTime | datepipe}}</td>
                 
-                <td><button pButton type="button" routerLink="/main/userEdit" label="Details" [disabled]="!roles.canEdit" (click)="gotoEdit(data)" class="p-button-info"></button></td>
-                <td><button pButton type="button" [disabled]="!roles.canDelete" (click)="deleteConfirm(data)" [disabled]="!roles.canDelete" label="" icon="pi pi-trash"></button></td>
+                <td><button pButton type="button" routerLink="/main/userEdit" label="Details" [disabled]="!permissions.canEdit" (click)="gotoEdit(data)" class="p-button-info"></button></td>
+                <td><button pButton type="button" [disabled]="!permissions.canDelete" (click)="deleteConfirm(data)" label="" icon="pi pi-trash"></button></td>
                 <!-- <button class="btn btn-info" (click)="details($event)">Details</button> -->
                 
             </tr>

@@ -7,6 +7,17 @@ body{
     border-color: #BA68C8
 }
 
+#greet{
+    height: 150px;
+    width: 100%;
+    position: relative;
+    
+    padding-top: 20px;
+    padding-left: 120px;
+
+    background-color: rgb(59, 200, 255)
+    
+}
 .profile-button {
     background: rgb(99, 39, 120);
     box-shadow: none;
@@ -73,8 +84,17 @@ input{
 	justify-content: center;
 	margin-top: 16px;
 }
-.d1,body{
-    background-color: rgb(95, 230, 227);
+.d1{
+    
+        background-color: white;
+        position: relative;
+        z-index: 1;
+        bottom: 50px;
+    
+        -webkit-box-shadow: 0 0 10px  lightblue;
+        box-shadow: 0 0 10px  lightblue;
+    
+
 }
 #f1{
     background-color: aqua;
@@ -85,4 +105,22 @@ input{
 #title{
     font-family: 'Cairo', sans-serif;
     font-weight:normal;
+    margin-left: 50px;
+}
+#leftColumn{
+    margin-left: 55px;
+}
+#imageDiv{
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+hr{
+    width: 90%;
+    margin-left: 60px;
+}
+#buttonDiv{
+    text-align: right;
+    display: inline-block;
+    padding-right: 70px;
+    padding-bottom: 30px;
 }

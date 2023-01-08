@@ -5,6 +5,12 @@ import { Router } from '@angular/router';
 import { AutoLogoutService } from '../services/auto-logout.service';
 import { BnNgIdleService } from 'bn-ng-idle';
 
+interface Roles {
+  name: string,
+  code: string
+}
+
+
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
@@ -22,9 +28,15 @@ export class UserEditComponent {
   nonImage : boolean = false;
   userId:any = "";
   editedDetails : any;
+  roles: Roles[];
+  selectedRolesCode: any = "";
+  selectedRole : any = "";
   constructor(private http: HttpClient, private router:Router, private autoLogoutService: AutoLogoutService,
     private bnIdle:BnNgIdleService){
-
+      this.roles = [
+        {name: 'Admin', code: 'Admin'},
+        {name: 'ITOuser', code: 'ITOuser'},
+          ];
   }
 
   Countries = [
@@ -68,6 +80,14 @@ export class UserEditComponent {
           this.states = this.Countries[1].states;
         }
 
+
+        if(this.detailsObj.roles==='Admin'){
+          this.selectedRolesCode = [{name: 'Admin', code: 'Admin'}]
+        }
+        else if(this.detailsObj.roles === 'ITOuser'){
+          this.selectedRolesCode = [{name: 'ITOuser', code: 'ITOuser'}]
+        }
+        // this.selectedRole = this.selectedRolesCode;
         this.form.setValue({
           username : this.detailsObj.username,
           firstname : this.detailsObj.firstname,
@@ -84,12 +104,15 @@ export class UserEditComponent {
           email : this.detailsObj.email,
           password : this.detailsObj.password,
           confirmpassword : this.detailsObj.password,
-          canEdit : this.detailsObj.roles.canEdit,
-          canDelete : this.detailsObj.roles.canDelete,
-          canAdd : this.detailsObj.roles.canAdd,
+          // canEdit : this.detailsObj.roles.canEdit,
+          // canDelete : this.detailsObj.roles.canDelete,
+          // canAdd : this.detailsObj.roles.canAdd,
           status : this.detailsObj.status,
+          roles : this.selectedRolesCode[0].name
           
         })
+        
+
         this.userId = this.detailsObj.id;
         this.image = this.detailsObj.image
     })
@@ -128,9 +151,10 @@ export class UserEditComponent {
     this.detailsObj.state = this.form.value.state;
     this.detailsObj.timezone = this.form.value.timezone;
     this.detailsObj.locale = this.form.value.locale;
-    this.detailsObj.roles.canEdit = this.form.value.canEdit;
-    this.detailsObj.roles.canDelete = this.form.value.canDelete;
-    this.detailsObj.roles.canAdd = this.form.value.canAdd;
+    // this.detailsObj.roles.canEdit = this.form.value.canEdit;
+    // this.detailsObj.roles.canDelete = this.form.value.canDelete;
+    // this.detailsObj.roles.canAdd = this.form.value.canAdd;
+    this.detailsObj.roles = this.selectedRolesCode;
     this.detailsObj.status = this.form.value.status;
     if(!this.newImage){
       this.detailsObj.image = this.image

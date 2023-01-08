@@ -14,12 +14,18 @@ export class NavBarComponent  {
   d: any;
   checked: boolean;
   username : any = "";
+  role : any ="";
+  ITOuser : any = false;
   constructor(private authService: AuthService, private router : Router, private userService : UserService){
     
   }
   ngOnInit(){
     this.username = localStorage.getItem('username');
     this.timeUpdate();
+    this.role = localStorage.getItem('roles');
+    if(this.role === 'ITOuser'){
+      this.ITOuser = true;
+    }
   }
   dis(){
     console.log(this.checked)

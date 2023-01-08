@@ -13,10 +13,10 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserListComponent } from './user-list-page/user-list.component';
 
 const routes: Routes = [
-  // {path : "" , redirectTo : "login", pathMatch: 'full'},
-  // {path : "login", component : LoginComponent},
+  {path : "" , redirectTo : "login", pathMatch: 'full'},
+  {path : "login", component : LoginComponent},
   
-  {path: "main", component : MainComponent,//canActivate: [AuthGuard],
+  {path: "main", component : MainComponent,canActivate: [AuthGuard],
    children: [
     {path:"home",component: HomePageComponent},
     {path: "userList", component : UserListComponent},

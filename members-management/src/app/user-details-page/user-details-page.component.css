@@ -2,6 +2,10 @@
     height: 150px;
     width: 100%;
     position: relative;
+    
+    padding-top: 20px;
+    padding-left: 120px;
+
     background-color: rgb(59, 200, 255)
     
 }
@@ -98,7 +102,7 @@ input{
     font-family: 'Cairo', sans-serif;
     font-weight:normal;
     padding-left: 20px;
-    margin-left: 75px;
+    margin-left: 50px;
 }
 #buttons{
     text-align: right;
@@ -107,14 +111,18 @@ input{
 }
 #imageSection{
     padding-left: 40px;
-    margin-top: 40px;
+    margin-top: 100px;
+    margin-left: 20px;
 }
 .leftFields{
     
-    margin-left: 30px;
+    margin-left: 40px;
 }
 #phnNum{
-    margin-top: 15px;
+    margin-top: 25px;
+}
+#addUser{
+    
 }
 /* #dp{
     z-index: ;

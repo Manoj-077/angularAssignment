@@ -26,17 +26,18 @@
 }
 .card{
     width: 90%;
-    
-left: 50%;
-transform: translateX(-50%);
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
     bottom: 50px;
+    -webkit-box-shadow: 0 0 10px  lightblue;
+    box-shadow: 0 0 10px  lightblue;
+
 }
 #welcome{
     /* display: inline-block; */
     /* width: 50%; */
     
-    color: white;
     margin-top: 20px;
     /* margin-left: 70px; */
 }

@@ -4,24 +4,20 @@
 <div class="roles-table" >
     
     <div class="container-fluid" id="table">
-    <p-table styleClass="p-datatable-striped" [value]="fetchedData" [paginator]="true" [rows]="5" [tableStyle]="{'min-width': '50rem'}">
+    <p-table styleClass="p-datatable-striped" [value]="fetchedData" [paginator]="false" [rows]="5" [tableStyle]="{'min-width': '50rem'}">
         <ng-template pTemplate="header">
             <tr>
-                <th style="width:20%">Username</th>
+                <th style="width:20%">Name</th>
                 <th style="width:20%">Description</th>
                 <th style="width:20%">Created Date</th>
-                <th style="width:20%">Roles</th>
+                
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-data>
             <tr>
-                <td>{{data.username}}</td>
+                <td>{{data.role}}</td>
                 <td>{{data.description}}</td>
                 <td>{{data.createdTime | datepipe}}</td>
-                <td><p><span *ngIf="data.roles.canEdit">canEdit: {{data.roles.canEdit}}</span><br>
-                    <span *ngIf="data.roles.canDelete">canDelete : {{data.roles.canDelete}}</span><br>
-                    <span *ngIf="data.roles.canAdd">canAdd : {{data.roles.canAdd}}</span></p>
-                </td>
             </tr>
         </ng-template>
     </p-table>

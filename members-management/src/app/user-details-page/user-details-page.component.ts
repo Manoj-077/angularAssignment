@@ -45,9 +45,8 @@ export class UserDetailsPageComponent implements OnInit {
   constructor(private title: Title, private http:HttpClient, private router : Router, private userService: UserService,
     private autoLogoutService: AutoLogoutService, private bnIdle:BnNgIdleService) {
     this.roles = [
-      {name: 'Can Edit', code: 'CE'},
-      {name: 'Can Delete', code: 'CD'},
-      {name: 'Can Add', code: 'CA'},
+      {name: 'Admin', code: 'Admin'},
+      {name: 'ITOuser', code: 'ITOuser'},
         ];
   }
 
@@ -154,11 +153,7 @@ export class UserDetailsPageComponent implements OnInit {
     timezone : "",
     locale:"",
     gender : "",
-    roles : {
-      canEdit : "",
-      canDelete : "",
-      canAdd :""
-        },
+    roles : "",
     image : "" , 
     password: "",
     description:"",
@@ -179,25 +174,26 @@ export class UserDetailsPageComponent implements OnInit {
       this.tdata.timezone = this.form.value.timezone;
       this.tdata.locale = this.form.value.locale;
       this.tdata.gender = this.form.value.gender;
+      this.tdata.roles = this.selectedRolesCode;
       console.log(this.selectedRolesCode)
-      if(this.selectedRolesCode.length === 0){
-        this.tdata.roles.canEdit = "";
-        this.tdata.roles.canDelete = "";
-        this.tdata.roles.canAdd = "";
-      }
-      else{
-        for (let x of this.selectedRolesCode){
-          if(x==='CE'){
-            this.tdata.roles.canEdit = "true";
-          }
-          else if(x === 'CD'){
-            this.tdata.roles.canDelete = "true";
-          }
-          else if(x === 'CA'){
-            this.tdata.roles.canAdd = "true";
-          }
-      }
-    }
+    //   if(this.selectedRolesCode.length === 0){
+    //     this.tdata.roles.canEdit = "";
+    //     this.tdata.roles.canDelete = "";
+    //     this.tdata.roles.canAdd = "";
+    //   }
+    //   else{
+    //     for (let x of this.selectedRolesCode){
+    //       if(x==='CE'){
+    //         this.tdata.roles.canEdit = "true";
+    //       }
+    //       else if(x === 'CD'){
+    //         this.tdata.roles.canDelete = "true";
+    //       }
+    //       else if(x === 'CA'){
+    //         this.tdata.roles.canAdd = "true";
+    //       }
+    //   }
+    // }
 
       // this.tdata.roles.canEdit = this.form.value.canEdit;
       // this.tdata.roles.canDelete = this.form.value.canDelete;
@@ -206,6 +202,7 @@ export class UserDetailsPageComponent implements OnInit {
       this.tdata.password = this.form.value.confirmpassword;
       this.tdata.description = this.description;
       this.tdata.createdTime = this.createdTime.toString();
+      console.log(this.tdata)
       this.http.post("http://localhost:3000/users",this.tdata).subscribe(data=>{})
       
       this.router.navigate(['main/userList'])
