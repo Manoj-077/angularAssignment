@@ -24,6 +24,7 @@ export class UserDetailsPageComponent implements OnInit {
   @ViewChild('f') form : NgForm;
   @ViewChild('img') inputImage : ElementRef;
   @ViewChild('username') usrname : ElementRef;
+  @ViewChild('confirmPass') confirmpassword: ElementRef;
   user : any;
   pass: any = ""
   editMode : boolean = false;
@@ -46,7 +47,7 @@ export class UserDetailsPageComponent implements OnInit {
   selectedStatus : any = "";
   selectedStatusFail : any = false;
   confirmpass : any = "";
-
+  confirmpassFail : any = false;
   
   // ig:any;
   constructor(private title: Title, private http:HttpClient, private router : Router, private userService: UserService,
@@ -157,6 +158,15 @@ export class UserDetailsPageComponent implements OnInit {
     }
   }
 
+  validateConfirmPassword(){
+    if(this.confirmpass === this.pass){
+        this.confirmpassFail = false;
+    }
+    else{
+      this.confirmpassFail = true;
+    }
+  }
+
   selectedCities: string[] = [];
   checked: boolean = false;
   selectedCountry: String = "--Choose Country--";
@@ -201,8 +211,9 @@ export class UserDetailsPageComponent implements OnInit {
       this.validateEmail();
       this.validatepassword();
       this.validateRoles();
+      this.validateConfirmPassword();
 
-      if(!this.phnNumFail && !this.firstnameFail && !this.addresFail && !this.selectedStatusFail && !this.emailFail && !this.passwordregexfail && !this.selectedRolesCodeFail){
+      if(!this.phnNumFail && !this.firstnameFail && !this.addresFail && !this.selectedStatusFail && !this.emailFail && !this.passwordregexfail && !this.selectedRolesCodeFail && !this.confirmpassFail){
         this.tdata.username = this.user;
         this.tdata.firstname = this.form.value.firstname;
         this.tdata.lastname = this.form.value.lastname;
@@ -230,6 +241,7 @@ export class UserDetailsPageComponent implements OnInit {
         setTimeout(()=>{
           this.userService.userCreated.next(true);
         },2000)
+        console.log(this.form.errors)
       }
       else{
           

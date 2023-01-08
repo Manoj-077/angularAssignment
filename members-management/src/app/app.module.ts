@@ -33,6 +33,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import { BnNgIdleService } from 'bn-ng-idle'
 import { DarkModeService } from 'angular-dark-mode';
 import {InputSwitchModule} from 'primeng/inputswitch';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import {InputSwitchModule} from 'primeng/inputswitch';
     PasswordValidatorDirective,
     DatePipe,
     UserEditComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

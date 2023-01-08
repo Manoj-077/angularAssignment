@@ -38,7 +38,7 @@
                         <label >Mobile Number (+91):<span style="color: red;">*</span></label>
                         <input type="text" class="form-control" minlength="10" maxlength="10" #mobile="ngModel" 
                         placeholder="enter phone number" value="" 
-                        [ngClass]="{'is-invalid': phnNumFail}" [(ngModel)]="phnNum" (keyup)="validatePhnNum()"
+                        [ngClass]="{'is-invalid': phnNumFail}" [(ngModel)]="phnNum" 
                         required name="mobile" ngModel>
                         <span *ngIf="phnNumFail" style="color: red;">enter valid mobile number</span>
                     </div>
@@ -190,13 +190,16 @@
                                 <label>confirm password:<span style="color: red;">*</span></label>
                                 <input type="text" [ngClass]="{'is-invalid': confirmpassword.invalid && confirmpassword.touched}" class="form-control" PasswordValidator="password" minlength="8" maxlength="20"  placeholder="confirm password"
                                 value="" required name="confirmpassword" #confirmpassword = "ngModel"
-                                [ngClass]="{'is-valid': confirmpassword.valid && confirmpassword.touched && confirmpassword.dirty}"
+                                [ngClass]="{'is-invalid': confirmpassword.errors?.['notEqual'] || confirmpassFail}"
                                 [(ngModel)]="confirmpass"
                                 ngModel>
-                                <span  *ngIf="confirmpassword.touched && confirmpassword.errors?.['notEqual']" 
+                                
+                                <span  *ngIf="confirmpassword.errors?.['notEqual']" 
                                 style="color:red">password not matching</span>
                                 <span *ngIf="confirmpassword.touched && confirmpassword.errors?.['empty']" 
                                 style="color:red">invalid field input</span>
+                                <span *ngIf="confirmpassFail && confirmpassword.pristine" 
+                                style="color:red">Enter same password before saving</span>
                                 <!-- <span *ngIf="confirmpassword.errors?.['regexfail']" 
                                 style="color:red">regex failed</span> -->
                                 
