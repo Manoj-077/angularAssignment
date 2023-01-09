@@ -94,7 +94,7 @@
       </div>
       <hr>
   </div>
-    <p-table  [value]="fetchedData" [style]="{'padding': '0 10px 0 10px'}"  #dt2 styleClass="p-datatable-striped" [paginator]="true"  [tableStyle]="{'min-width': '50rem'}" 
+    <p-table  [value]="fetchedData" [style]="{'padding': '0 10px 0 10px'}"  #dt2 styleClass="p-datatable-striped" [paginator]="isPaginate"  [tableStyle]="{'min-width': '50rem'}" 
     [rows]="rows" [showCurrentPageReport]="true" [(first)]="first"
     [globalFilterFields]="['username','firstname','lastname','email','status','createdate']">  
       <ng-template pTemplate="header"  >

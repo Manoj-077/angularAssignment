@@ -31,6 +31,9 @@ export class UserEditComponent {
   roles: Roles[];
   selectedRolesCode: any = "";
   selectedRole : any = "";
+  addres:any=""
+  addresFail:any= false;
+
   constructor(private http: HttpClient, private router:Router, private autoLogoutService: AutoLogoutService,
     private bnIdle:BnNgIdleService){
       this.roles = [
@@ -143,8 +146,18 @@ export class UserEditComponent {
     },3000)
   }
 }
+
+validateAddress(){
+  if(this.addres.length < 1){
+    this.addresFail = true;
+  }
+  else{
+    this.addresFail = false;
+  }
+}
   onSubmit(){
-    
+    this.validateAddress();
+    if(!this.addresFail){
     this.detailsObj.address = this.form.value.address;
     this.detailsObj.zipcode = this.form.value.zipcode;
     this.detailsObj.country = this.form.value.country;
@@ -167,6 +180,7 @@ export class UserEditComponent {
     this.http.put("http://localhost:3000/users/"+this.userId,this.editedDetails).subscribe((data)=>{
       this.router.navigate(['main/userList'])
     })
+  }
   }
 
   cancel(){

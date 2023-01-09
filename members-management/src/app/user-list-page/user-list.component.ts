@@ -44,6 +44,7 @@ export class UserListComponent implements OnInit {
   pageNums: Page[];
   pageNumSelected: Page;
   permissions: any = "";
+  isPaginate : any = false;
   constructor(private http: HttpClient, private router: Router, private userService : UserService,
     private confirmationService: ConfirmationService, private route:ActivatedRoute, private messageService: MessageService,
     private autoLogoutService : AutoLogoutService, private bnIdle: BnNgIdleService){
@@ -79,9 +80,15 @@ export class UserListComponent implements OnInit {
     // }
     // )
     this.http.get("http://localhost:3000/users").subscribe((data)=>{
+
       this.fetchedData = data;
       this.fetchedData = this.fetchedData.slice(2)
-     
+      if(this.fetchedData.length>9){
+        this.isPaginate = true; 
+      }
+      else{
+        this.isPaginate = false;
+      }
     });
   //  this.userService.userCreated.subscribe({
   //   next: (data) => { 
@@ -156,7 +163,13 @@ showSuccess() {
                 setTimeout(()=>{
                   this.http.get("http://localhost:3000/users").subscribe((data)=>{
                     this.fetchedData = data;
-                    this.fetchedData = this.fetchedData.slice(2)
+                    this.fetchedData = this.fetchedData.slice(2);
+                    console.log('getting after delete')
+                    console.log(this.fetchedData)
+                    if(this.fetchedData.length<11){
+                      this.isPaginate = false;
+                      console.log('paginate to false')
+                    }
                   })
               },100)
              })
@@ -168,6 +181,7 @@ showSuccess() {
             })
         }
     });
+    
 }
   addUser(){
     const exp = new RegExp("^[a-zA-Z0-9_]*$");

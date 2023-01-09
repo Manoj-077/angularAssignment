@@ -111,7 +111,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <label >Mobile Number (+91):<span style="color: red;">*</span></label>
+                                <label >Mobile Number:<span style="color: red;">*</span></label>
                                 <input type="text" disabled class="form-control" maxlength="10"  
                                 placeholder="enter phone number" value="" 
                                 required name="mobile" ngModel>
@@ -119,9 +119,9 @@
                             <div class="col-md-12">
                                 <label >Address :<span style="color: red;">*</span></label>
                                 <input type="text" class="form-control" maxlength="100" 
-                                placeholder="enter address" value="" required name="address" 
+                                placeholder="enter address" value="" required name="address"  [(ngModel)]="addres"
                                 ngModel>
-                                
+                                <span *ngIf="addresFail" style="color: red;">enter valid address</span>
                             </div>
                             <div class="col-md-12">
                                 <label>zipcode:</label>
