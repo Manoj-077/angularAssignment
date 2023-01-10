@@ -36,11 +36,31 @@
 </div>
    -->
 
+<div class="container-fluid">    
+  <div class="grid">
+    <div class="col-4">
+      <a><img id="logo" src="https://career.gatech.edu/sites/default/files/images/itorizon_logo.png" style="height: 50px; width: 170px;"></a>
+    </div>
+    <div class="col-6">
 
-
+    </div>
+    <div class="col-2">
+      <div class="dropdown" id="menu" >
+        <a class="btn btn-secondary dropdown-toggle" style="margin-left:10px"  role="menu" data-bs-toggle="dropdown">
+          {{username}}
+        </a>
+        <ul class="dropdown-menu" >
+          <li><a class="dropdown-item" routerLink="userProfile" >Profile</a></li>
+          <li><a class="dropdown-item" (click)="logout()" style="cursor: pointer;">LogOut</a></li>
+        </ul>
+      </div>  
+    </div>
+  </div>
+</div>
+<!-- 
 <div class="container-fluid">
   <a><img id="logo" src="https://career.gatech.edu/sites/default/files/images/itorizon_logo.png" style="height: 50px; width: 170px;"></a>
-  <!-- <a id="menu">Menu</a> -->
+ 
   <div class="dropdown" id="menu" >
     <a class="btn btn-secondary dropdown-toggle" style="margin-left:10px"  role="menu" data-bs-toggle="dropdown">
       {{username}}
@@ -50,8 +70,9 @@
       <li><a class="dropdown-item" (click)="logout()" style="cursor: pointer;">LogOut</a></li>
     </ul>
   </div>  
-</div>
+</div> -->
 
+<!-- 
 <nav id="navbar" class="navbar navbar-expand-lg navbar-dark p-0">
   <div class="collapse navbar-collapse " style="margin-left: 50px;" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto ">
@@ -69,4 +90,17 @@
       <p id="dateTime" style="margin-right: 30px;">{{d | datepipe}}</p>
     </div>
   </div>
-</nav>
+</nav> -->
+
+
+
+
+<div class="topnav" id="myTopnav">
+  <a routerLink="home" routerLinkActive = "act" style="margin-left:70px">Home</a>
+  <a routerLink="userList" routerLinkActive = "act">user List</a>
+  <a routerLink="roles" routerLinkActive = "act">Roles</a>
+  <!-- <a href="#about">About</a> -->
+  <div style="text-align: right;">
+    <p id="dateTime" style="margin-right: 30px;margin-top: 15px;">{{d | datepipe}}</p>
+  </div>
+</div>

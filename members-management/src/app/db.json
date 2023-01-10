@@ -293,6 +293,28 @@
       "description": "",
       "createdTime": "Mon Jan 09 2023 11:04:41 GMT+0530 (India Standard Time)",
       "id": 25
+    },
+    {
+      "username": "gfhjfh",
+      "firstname": "fhmj",
+      "lastname": "",
+      "email": "sdfsd@gdd.com",
+      "country": "",
+      "state": "",
+      "mobile": "5465464545",
+      "status": "available",
+      "birthday": "",
+      "address": "fdgh",
+      "zipcode": "",
+      "timezone": "",
+      "locale": "",
+      "gender": "",
+      "roles": "ITOuser",
+      "image": "https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg",
+      "password": "Abcabcabc1",
+      "description": "",
+      "createdTime": "Tue Jan 10 2023 17:38:01 GMT+0530 (India Standard Time)",
+      "id": 26
     }
   ]
 }

@@ -5,7 +5,7 @@
     <h1 id="addUser">Add user</h1>
 </div>
 
-<div class="container" id="dp">
+<!-- <div class="container" id="dp">
     <div class="container rounded bg-white mt-5 mb-5" class="d1">
         <form #f="ngForm" (ngSubmit)="onSubmit()">
             <div class="row" >
@@ -14,17 +14,13 @@
                     <div class="d-flex flex-column align-items-center text-center">
                         <img class="rounded-circle mt-5" [src]="image" width="150px" height="150px">
                     
-                        <!-- <label for="imageinput">upload image</label>
-                        <input style="text-align:center" type="file" name="imageinput" id="imageinput" required ngModel> -->
+                       
                         <label class="form-label" for="customFile">only .jpg and .png images allowed</label>
                         <input type="file" style="width: 50%;" class="form-control" id="customFile" name="image" 
                         (change)="onfileselected($event)" 
                         accept="image/jpg, image/png" #img
                         ngModel/>
-                            <!-- <span class="font-weight-bold">Edogaru</span>
-                            <span class="text-black-50">edogaru@mail.com.my</span>
-
-                            <span> </span> -->
+                            
                             
                         <span *ngIf="nonImage"> 
                             <br>
@@ -62,10 +58,10 @@
                         <div class="col-md-6 dropdown" class="leftFields">
                             <label>Country:</label>
                             <select placeholder="Country" class="form-select"  (change)="changeCountry($event)" name="country" ngModel>
-                                <!-- <option>--Choose Country--</option> -->
+                               
                                 <option *ngFor="let country of Countries">{{country.name}}</option>
                             </select>
-                            <!-- <input type="text" class="form-control" placeholder="country" value=""> -->
+                            
                         </div>
                         <div class="col-md-6" class="leftFields">
                             <label>State/Region:</label>
@@ -73,20 +69,20 @@
                                 <option value="">--Choose State--</option>
                                 <option *ngFor="let state of states">{{state}}</option>
                             </select>
-                            <!-- <input type="text" class="form-control" value="" placeholder="state"> -->
+                            
                         </div>
                 
                     <div class="col-md-12" class="leftFields" >
                         <label>Timezone:</label>
                         <select class="form-select" name="timezone" ngModel>
-                            <!-- <option selected>--Choose timezone--</option> -->
+                          
                         
                             <option value="AST" >AST</option>
                             <option value="EST">EST</option>
                             <option value="CST">CST</option>
                             <option value="UTC+10">UTC+10</option>
                         </select>
-                        <!-- <input type="text" class="form-control" placeholder="timezone" value=""> -->
+                        
                     </div>
 
                 </div>
@@ -137,12 +133,10 @@
                                     <option value="india">kn_IN</option>
                                     <option value="ireland">en_IE</option>
                                 </select>
-                                <!-- <input type="text" class="form-control" placeholder="locales" value="" required name="locales" ngModel> -->
                             </div>
                             
                             <div class="radio">
                                 <label>
-                                <!-- class="labels" -->
                                     Genders:
                                 </label>
                                 <br>
@@ -162,7 +156,6 @@
                                 #email="ngModel" placeholder="enter email id" value="" [(ngModel)]="emailId"
                                 [ngClass]="{'is-invalid': emailFail}"
                                 required name="email" ngModel>
-                                <!-- <span *ngIf="email.invalid && email.touched && email.errors?.['pattern']" style="color: red;">enter a valid email id</span> -->
                                 <span *ngIf="emailFail" style="color: red;">enter a valid email id</span>
                             </div>  
 
@@ -175,9 +168,6 @@
                                 required 
                                 #password="ngModel" name="password" value=""
                                 [(ngModel)]="pass"  ngModel  >
-                                <!-- <span  *ngIf="password.touched && password.invalid" 
-                                style="color:red">invalid field input</span>
-                                 -->
                                 <span *ngIf="passwordregexfail">
                                     <br>
                                     <div class="alert alert-danger"  role="alert">
@@ -200,9 +190,6 @@
                                 style="color:red">invalid field input</span>
                                 <span *ngIf="confirmpassFail && confirmpassword.pristine" 
                                 style="color:red">Enter same password before saving</span>
-                                <!-- <span *ngIf="confirmpassword.errors?.['regexfail']" 
-                                style="color:red">regex failed</span> -->
-                                
                                 <span *ngIf="confirmpassword.errors?.['regexfail']">
                                     <br>
                                 <div class="alert alert-danger"  role="alert">
@@ -214,13 +201,6 @@
                             
                             <label>Select Roles:<span style="color: red;">*</span></label>
                             <div class="field-checkbox">
-                                <!-- <p-checkbox value="true"  name="canEdit" inputId="ny" ngModel> </p-checkbox>
-                                <label class="r" for="ny">Can Edit</label>
-                                <p-checkbox  value="true" name="canDelete" inputId="sf" ngModel [style]="{'margin-left': '10px'}"></p-checkbox>
-                                <label class="r" for="sf">Can Delete</label>
-                                <p-checkbox value="true"  name="canAdd" inputId="la" [style]="{'margin-left': '10px'}" ngModel></p-checkbox>
-                                <label class="r">Can Add</label> -->
-                                <!-- <p-multiSelect [options]="roles" [(ngModel)]="selectedRolesCode" name="roles" optionLabel="name" optionValue="code"></p-multiSelect> -->
                                 <p-dropdown [options]="roles" [(ngModel)]="selectedRolesCode" placeholder="Select role" name="roles"  optionValue="code" optionLabel="name" [showClear]="true"></p-dropdown>
                                 <div *ngIf="selectedRolesCodeFail">
                                     <span  style="color: red;">Select a role</span>
@@ -257,4 +237,236 @@
             
         </form>  
     </div>
-</div>
+</div>  
+ -->
+
+
+
+
+
+
+
+
+
+<div class="container" id="dp">
+    <div class="container rounded bg-white mt-5 mb-5" class="d1">
+        <form #f="ngForm" (ngSubmit)="onSubmit()">
+            <div class="row" >
+                <div class="col-sm-6 border-right">
+                    <div class="ml-4 mr-2 p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3" >
+                            <h2 style="font-family: 'Poppins', sans-serif;">User Details</h2>
+                        </div>
+
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img class="rounded-circle mt-5" [src]="image" width="150px" height="150px">
+                        
+                            
+                            <label class="form-label" for="customFile">only .jpg and .png images allowed</label>
+                            <input type="file" style="width: 50%;" class="form-control" id="customFile" name="image" 
+                            (change)="onfileselected($event)" 
+                            accept="image/jpg, image/png" #img
+                            ngModel/>
+                            
+                                
+                            <span *ngIf="nonImage"> 
+                                <br>
+                                <div class="alert alert-danger" style="width: 300px"  role="alert">
+                                    Unsupported file
+                                </div> 
+                            </span>     
+                        </div>
+                        
+                        
+
+                        <div class="" >
+                            <label >Address :<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" maxlength="100" #address="ngModel" 
+                            placeholder="enter address" value="" required name="address" [(ngModel)]="addres"
+                            [ngClass]="{'is-invalid': addresFail}"
+                            ngModel>
+                            <span *ngIf="addresFail" style="color: red;">enter valid address</span>
+                        </div>
+
+                        <div class="" >
+                            <label>zipcode:</label>
+                            <input type="text" class="form-control" 
+                            maxlength="20" placeholder="zipcode" value="" name="zipcode"
+                            ngModel>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 dropdown" >
+                                <label>Country:</label>
+                                <select placeholder="Country" class="form-select"  (change)="changeCountry($event)" name="country" ngModel>
+                                    <!-- <option>--Choose Country--</option> -->
+                                    <option *ngFor="let country of Countries">{{country.name}}</option>
+                                </select>
+                                <!-- <input type="text" class="form-control" placeholder="country" value=""> -->
+                            </div>
+                            <div class="col-sm-6" >
+                                <label>State/Region:</label>
+                                <select placeholder="State" class="form-select" name="state" ngModel>
+                                    <option value="">--Choose State--</option>
+                                    <option *ngFor="let state of states">{{state}}</option>
+                                </select>
+                                <!-- <input type="text" class="form-control" value="" placeholder="state"> -->
+                            </div>
+                        </div>    
+                        <div class=""  >
+                            <label>Timezone:</label>
+                            <select class="form-select" name="timezone" ngModel>
+                            
+                                <option value="AST" >AST</option>
+                                <option value="EST">EST</option>
+                                <option value="CST">CST</option>
+                                <option value="UTC+10">UTC+10</option>
+                            </select>   
+                        </div>
+                        <div class="">
+                            <label>Locales:</label>
+                            <select class="form-select" name="locale" ngModel>
+                                <option selected></option>
+                                <option value="us" >en_US</option>
+                                <option value="india">kn_IN</option>
+                                <option value="ireland">en_IE</option>
+                            </select>
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="col-sm-6 border-right">
+                    <div class="ml-3 p-3 ">
+                        <div class="">
+                            <label>UserName<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" disabled [ngClass]="{'is-invalid': username.invalid && username.touched}"
+                            #username="ngModel" maxlength="20" [placeholder]='user'  
+                            value="" required name="username" ngModel>
+                            <span *ngIf="username.invalid && username.touched"  style="color: red;">enter valid username</span>
+                        </div>
+
+                       
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label >First Name:<span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" #firstname="ngModel" placeholder="firstname" 
+                                maxlength="30" value=""
+                                [ngClass]="{'is-invalid': firstnameFail}" 
+                                required name="firstname" [(ngModel)]="fn" (keyup)="validateFirstname()" ngModel>
+                                <span *ngIf="firstnameFail"  style="color: red;">enter valid username</span>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Last name:</label>
+                                <input type="text" class="form-control" #lastname="ngModel" value="" placeholder="lastname" maxlength="30" name="lastname" ngModel>
+                            </div>
+                        </div>
+
+                        <div class="" >
+                            <label >Mobile Number:<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" minlength="10" maxlength="10" #mobile="ngModel" 
+                            placeholder="enter phone number" value="" 
+                            [ngClass]="{'is-invalid': phnNumFail}" [(ngModel)]="phnNum" 
+                            required name="mobile" ngModel>
+                            <span *ngIf="phnNumFail" style="color: red;">enter valid mobile number</span>
+                        </div>
+
+                        <div class="form-outline datepicker w-100 ">
+                            <label for="birthdayDate">Birthday:</label>
+                            <input type="date" class="form-control" name="birthday" id="birthdayDate" ngModel/>
+                        </div>    
+                        <div class="radio">
+                                <label>
+                                    Genders:
+                                </label>
+                                <br>
+                                <label class="g">
+                                <input type="radio" name="gender" ngModel value="male">
+                                    Male
+                                </label>
+                                
+                                <label class="g">
+                                    <input type="radio" name="gender" ngModel value="female" style="margin-left: 10px;">
+                                    Female
+                                </label>
+                        </div>
+                        <div class="">
+                                <label >Email ID: <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" maxlength="100" 
+                                #email="ngModel" placeholder="enter email id" value="" [(ngModel)]="emailId"
+                                [ngClass]="{'is-invalid': emailFail}"
+                                required name="email" ngModel>
+                                <span *ngIf="emailFail" style="color: red;">enter a valid email id</span>
+                        </div>  
+                        <div class="">
+                                <label>password:<span style="color: red;">*</span></label>
+                                <input [ngClass]="{'is-invalid': password.invalid && password.touched}"  
+                                [ngClass]="{'is-invalid': passwordregexfail}"
+                                type="text" class="form-control"
+                                placeholder="password" minlength="8" maxlength="20"
+                                required 
+                                #password="ngModel" name="password" value=""
+                                [(ngModel)]="pass"  ngModel  >
+                                <span *ngIf="passwordregexfail">
+                                    <br>
+                                    <div class="alert alert-danger"  role="alert">
+                                        password must contain atleast 1 upper and 1 lower case with atleast 1 number
+                                    </div>
+                                </span>
+                        </div>
+                        <div class="">
+                                <label>confirm password:<span style="color: red;">*</span></label>
+                                <input type="text" [ngClass]="{'is-invalid': confirmpassword.invalid && confirmpassword.touched}" class="form-control" PasswordValidator="password" minlength="8" maxlength="20"  placeholder="confirm password"
+                                value="" required name="confirmpassword" #confirmpassword = "ngModel"
+                                [ngClass]="{'is-invalid': confirmpassword.errors?.['notEqual'] || confirmpassFail}"
+                                [(ngModel)]="confirmpass"
+                                ngModel>
+                                
+                                <span  *ngIf="confirmpassword.errors?.['notEqual']" 
+                                style="color:red">password not matching</span>
+                                <span *ngIf="confirmpassword.touched && confirmpassword.errors?.['empty']" 
+                                style="color:red">invalid field input</span>
+                                <span *ngIf="confirmpassFail && confirmpassword.pristine" 
+                                style="color:red">Enter same password before saving</span>
+                                <span *ngIf="confirmpassword.errors?.['regexfail']">
+                                    <br>
+                                <div class="alert alert-danger"  role="alert">
+                                    password must contain atleast 1 upper and 1 lower case with atleast 1 number
+                                </div>
+                                </span>
+                        </div>
+    
+                        <div class="">
+                            <br>
+                            <label>Select Roles:<span style="color: red;">*</span></label>
+                            <p-dropdown [options]="roles" [(ngModel)]="selectedRolesCode" placeholder="Select role" name="roles"  optionValue="code" optionLabel="name" [showClear]="true"></p-dropdown>
+                                <div *ngIf="selectedRolesCodeFail">
+                                    <span  style="color: red;">Select a role</span>
+                                </div>
+                                
+                        </div>
+                        <div class="dropdown">
+                            <label>Status:<span style="color: red;">*</span></label>
+                            <select class="form-select" name="status" [ngClass]="{'is-invalid': selectedStatusFail}"
+                            [(ngModel)]="selectedStatus" #status="ngModel" required ngModel>
+                                
+                                    <option value="available">Available</option>
+                                    <option value="unavailable">Unavailable</option>
+                            </select>
+                            <span *ngIf="selectedStatusFail" style="color: red;">Select a status</span>
+                        </div>
+                            
+                            
+                        
+                        
+                    </div>
+                    
+                </div>
+                <hr style="width: 95%; margin-left: 35px;">
+                <div id="buttons">
+                    <button class="btn btn-primary btn-lg m-3" type="submit">Save</button>
+                    <button class="btn btn-primary btn-lg" type="button" (click)="onCancel()">Cancel</button>
+                </div>
+            </div>
+            
+        </form>  
+    </div>
+</div>  

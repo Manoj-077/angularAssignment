@@ -108,15 +108,15 @@ input{
     margin-left: 50px;
 }
 #leftColumn{
-    margin-left: 55px;
+    
 }
-#imageDiv{
+/* #imageDiv{
     margin-top: 50px;
     margin-bottom: 20px;
-}
+} */
 hr{
-    width: 90%;
-    margin-left: 60px;
+    width: 100%;
+    
 }
 #buttonDiv{
     text-align: right;

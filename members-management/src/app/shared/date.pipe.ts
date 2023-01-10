@@ -17,9 +17,18 @@ export class DatePipe implements PipeTransform {
     else{
       minutes = date.getMinutes();
     }
-    if(date.getHours()>12){
+
+    if(date.getHours() === 0){
+      this.hours = 12;
+      this.ampm = 'AM';
+    }
+    else if(date.getHours()>=13){
       this.hours = date.getHours() - 12;
-      this.ampm = 'PM'
+      this.ampm = 'PM';
+    }
+    else if(date.getHours()===12){
+      this.hours = 12;
+      this.ampm = 'PM';
     }
     else{
       this.hours = date.getHours();
