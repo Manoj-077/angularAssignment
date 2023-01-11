@@ -54,6 +54,14 @@
     margin-right: 15px;
 } 
 
+#homeLink{
+    margin-left:70px
+}
+
+#dateTime{
+    margin-right: 30px;
+    margin-top: 15px;
+}
 
 /* 
 @media (max-width:320px) {
@@ -102,7 +110,54 @@
   /* .topnav .icon {
     display: none;
   } */
+  #itorizon{
+    height: 50px; 
+    width: 170px; 
+    padding-top: 0;
+    margin-top: 10px;
+    margin-left: 60px;
+  }
 
+  .btn{
+    background-color: white;
+    color: black;
+    border: none;
+  }
+
+  @media screen and (max-width:585px) {
+      #itorizon{
+          margin-top: 10px;
+          margin-left: 0;
+          height: 50px;
+          width: 140px;
+      }
+      #menu{
+        margin: 10px 0 0 0;
+        bottom: 50px;
+        
+      }
+  }
+
+  @media screen and (max-width:400px) {
+    #dateTime{
+        margin: 0 0 0 0;
+        height: 25px;
+        font-size: small;
+
+    }
+    #homeLink{
+        margin-left:0;
+    }
+  }
+
+  @media screen and (min-width:401px) and (max-width:510px) {
+    #dateTime{
+        margin: 15px 0 0 0 ;
+    }
+    #homeLink{
+        margin-left:0;
+    }
+  }
 
   @media screen and (max-width: 600px) {
     /* .topnav a:not(:first-child) {display: none;} */

@@ -34,9 +34,41 @@
       </div>
     </nav>
 </div>
-   -->
+   trail from below  -->
 
-<div class="container-fluid">    
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-1">
+      <a><img id="itorizon" src="https://career.gatech.edu/sites/default/files/images/itorizon_logo.png" ></a>
+    </div>
+    <div class="col-sm-1">
+      
+    </div>
+    <div class="col-sm-8">
+
+    </div>
+    <div class="col-sm-1">
+      
+    </div>
+    <div class="col-sm-1">
+      
+      <div class="dropdown" id="menu" >
+          
+          <a class="btn dropdown-toggle" style="margin-left:0px"  role="menu" data-bs-toggle="dropdown">
+            <img src="{{userLogo}}" class="rounded-circle align-middle" style="height: 30px;  width: 30px;margin-right: 5px;">
+            {{username}}
+          </a>
+        <ul class="dropdown-menu" >
+          <li><a class="dropdown-item" routerLink="userProfile" >Profile</a></li>
+          <li><a class="dropdown-item" (click)="logout()" style="cursor: pointer;">LogOut</a></li>
+        </ul>
+      </div>  
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="container-fluid">    
   <div class="grid">
     <div class="col-4">
       <a><img id="logo" src="https://career.gatech.edu/sites/default/files/images/itorizon_logo.png" style="height: 50px; width: 170px;"></a>
@@ -56,7 +88,7 @@
       </div>  
     </div>
   </div>
-</div>
+</div> -->
 <!-- 
 <div class="container-fluid">
   <a><img id="logo" src="https://career.gatech.edu/sites/default/files/images/itorizon_logo.png" style="height: 50px; width: 170px;"></a>
@@ -96,11 +128,11 @@
 
 
 <div class="topnav" id="myTopnav">
-  <a routerLink="home" routerLinkActive = "act" style="margin-left:70px">Home</a>
-  <a routerLink="userList" routerLinkActive = "act">user List</a>
-  <a routerLink="roles" routerLinkActive = "act">Roles</a>
+  <a id="homeLink" routerLink="/main/home" routerLinkActive = "act" >Home</a>
+  <a routerLink="/main/userList" routerLinkActive = "act">User List</a>
+  <a routerLink="/main/roles" [ngStyle]="{'display': this.role === 'ITOuser' ? 'none': 'content'}" routerLinkActive = "act">Roles</a>
   <!-- <a href="#about">About</a> -->
   <div style="text-align: right;">
-    <p id="dateTime" style="margin-right: 30px;margin-top: 15px;">{{d | datepipe}}</p>
+    <p id="dateTime" >{{d | datepipe}}</p>
   </div>
 </div>

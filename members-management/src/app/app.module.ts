@@ -31,7 +31,7 @@ import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { BnNgIdleService } from 'bn-ng-idle'
-import { DarkModeService } from 'angular-dark-mode';
+
 import {InputSwitchModule} from 'primeng/inputswitch';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -71,7 +71,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MultiSelectModule,
     InputSwitchModule
   ],
-  providers: [ConfirmationService,MessageService,BnNgIdleService, DarkModeService],
+  providers: [ConfirmationService,MessageService,BnNgIdleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

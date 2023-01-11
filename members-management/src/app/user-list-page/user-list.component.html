@@ -87,7 +87,7 @@
             <p-button (onClick)="showResponsiveDialog()" class="mt-4 mb-2 mr-5"  id="add" icon="pi pi-external-link"
             label="Add+" [disabled]="!permissions.canAdd" [style]="{'margin-right': '30px'}"></p-button>
             <p-dropdown [options]="pageNums" class="mt-4 mb-2 mr-3" id="page" [(ngModel)]="pageNumSelected"
-             placeholder="Number of Records" optionLabel="name" (click)="onSelected($event)"></p-dropdown>
+             placeholder="10" optionLabel="name" (click)="onSelected($event)"></p-dropdown>
             
               <!-- <button class="btn btn-success mt-4 mb-2 mr-5" style="float: right;" id="add" (click)="openPop()" >Add +</button> -->
           </div>

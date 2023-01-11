@@ -23,3 +23,11 @@ body{
     padding-left: 20px;
     padding-top: 20px;
 }
+#fc{
+    height: 8px;
+    border: collapse;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+}

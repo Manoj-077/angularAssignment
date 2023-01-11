@@ -162,7 +162,7 @@ export class UserDetailsPageComponent implements OnInit {
     if(this.confirmpass === this.pass){
         this.confirmpassFail = false;
     }
-    else{
+    else if(this.confirmpass.length===0){
       this.confirmpassFail = true;
     }
   }

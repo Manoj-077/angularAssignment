@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../gaurd/auth.service';
@@ -16,7 +17,10 @@ export class NavBarComponent  {
   username : any = "";
   role : any ="";
   ITOuser : any = false;
-  constructor(private authService: AuthService, private router : Router, private userService : UserService){
+  userLogo : any = "";
+  userData: any = "";
+  constructor(private authService: AuthService, private router : Router, private userService : UserService,
+    private http: HttpClient){
     
   }
   ngOnInit(){
@@ -24,6 +28,15 @@ export class NavBarComponent  {
     this.username = localStorage.getItem('username');
     this.timeUpdate();
     
+    this.http.get("http://localhost:3000/users").subscribe((data)=>{
+      this.userData = data;
+      for (let i=0;i<this.userData.length;i++){
+        if(this.username === this.userData[i].username){
+          this.userData = this.userData[i];
+          this.userLogo = this.userData.image;
+        }
+      }
+    })
     
     // if(this.role === 'ITOuser'){
     //   this.ITOuser = true;
