@@ -19,13 +19,13 @@
   <div #popup id="primepop">
     <p-dialog header="" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}" [style]="{width: '600px'}"
         [draggable]="false" [resizable]="false">
-        <div class="container text-center" style="width: 70%" *ngIf="userExist">
+        <!-- <div class="container text-center" style="width: 70%" *ngIf="userExist">
           <div class="alert alert-danger"  role="alert" >
               Invalid entry
           </div>
-        </div>
+        </div> -->
         <div class="row">
-          <div class="col-sm-4 pt-2">
+          <div class="col-sm-4 pt-3">
             <label  id="d1"><h5 >Enter Username:<span style="color: red;">*</span></h5></label>
           </div>
           <div class="col" id="d2">

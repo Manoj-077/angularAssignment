@@ -141,6 +141,14 @@ userDeleted(){
   this.messageService.add({severity:'success', summary: 'User Deleted!', detail: 'User Successfully deleted'});
 }
 
+userAlreadyExist(){
+  this.messageService.add({severity:'warn', summary: 'Username Already Exists!', detail: 'Enter a Unique Username'});
+}
+
+fieldCannotBeEmpty(){
+  this.messageService.add({severity:'warn', summary: 'Input Field Cannot be empty', detail: 'Input Username Field'});
+}
+
 
   openPop(){
     this.pop.nativeElement.style.visibility = 'visible';
@@ -214,12 +222,13 @@ userDeleted(){
         // localStorage.setItem('description',this.description.nativeElement.value)
         }
         else{
-          this.userExist=true;
+          // this.userExist=true;
         
-          setTimeout(()=>{
-            this.userExist = false;
+          // setTimeout(()=>{
+          //   this.userExist = false;
             
-          }, 2000) 
+          // }, 2000) 
+          this.userAlreadyExist()
         }
         this.clear();
         // this.user = this.users.find((o:any)=>{o.username === this.username.nativeElement.value})
@@ -227,12 +236,14 @@ userDeleted(){
       })
     }
     else{
-        this.userExist=true;
+        // this.userExist=true;
         
-        setTimeout(()=>{
-          this.userExist = false;
+        // setTimeout(()=>{
+        //   this.userExist = false;
          
-        }, 2000)  
+        // }, 2000)  
+
+        this.fieldCannotBeEmpty()
     }
   }
 

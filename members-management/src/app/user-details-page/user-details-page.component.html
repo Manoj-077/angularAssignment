@@ -254,7 +254,7 @@
             <div class="row" >
                 <div class="col-sm-6 border-right">
                     <div class="ml-3 px-3">
-                        <div class="d-flex justify-content-between align-items-center mb-3" >
+                        <div class="d-flex justify-content-between align-items-center mt-4 mb-3" >
                             <h2 style="font-family: 'Poppins', sans-serif;">User Details</h2>
                         </div>
 
@@ -278,64 +278,6 @@
                         </div>
                         
                         
-
-                        <div class="" >
-                            <label >Address :<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" maxlength="100" #address="ngModel" 
-                            placeholder="enter address" value="" required name="address" [(ngModel)]="addres"
-                            [ngClass]="{'is-invalid': addresFail}"
-                            ngModel>
-                            <span *ngIf="addresFail" style="color: red;">enter valid address</span>
-                        </div>
-
-                        <div class="" >
-                            <label>zipcode:</label>
-                            <input type="text" class="form-control" 
-                            maxlength="20" placeholder="zipcode" value="" name="zipcode"
-                            ngModel>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 dropdown" >
-                                <label>Country:</label>
-                                <select placeholder="Country" class="form-select"  (change)="changeCountry($event)" name="country" ngModel>
-                                    <!-- <option>--Choose Country--</option> -->
-                                    <option *ngFor="let country of Countries">{{country.name}}</option>
-                                </select>
-                                <!-- <input type="text" class="form-control" placeholder="country" value=""> -->
-                            </div>
-                            <div class="col-sm-6" >
-                                <label>State/Region:</label>
-                                <select placeholder="State" class="form-select" name="state" ngModel>
-                                    <option value="">--Choose State--</option>
-                                    <option *ngFor="let state of states">{{state}}</option>
-                                </select>
-                                <!-- <input type="text" class="form-control" value="" placeholder="state"> -->
-                            </div>
-                        </div>    
-                        <div class=""  >
-                            <label>Timezone:</label>
-                            <select class="form-select" name="timezone" ngModel>
-                            
-                                <option value="AST" >AST</option>
-                                <option value="EST">EST</option>
-                                <option value="CST">CST</option>
-                                <option value="UTC+10">UTC+10</option>
-                            </select>   
-                        </div>
-                        <div class="">
-                            <label>Locales:</label>
-                            <select class="form-select" name="locale" ngModel>
-                                <option selected></option>
-                                <option value="us" >en_US</option>
-                                <option value="india">kn_IN</option>
-                                <option value="ireland">en_IE</option>
-                            </select>
-                        </div>
-                    </div>    
-                </div>
-
-                <div class="col-sm-6 border-right">
-                    <div class="ml-3 px-3">
                         <div class="">
                             <label>UserName<span style="color: red;">*</span></label>
                             <input type="text" class="form-control" disabled [ngClass]="{'is-invalid': username.invalid && username.touched}"
@@ -362,6 +304,72 @@
                                 <span *ngIf="lastnameFail"  style="color: red;">Invalid last name</span>
                             </div>
                         </div>
+
+
+
+                        
+                          
+                        <div class=""  >
+                            <label>Timezone:</label>
+                            <select class="form-select" name="timezone" ngModel>
+                            
+                                <option value="AST" >AST</option>
+                                <option value="EST">EST</option>
+                                <option value="CST">CST</option>
+                                <option value="UTC+10">UTC+10</option>
+                            </select>   
+                        </div>
+                        <div class="">
+                            <label>Locales:</label>
+                            <select class="form-select" name="locale" ngModel>
+                                <option selected></option>
+                                <option value="us" >en_US</option>
+                                <option value="india">kn_IN</option>
+                                <option value="ireland">en_IE</option>
+                            </select>
+                        </div>
+
+                        <div class="" >
+                            <label>zipcode:</label>
+                            <input type="text" class="form-control" 
+                            maxlength="20" placeholder="zipcode" value="" name="zipcode"
+                            ngModel>
+                        </div>
+
+                        
+                    </div>    
+                </div>
+
+                <div class="col-sm-6 border-right">
+                    <div class="ml-3 px-3">
+                        
+                        <div class="" >
+                            <label >Address :<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" maxlength="100" #address="ngModel" 
+                            placeholder="enter address" value="" required name="address" [(ngModel)]="addres"
+                            [ngClass]="{'is-invalid': addresFail}"
+                            ngModel>
+                            <span *ngIf="addresFail" style="color: red;">enter valid address</span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 dropdown" >
+                                <label>Country:</label>
+                                <select placeholder="Country" class="form-select"  (change)="changeCountry($event)" name="country" ngModel>
+                                    <!-- <option>--Choose Country--</option> -->
+                                    <option *ngFor="let country of Countries">{{country.name}}</option>
+                                </select>
+                                <!-- <input type="text" class="form-control" placeholder="country" value=""> -->
+                            </div>
+                            <div class="col-sm-6" >
+                                <label>State/Region:</label>
+                                <select placeholder="State" class="form-select" name="state" ngModel>
+                                    <option value="">--Choose State--</option>
+                                    <option *ngFor="let state of states">{{state}}</option>
+                                </select>
+                                <!-- <input type="text" class="form-control" value="" placeholder="state"> -->
+                            </div>
+                        </div> 
 
                         <div class="" >
                             <label >Mobile Number:<span style="color: red;">*</span></label>
