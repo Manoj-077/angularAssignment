@@ -354,9 +354,12 @@
                                 required name="firstname" [(ngModel)]="fn" (keyup)="validateFirstname()" ngModel>
                                 <span *ngIf="firstnameFail"  style="color: red;">enter valid username</span>
                             </div>
+
                             <div class="col-sm-6">
                                 <label>Last name:</label>
-                                <input type="text" class="form-control" #lastname="ngModel" value="" placeholder="lastname" maxlength="30" name="lastname" ngModel>
+                                <input  [ngClass]="{'is-invalid': lastnameFail}" #lname = "ngModel"  type="text" class="form-control" [(ngModel)]="lastname" value=""
+                                 placeholder="lastname"  maxlength="30" name="lastname" ngModel>
+                                <span *ngIf="lastnameFail"  style="color: red;">Invalid last name</span>
                             </div>
                         </div>
 
@@ -415,18 +418,18 @@
                         <div class="">
                                 <label>confirm password:<span style="color: red;">*</span></label>
                                 <input type="password"  class="form-control" PasswordValidator="password" minlength="8" maxlength="20"  placeholder="confirm password"
-                                value="" required name="confirmpassword" #confirmpassword = "ngModel"
-                                [ngClass]="{'is-invalid': confirmpassword.errors?.['notEqual'] || !confirmpassFail}"
+                                value="" name="confirmpassword" #confirmpassword = "ngModel"
+                                [ngClass]="{'is-invalid': confirmpassword.errors?.['notEqual'] || confirmpassFail}"
                                 [(ngModel)]="confirmpass"
                                 ngModel>
                                 
                                 <span  *ngIf="confirmpassword.errors?.['notEqual']" 
                                 style="color:red">password not matching</span>
-                                <span *ngIf="confirmpassword.touched && confirmpassword.errors?.['empty'] || confirmpassFail " 
-                                style="color:red">invalid field input</span>
+                                <!-- <span *ngIf="confirmpassword.touched && confirmpassword.errors?.['empty']" 
+                                style="color:red">invalid field input</span> -->
                                 <span *ngIf="confirmpassFail" 
-                                style="color:red"><br>cannot be empty input</span>
-                                <span *ngIf="confirmpassFail && confirmpassword.dirty" 
+                                style="color:red"><br>invalid field input</span>
+                                <span *ngIf="confirmpassword.errors?.['notEqual'] && confirmpassword.dirty" 
                                 style="color:red"><br>Enter same password before saving</span>
                                 <!-- <span *ngIf="confirmpassword.errors?.['regexfail']">
                                     <br>

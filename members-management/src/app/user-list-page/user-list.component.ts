@@ -151,7 +151,7 @@ userDeleted(){
   }
   clear(){
     this.username.nativeElement.value = "";
-    this.description.nativeElement.value = "";
+    // this.description.nativeElement.value = "";
   }
   deleteConfirm(data:any) {
     this.cdata = data;
@@ -211,7 +211,7 @@ userDeleted(){
         if(!this.userExist){
         this.router.navigate(['/main/userDetails'])
         localStorage.setItem('newUser',this.username.nativeElement.value)
-        localStorage.setItem('description',this.description.nativeElement.value)
+        // localStorage.setItem('description',this.description.nativeElement.value)
         }
         else{
           this.userExist=true;

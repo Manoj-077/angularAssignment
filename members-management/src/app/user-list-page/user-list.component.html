@@ -13,41 +13,9 @@
 </div>
 
 <div class="user-list-content">
-  
-  
   <p-toast position="top-center"></p-toast>
-   
-  <!-- <button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success mb-2"></button> -->
-
-
-  <!-- <div class="modal" tabindex="-1" id="popup" #popup>
-      <div class="modal-dialog" >
-        <div class="modal-content" >
-          <div class="modal-header">
-            
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closePopup()"></button>
-          </div>
-          <div class="modal-body">
-            <label> <h5>Enter username:<span style="color: red;">*</span></h5></label>
-            <input class="form-control" name="username" #username>
-            <label><h5 >Description:</h5></label>
-            <textarea class="form-control" type="text" rows="4" style="resize: none;" name="Description" #description></textarea>
-          </div>
-          
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closePopup()" >Close</button>
-            <button type="button" class="btn btn-primary" id="ok" (click)="addUser()">Ok</button>
-          </div>
-        </div>
-      </div>
-  </div> -->
   <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-
-  <!-- <button (click)="confirm()" pButton icon="pi pi-check" label="Confirm"></button>     -->
-
-
-
-
+  <!-- <button (click)="confirm()" pButton icon="pi pi-check" label="Confirm"></button>-->
   <div #popup id="primepop">
     <p-dialog header="" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}" [style]="{width: '600px'}"
         [draggable]="false" [resizable]="false">
@@ -57,24 +25,24 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
-            <label id="d1"><h5 >Enter Username:<span style="color: red;">*</span></h5></label>
+          <div class="col-sm-4 pt-2">
+            <label  id="d1"><h5 >Enter Username:<span style="color: red;">*</span></h5></label>
           </div>
           <div class="col" id="d2">
             <input class="form-control" name="username" #username>
           </div>
         </div>
-        <br><br>
+        <!-- <br><br>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <label id="d3"><h5>Description:</h5></label>
           </div>
           <div class="col" id="d4">
             <textarea class="form-control"  type="text" rows="4" style="resize: none;" name="Description" #description></textarea>
           </div>
-        </div>
+        </div> -->
             <ng-template pTemplate="footer">
-            <p-button (click)="displayResponsive=false" label="Cancel" styleClass="p-button-text"></p-button>
+            <p-button (click)="displayResponsive=false" (click)="clear()" label="Cancel" styleClass="p-button-text"></p-button>
             <p-button  (click)="addUser()" label="Ok" styleClass="p-button-text"></p-button>
             </ng-template>
     </p-dialog>

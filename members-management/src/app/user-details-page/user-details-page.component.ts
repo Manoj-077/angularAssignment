@@ -25,6 +25,8 @@ export class UserDetailsPageComponent implements OnInit {
   @ViewChild('img') inputImage : ElementRef;
   @ViewChild('username') usrname : ElementRef;
   @ViewChild('confirmPass') confirmpassword: ElementRef;
+  @ViewChild('confirmpassword') cnfrmPass : NgForm;
+  @ViewChild('lname') lastnameRef : NgForm;
   user : any;
   pass: any = ""
   editMode : boolean = false;
@@ -48,7 +50,8 @@ export class UserDetailsPageComponent implements OnInit {
   selectedStatusFail : any = false;
   confirmpass : any = "";
   confirmpassFail : any = false;
-  
+  lastname : any = "";
+  lastnameFail:any = "";
   // ig:any;
   constructor(private title: Title, private http:HttpClient, private router : Router, private userService: UserService,
     private autoLogoutService: AutoLogoutService, private bnIdle:BnNgIdleService) {
@@ -111,6 +114,16 @@ export class UserDetailsPageComponent implements OnInit {
     }
   }
 
+  validateLastname(){
+    const expression = new RegExp('^[a-zA-Z\s]+$');
+    if(this.lastname.length>0 && !this.lastname.match(expression)){
+      this.lastnameFail = true;
+    }
+    else if(this.lastname.match(expression)){
+      this.lastnameFail = false;
+    }
+  }
+
   validateAddress(){
     if(this.addres.length < 1){
       this.addresFail = true;
@@ -159,11 +172,11 @@ export class UserDetailsPageComponent implements OnInit {
   }
 
   validateConfirmPassword(){
-    if(this.confirmpass === this.pass){
-        this.confirmpassFail = false;
-    }
-    else if(this.confirmpass.length===0){
+    if(this.cnfrmPass.errors?.['empty'] || this.cnfrmPass.errors?.['notEqual']){
       this.confirmpassFail = true;
+    }
+    else{
+      this.confirmpassFail = false;
     }
   }
 
@@ -212,8 +225,10 @@ export class UserDetailsPageComponent implements OnInit {
       this.validatepassword();
       this.validateRoles();
       this.validateConfirmPassword();
+      this.validateLastname();
 
-      if(!this.phnNumFail && !this.firstnameFail && !this.addresFail && !this.selectedStatusFail && !this.emailFail && !this.passwordregexfail && !this.selectedRolesCodeFail && !this.confirmpassFail){
+      if(!this.phnNumFail && !this.firstnameFail && !this.addresFail && !this.selectedStatusFail && !this.emailFail && !this.passwordregexfail && !this.selectedRolesCodeFail 
+        && !this.confirmpassFail && !this.lastnameFail){
         this.tdata.username = this.user;
         this.tdata.firstname = this.form.value.firstname;
         this.tdata.lastname = this.form.value.lastname;
