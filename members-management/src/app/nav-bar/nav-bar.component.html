@@ -50,7 +50,7 @@
     <div class="col-sm-1">
       
     </div>
-    <div class="col-sm-1">
+    <div class="col-sm-1" id="dropdownMenu">
       
       <div class="dropdown" id="menu" >
           
@@ -128,9 +128,9 @@
 
 
 <div class="topnav" id="myTopnav">
-  <a id="homeLink" routerLink="/main/home" routerLinkActive = "act" >Home</a>
-  <a routerLink="/main/userList" routerLinkActive = "act">User List</a>
-  <a routerLink="/main/roles" [ngStyle]="{'display': this.role === 'ITOuser' ? 'none': 'content'}" routerLinkActive = "act">Roles</a>
+  <a class="navItem" id="homeLink" routerLink="/main/home" routerLinkActive = "act" >Home</a>
+  <a class="navItem" routerLink="/main/userList" routerLinkActive = "act">User List</a>
+  <a class="navItem" routerLink="/main/roles" [ngStyle]="{'display': this.role === 'ITOuser' ? 'none': 'content'}" routerLinkActive = "act">Roles</a>
   <!-- <a href="#about">About</a> -->
   <div style="text-align: right;">
     <p id="dateTime" >{{d | datepipe}}</p>

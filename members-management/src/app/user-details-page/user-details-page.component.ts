@@ -235,6 +235,7 @@ export class UserDetailsPageComponent implements OnInit {
         this.tdata.description = this.description;
         this.tdata.createdTime = this.createdTime.toString();
         console.log(this.tdata)
+        this.userService.userCreated.next(true)
         this.http.post("http://localhost:3000/users",this.tdata).subscribe(data=>{})
         
         this.router.navigate(['main/userList'])

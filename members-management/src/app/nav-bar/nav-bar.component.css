@@ -136,17 +136,35 @@
         bottom: 50px;
         
       }
+      #dropdownMenu{
+        height: 10px;
+      }
   }
 
-  @media screen and (max-width:400px) {
+  @media screen and (max-width:359px) {
     #dateTime{
-        margin: 0 0 0 0;
+      margin: 0 0 0 0;
+      height: 25px;
+      font-size: small;
+    }
+    #homeLink{
+        margin-left:0;
+    }
+  }
+
+
+  @media screen and (min-width:360px) and (max-width:400px) {
+    #dateTime{
+        margin: 15px 0 0 0;
         height: 25px;
         font-size: small;
 
     }
     #homeLink{
         margin-left:0;
+    }
+    .navItem{
+      font-size: smaller;
     }
   }
 
@@ -157,10 +175,13 @@
     #homeLink{
         margin-left:0;
     }
+    .navItem{
+      font-size: small;
+    }
   }
 
   @media screen and (max-width: 600px) {
-    /* .topnav a:not(:first-child) {display: none;} */
+   
     .topnav a.icon {
       float: right;
       display: block;

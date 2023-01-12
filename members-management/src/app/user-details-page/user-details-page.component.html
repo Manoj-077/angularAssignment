@@ -253,7 +253,7 @@
         <form #f="ngForm" (ngSubmit)="onSubmit()">
             <div class="row" >
                 <div class="col-sm-6 border-right">
-                    <div class="ml-4 mr-2 p-3">
+                    <div class="ml-3 px-3">
                         <div class="d-flex justify-content-between align-items-center mb-3" >
                             <h2 style="font-family: 'Poppins', sans-serif;">User Details</h2>
                         </div>
@@ -335,7 +335,7 @@
                 </div>
 
                 <div class="col-sm-6 border-right">
-                    <div class="ml-3 p-3 ">
+                    <div class="ml-3 px-3">
                         <div class="">
                             <label>UserName<span style="color: red;">*</span></label>
                             <input type="text" class="form-control" disabled [ngClass]="{'is-invalid': username.invalid && username.touched}"
@@ -408,15 +408,15 @@
                                 <span *ngIf="passwordregexfail">
                                     <br>
                                     <div class="alert alert-danger"  role="alert">
-                                        password must contain atleast 1 upper and 1 lower case with atleast 1 number
+                                        password must contain atleast 1 upper and 1 lower case with atleast 1 number (must have minimum 8 characters)
                                     </div>
                                 </span>
                         </div>
                         <div class="">
                                 <label>confirm password:<span style="color: red;">*</span></label>
-                                <input type="password" [ngClass]="{'is-invalid': confirmpassword.invalid && confirmpassword.touched}" class="form-control" PasswordValidator="password" minlength="8" maxlength="20"  placeholder="confirm password"
+                                <input type="password"  class="form-control" PasswordValidator="password" minlength="8" maxlength="20"  placeholder="confirm password"
                                 value="" required name="confirmpassword" #confirmpassword = "ngModel"
-                                [ngClass]="{'is-invalid': confirmpassword.errors?.['notEqual'] || confirmpassFail}"
+                                [ngClass]="{'is-invalid': confirmpassword.errors?.['notEqual'] || !confirmpassFail}"
                                 [(ngModel)]="confirmpass"
                                 ngModel>
                                 
@@ -424,18 +424,28 @@
                                 style="color:red">password not matching</span>
                                 <span *ngIf="confirmpassword.touched && confirmpassword.errors?.['empty'] || confirmpassFail " 
                                 style="color:red">invalid field input</span>
+                                <span *ngIf="confirmpassFail" 
+                                style="color:red"><br>cannot be empty input</span>
                                 <span *ngIf="confirmpassFail && confirmpassword.dirty" 
                                 style="color:red"><br>Enter same password before saving</span>
-                                <span *ngIf="confirmpassword.errors?.['regexfail']">
+                                <!-- <span *ngIf="confirmpassword.errors?.['regexfail']">
                                     <br>
-                                <div class="alert alert-danger"  role="alert">
-                                    password must contain atleast 1 upper and 1 lower case with atleast 1 number (must have minimum 8 characters)
-                                </div>
-                                </span>
+                                    <div class="alert alert-danger"  role="alert">
+                                        password must contain atleast 1 upper and 1 lower case with atleast 1 number (must have minimum 8 characters)
+                                    </div>
+                                </span> -->
                         </div>
-    
                         
-                        <div class="dropdown">
+                        <div class="">
+                            <br>
+                            <label style="margin-right: 10px;">Select Roles:<span style="color: red;">*</span></label>
+                            <p-dropdown [options]="roles" [ngClass]="{'is-invalid':selectedRolesCodeFail }" [(ngModel)]="selectedRolesCode" placeholder="Select role" name="roles"  optionValue="code" optionLabel="name" [showClear]="true"></p-dropdown>
+                                <div *ngIf="selectedRolesCodeFail">
+                                    <span  style="color: red;">Select a role</span>
+                                </div>     
+                        </div> 
+                        
+                        <div class="dropdown mb-2" >
                             <label>Status:<span style="color: red;">*</span></label>
                             <select class="form-select" name="status" [ngClass]="{'is-invalid': selectedStatusFail}"
                             [(ngModel)]="selectedStatus" #status="ngModel" required ngModel>
@@ -446,14 +456,7 @@
                             <span *ngIf="selectedStatusFail" style="color: red;">Select a status</span>
                         </div>
                             
-                        <div class="">
-                            <br>
-                            <label style="margin-right: 10px;">Select Roles:<span style="color: red;">*</span></label>
-                            <p-dropdown [options]="roles" [ngClass]="{'is-invalid':selectedRolesCodeFail }" [(ngModel)]="selectedRolesCode" placeholder="Select role" name="roles"  optionValue="code" optionLabel="name" [showClear]="true"></p-dropdown>
-                                <div *ngIf="selectedRolesCodeFail">
-                                    <span  style="color: red;">Select a role</span>
-                                </div>     
-                        </div> 
+                       
                     </div>   
                 </div>
                 <hr style="width: 95%; margin-left: 35px;">

@@ -45,6 +45,8 @@ export class UserListComponent implements OnInit {
   pageNumSelected: Page;
   permissions: any = "";
   isPaginate : any = false;
+  isUserCreated : any = false;
+  userCreatedSubcription : Subscription;
   constructor(private http: HttpClient, private router: Router, private userService : UserService,
     private confirmationService: ConfirmationService, private route:ActivatedRoute, private messageService: MessageService,
     private autoLogoutService : AutoLogoutService, private bnIdle: BnNgIdleService){
@@ -54,19 +56,23 @@ export class UserListComponent implements OnInit {
         { name: '20', records: 20 }
     ];
     console.log("hello")
-    this.userService.userCreated.subscribe((data)=>{
-      this.userCreated = data;
-      this.showSuccess();
-      // console.log(data)
-      // this.router.navigate(["main/userList"])
-    })
+    // this.userService.userCreated.subscribe((data)=>{
+    //   this.userCreated = data;
+    //   this.showSuccess();
+    //   // console.log(data)
+    //   // this.router.navigate(["main/userList"])
+    // })
   }
   x = this.autoLogoutService.logoutTime;
   ngOnInit(): void {
     
     this.permissions = localStorage.getItem('permissions');
     this.permissions = JSON.parse(this.permissions)
-    
+    this.userCreatedSubcription  =  this.userService.userCreated.subscribe((data)=>{
+      // this.showSuccess()
+      this.showSuccess();
+      console.log("created users")
+    })
     this.bnIdle.startWatching(this.x).subscribe((isTimedOut: boolean) => {
       if(isTimedOut){
       this.autoLogoutService.logout() 
@@ -126,7 +132,13 @@ onSelected(value:any){
 }
 
 showSuccess() {
+  
   this.messageService.add({severity:'success', summary: 'Success', detail: 'User Created'});
+  
+}
+
+userDeleted(){
+  this.messageService.add({severity:'success', summary: 'User Deleted!', detail: 'User Successfully deleted'});
 }
 
 
@@ -160,6 +172,8 @@ showSuccess() {
               
               this.http.delete('http://localhost:3000/users/'+this.dobj.id).subscribe((data)=>{
                 console.log("deleted");
+                this.userDeleted()
+                
                 setTimeout(()=>{
                   this.http.get("http://localhost:3000/users").subscribe((data)=>{
                     this.fetchedData = data;
@@ -171,7 +185,7 @@ showSuccess() {
                       console.log('paginate to false')
                     }
                   })
-              },100)
+                },200)
              })
               
               // let obj = arr.find((o:any)=>{
@@ -278,5 +292,7 @@ showSuccess() {
     ngOnDestroy(){
       this.bnIdle.stopTimer();
       console.log('destroyed userlist')
+
+      this.userCreatedSubcription.unsubscribe();
     }
 }
