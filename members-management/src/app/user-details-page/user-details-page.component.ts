@@ -27,6 +27,7 @@ export class UserDetailsPageComponent implements OnInit {
   @ViewChild('confirmPass') confirmpassword: ElementRef;
   @ViewChild('confirmpassword') cnfrmPass : NgForm;
   @ViewChild('lname') lastnameRef : NgForm;
+  gnder : any ="";
   user : any;
   pass: any = ""
   editMode : boolean = false;
@@ -52,6 +53,9 @@ export class UserDetailsPageComponent implements OnInit {
   confirmpassFail : any = false;
   lastname : any = "";
   lastnameFail:any = "";
+  genderFail : any = false;
+  bdayDate : any = "";
+  bdayFail:any = false;
   // ig:any;
   constructor(private title: Title, private http:HttpClient, private router : Router, private userService: UserService,
     private autoLogoutService: AutoLogoutService, private bnIdle:BnNgIdleService) {
@@ -95,7 +99,7 @@ export class UserDetailsPageComponent implements OnInit {
   }
   
   validatePhnNum(){
-    const expression = new RegExp('^[0-9]{10}$');
+    const expression = new RegExp('^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$');
     if(this.phnNum.match(expression)){
       this.phnNumFail = false
     }
@@ -143,7 +147,7 @@ export class UserDetailsPageComponent implements OnInit {
   }
 
   validateEmail(){
-    const expression = new RegExp('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$');
+    const expression = new RegExp('^[a-z0-9]+@[a-z]+\.com$');
     if(this.emailId.match(expression)){
         this.emailFail = false
     }
@@ -152,6 +156,15 @@ export class UserDetailsPageComponent implements OnInit {
     }
   }
   
+  validateGender(){
+    if(this.gnder ===""){
+        this.genderFail = true;
+    }
+    else{
+      this.genderFail = false;
+    }
+  }
+
   validateRoles(){
     if(!this.selectedRolesCode){
         this.selectedRolesCodeFail = true;
@@ -177,6 +190,16 @@ export class UserDetailsPageComponent implements OnInit {
     }
     else{
       this.confirmpassFail = false;
+    }
+  }
+
+  validateBday(){
+    const thisYear = new Date();
+    let bdayYear = this.bdayDate.slice(0,4) 
+    if(bdayYear>=thisYear.getFullYear()){
+    this.bdayFail = true;
+    }else{
+      this.bdayFail = false;
     }
   }
 
@@ -226,9 +249,11 @@ export class UserDetailsPageComponent implements OnInit {
       this.validateRoles();
       this.validateConfirmPassword();
       this.validateLastname();
+      this.validateGender()
+      this.validateBday();
 
       if(!this.phnNumFail && !this.firstnameFail && !this.addresFail && !this.selectedStatusFail && !this.emailFail && !this.passwordregexfail && !this.selectedRolesCodeFail 
-        && !this.confirmpassFail && !this.lastnameFail){
+        && !this.confirmpassFail && !this.lastnameFail && !this.genderFail && !this.bdayFail){
         this.tdata.username = this.user;
         this.tdata.firstname = this.form.value.firstname;
         this.tdata.lastname = this.form.value.lastname;
@@ -237,7 +262,8 @@ export class UserDetailsPageComponent implements OnInit {
         this.tdata.state = this.form.value.state;
         this.tdata.mobile = this.form.value.mobile;
         this.tdata.status = this.form.value.status;
-        this.tdata.birthday = this.form.value.birthday;
+        this.tdata.birthday = this.bdayDate;
+        // this.tdata.birthday = this.form.value.birthday;
         this.tdata.address = this.form.value.address;
         this.tdata.zipcode = this.form.value.zipcode;
         this.tdata.timezone = this.form.value.timezone;
@@ -251,7 +277,10 @@ export class UserDetailsPageComponent implements OnInit {
         this.tdata.createdTime = this.createdTime.toString();
         console.log(this.tdata)
         this.userService.userCreated.next(true)
-        this.http.post("http://localhost:3000/users",this.tdata).subscribe(data=>{})
+        this.userService.addUser(this.tdata).subscribe((data)=>{
+
+        })
+        // this.http.post("http://localhost:3000/users",this.tdata).subscribe(data=>{})
         
         this.router.navigate(['main/userList'])
         setTimeout(()=>{

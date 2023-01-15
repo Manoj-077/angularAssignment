@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AutoFocusModule } from 'primeng/autofocus';
 import { AutoLogoutService } from '../services/auto-logout.service';
 import { BnNgIdleService } from 'bn-ng-idle';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-roles',
@@ -13,7 +14,8 @@ export class RolesComponent {
 
 fetchedData: any; 
 
-constructor(private http:HttpClient, private autoLogoutService: AutoLogoutService, private bnIdle: BnNgIdleService){
+constructor(private http:HttpClient, private autoLogoutService: AutoLogoutService, 
+  private bnIdle: BnNgIdleService, private userService:UserService){
 
  } 
  x = this.autoLogoutService.logoutTime;
@@ -26,11 +28,15 @@ ngOnInit(){
     }
   });
 
-
-  this.http.get("http://localhost:3000/roles").subscribe((data)=>{
+  this.userService.getRoles().subscribe((data)=>{
     this.fetchedData = data;
     this.fetchedData = this.fetchedData.slice(1)
   })
+
+  // this.http.get("http://localhost:3000/roles").subscribe((data)=>{
+  //   this.fetchedData = data;
+  //   this.fetchedData = this.fetchedData.slice(1)
+  // })
 }
 
 ngOnDestroy(){

@@ -19,6 +19,8 @@ export class NavBarComponent  {
   ITOuser : any = false;
   userLogo : any = "";
   userData: any = "";
+  firstname : any = "";
+  lastname : any = "";
   constructor(private authService: AuthService, private router : Router, private userService : UserService,
     private http: HttpClient){
     
@@ -27,16 +29,32 @@ export class NavBarComponent  {
     console.log(this.ITOuser)
     this.username = localStorage.getItem('username');
     this.timeUpdate();
-    
-    this.http.get("http://localhost:3000/users").subscribe((data)=>{
+
+    this.userService.getUsers().subscribe((data)=>{
       this.userData = data;
       for (let i=0;i<this.userData.length;i++){
         if(this.username === this.userData[i].username){
           this.userData = this.userData[i];
           this.userLogo = this.userData.image;
+          this.firstname = this.userData.firstname;
+          this.lastname = this.userData.lastname;
+
         }
       }
     })
+    
+    // this.http.get("http://localhost:3000/users").subscribe((data)=>{
+    //   this.userData = data;
+    //   for (let i=0;i<this.userData.length;i++){
+    //     if(this.username === this.userData[i].username){
+    //       this.userData = this.userData[i];
+    //       this.userLogo = this.userData.image;
+    //       this.firstname = this.userData.firstname;
+    //       this.lastname = this.userData.lastname;
+
+    //     }
+    //   }
+    // })
     
     // if(this.role === 'ITOuser'){
     //   this.ITOuser = true;

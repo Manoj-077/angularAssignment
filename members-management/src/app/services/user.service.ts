@@ -52,9 +52,23 @@ export class UserService {
 
   }
   getUsers(){
-    return this.http.get("http://localhost:3000/users").subscribe((data)=>{
-      return data
-    })
+    return this.http.get("http://localhost:3000/users");
+  }
+
+  getRoles(){
+    return this.http.get("http://localhost:3000/roles");
+  }
+
+  deleteUser(id:any){
+    return this.http.delete("http://localhost:3000/users/"+id);
+  }
+
+  addUser(userObject:any){
+    return this.http.post("http://localhost:3000/users",userObject);
+  }
+
+  editUser(id:any,userObject:any){
+      return this.http.put("http://localhost:3000/users/"+id,userObject)
   }
 
 }

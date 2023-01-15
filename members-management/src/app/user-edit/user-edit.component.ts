@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AutoLogoutService } from '../services/auto-logout.service';
 import { BnNgIdleService } from 'bn-ng-idle';
+import { UserService } from '../services/user.service';
 
 interface Roles {
   name: string,
@@ -33,9 +34,10 @@ export class UserEditComponent {
   selectedRole : any = "";
   addres:any=""
   addresFail:any= false;
+  selectedRolesCodeFail : any = false;
 
   constructor(private http: HttpClient, private router:Router, private autoLogoutService: AutoLogoutService,
-    private bnIdle:BnNgIdleService){
+    private bnIdle:BnNgIdleService, private userService : UserService){
       this.roles = [
         {name: 'Admin', code: 'Admin'},
         {name: 'ITOuser', code: 'ITOuser'},
@@ -68,57 +70,110 @@ export class UserEditComponent {
 
     this.username = localStorage.getItem('userEdit')
     console.log(this.username)
-    this.http.get("http://localhost:3000/users").subscribe((data)=>{
-        let arr:any;
-        arr = data;
-        for (let i=0;i<arr.length;i++){
-          if(arr[i].username === this.username){
-            this.detailsObj = arr[i];
-          }
+
+    this.userService.getUsers().subscribe((data)=>{
+      let arr:any;
+      arr = data;
+      for (let i=0;i<arr.length;i++){
+        if(arr[i].username === this.username){
+          this.detailsObj = arr[i];
         }
-        if(this.detailsObj.country==='USA'){
-          this.states = this.Countries[0].states;
-        }
-        else{
-          this.states = this.Countries[1].states;
-        }
+      }
+      if(this.detailsObj.country==='USA'){
+        this.states = this.Countries[0].states;
+      }
+      else{
+        this.states = this.Countries[1].states;
+      }
 
 
-        if(this.detailsObj.roles==='Admin'){
-          this.selectedRolesCode = [{name: 'Admin', code: 'Admin'}]
-        }
-        else if(this.detailsObj.roles === 'ITOuser'){
-          this.selectedRolesCode = [{name: 'ITOuser', code: 'ITOuser'}]
-        }
-        // this.selectedRole = this.selectedRolesCode;
-        this.form.setValue({
-          username : this.detailsObj.username,
-          firstname : this.detailsObj.firstname,
-          lastname : this.detailsObj.lastname,
-          birthday : this.detailsObj.birthday,
-          mobile : this.detailsObj.mobile,
-          address : this.detailsObj.address,
-          zipcode : this.detailsObj.zipcode,
-          country : this.detailsObj.country,
-          state : this.detailsObj.state,
-          timezone : this.detailsObj.timezone,
-          locale : this.detailsObj.locale,
-          gender : this.detailsObj.gender,
-          email : this.detailsObj.email,
-          password : this.detailsObj.password,
-          confirmpassword : this.detailsObj.password,
-          // canEdit : this.detailsObj.roles.canEdit,
-          // canDelete : this.detailsObj.roles.canDelete,
-          // canAdd : this.detailsObj.roles.canAdd,
-          status : this.detailsObj.status,
-          roles : this.selectedRolesCode[0].name
+      if(this.detailsObj.roles==='Admin'){
+        this.selectedRolesCode = [{name: 'Admin', code: 'Admin'}]
+      }
+      else if(this.detailsObj.roles === 'ITOuser'){
+        this.selectedRolesCode = [{name: 'ITOuser', code: 'ITOuser'}]
+      }
+      // this.selectedRole = this.selectedRolesCode;
+      this.form.setValue({
+        username : this.detailsObj.username,
+        firstname : this.detailsObj.firstname,
+        lastname : this.detailsObj.lastname,
+        birthday : this.detailsObj.birthday,
+        mobile : this.detailsObj.mobile,
+        address : this.detailsObj.address,
+        zipcode : this.detailsObj.zipcode,
+        country : this.detailsObj.country,
+        state : this.detailsObj.state,
+        timezone : this.detailsObj.timezone,
+        locale : this.detailsObj.locale,
+        gender : this.detailsObj.gender,
+        email : this.detailsObj.email,
+        password : this.detailsObj.password,
+        confirmpassword : this.detailsObj.password,
+        // canEdit : this.detailsObj.roles.canEdit,
+        // canDelete : this.detailsObj.roles.canDelete,
+        // canAdd : this.detailsObj.roles.canAdd,
+        status : this.detailsObj.status,
+        roles : this.selectedRolesCode[0].name
+        
+      })
+      
+
+      this.userId = this.detailsObj.id;
+      this.image = this.detailsObj.image
+    })
+
+    // this.http.get("http://localhost:3000/users").subscribe((data)=>{
+    //     let arr:any;
+    //     arr = data;
+    //     for (let i=0;i<arr.length;i++){
+    //       if(arr[i].username === this.username){
+    //         this.detailsObj = arr[i];
+    //       }
+    //     }
+    //     if(this.detailsObj.country==='USA'){
+    //       this.states = this.Countries[0].states;
+    //     }
+    //     else{
+    //       this.states = this.Countries[1].states;
+    //     }
+
+
+    //     if(this.detailsObj.roles==='Admin'){
+    //       this.selectedRolesCode = [{name: 'Admin', code: 'Admin'}]
+    //     }
+    //     else if(this.detailsObj.roles === 'ITOuser'){
+    //       this.selectedRolesCode = [{name: 'ITOuser', code: 'ITOuser'}]
+    //     }
+    //     // this.selectedRole = this.selectedRolesCode;
+    //     this.form.setValue({
+    //       username : this.detailsObj.username,
+    //       firstname : this.detailsObj.firstname,
+    //       lastname : this.detailsObj.lastname,
+    //       birthday : this.detailsObj.birthday,
+    //       mobile : this.detailsObj.mobile,
+    //       address : this.detailsObj.address,
+    //       zipcode : this.detailsObj.zipcode,
+    //       country : this.detailsObj.country,
+    //       state : this.detailsObj.state,
+    //       timezone : this.detailsObj.timezone,
+    //       locale : this.detailsObj.locale,
+    //       gender : this.detailsObj.gender,
+    //       email : this.detailsObj.email,
+    //       password : this.detailsObj.password,
+    //       confirmpassword : this.detailsObj.password,
+    //       // canEdit : this.detailsObj.roles.canEdit,
+    //       // canDelete : this.detailsObj.roles.canDelete,
+    //       // canAdd : this.detailsObj.roles.canAdd,
+    //       status : this.detailsObj.status,
+    //       roles : this.selectedRolesCode[0].name
           
-        })
+    //     })
         
 
-        this.userId = this.detailsObj.id;
-        this.image = this.detailsObj.image
-    })
+    //     this.userId = this.detailsObj.id;
+    //     this.image = this.detailsObj.image
+    // })
   }
 
   ngOnDestroy(){
@@ -145,19 +200,29 @@ export class UserEditComponent {
       this.nonImage = false;
     },3000)
   }
-}
+  }
 
-validateAddress(){
+  validateAddress(){
   if(this.addres.length < 1){
     this.addresFail = true;
   }
   else{
     this.addresFail = false;
   }
-}
+  }
+  validateRoles(){
+    if(!this.selectedRolesCode){
+        this.selectedRolesCodeFail = true;
+    }
+    else{
+      this.selectedRolesCodeFail = false;
+    }
+  }
+
   onSubmit(){
     this.validateAddress();
-    if(!this.addresFail){
+    this.validateRoles()
+    if(!this.addresFail && !this.selectedRolesCodeFail){
     this.detailsObj.address = this.form.value.address;
     this.detailsObj.zipcode = this.form.value.zipcode;
     this.detailsObj.country = this.form.value.country;
@@ -177,9 +242,13 @@ validateAddress(){
     }
     
     this.editedDetails = this.detailsObj;
-    this.http.put("http://localhost:3000/users/"+this.userId,this.editedDetails).subscribe((data)=>{
+
+    this.userService.editUser(this.userId,this.editedDetails).subscribe((data)=>{
       this.router.navigate(['main/userList'])
     })
+    // this.http.put("http://localhost:3000/users/"+this.userId,this.editedDetails).subscribe((data)=>{
+    //   this.router.navigate(['main/userList'])
+    // })
   }
   }
 
@@ -187,6 +256,5 @@ validateAddress(){
     
     this.router.navigate(['main/userList'])
   }
-
   
 }

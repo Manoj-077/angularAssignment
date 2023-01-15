@@ -46,11 +46,12 @@
             <div class="col-sm-1"> 
             </div>
             <div class="col-sm-2"> 
-              <label>Username:</label>
+              <label>Username:<span style="color: red;">*</span></label>
               
             </div>
             <div class="col-sm-12">
-              <input  type="text" id="login" class="fadeIn second" name="username" placeholder="login" ngModel>
+              <input #username="ngModel"  type="text" id="login" class="fadeIn second" name="username" placeholder="login" ngModel>
+              <span *ngIf="usernameEmpty && username.pristine" style="color: red; text-align: left;" ><br>username cannot be empty<br></span>
             </div>
           </div> 
           
@@ -58,10 +59,11 @@
             <div class="col-sm-1"> 
             </div>
             <div class="col-sm-2"> 
-              <label >Password:</label>
+              <label >Password:<span style="color: red;">*</span></label>
             </div>
             <div class="col-sm-12">
-              <input type="password"  id="password" class="fadeIn third" name="password" placeholder="password" ngModel>
+              <input type="password" #password="ngModel" id="password" class="fadeIn third" name="password" placeholder="password" ngModel>
+              <span *ngIf="passwordEmpty && password.pristine" style="color: red; text-align: left;" ><br>password cannot be empty<br></span>
             </div>
             
           </div> 

@@ -414,21 +414,21 @@
                             </div>
                             <div class="col-sm-6">
                                 <label>Last name:</label>
-                                <input type="text" disabled class="form-control" value="" placeholder="lastname" maxlength="30" name="lastname" ngModel>
+                                <input type="text" disabled class="form-control" value="" placeholder="" maxlength="30" name="lastname" ngModel>
                             </div>
                         </div>
-                        <!-- <div class="row"> -->
+                       
                         <div class="form-outline datepicker w-100">
                             <label for="birthdayDate">Birthday:</label>
                             <input type="date" disabled class="form-control" name="birthday" id="birthdayDate" ngModel/>
                         </div>    
-                        <!-- </div> -->
+                        
                         
                         <div class="">
                                 <label >Mobile Number:<span style="color: red;">*</span></label>
-                                <input type="text" disabled class="form-control" maxlength="10"  
+                                <input type="text" disabled class="form-control"
                                 placeholder="enter phone number" value="" 
-                                required name="mobile" ngModel>
+                                name="mobile" ngModel>
                         </div>
                         <div class="">
                                 <label >Address :<span style="color: red;">*</span></label>
@@ -537,6 +537,7 @@
                             <br>
                             <label>Select Roles: </label>
                             <p-dropdown [options]="roles" [(ngModel)]="selectedRolesCode" name="roles" placeholder="Select role"   optionValue="code" optionLabel="name" [showClear]="true"></p-dropdown>
+                            <span style="color:red" *ngIf="selectedRolesCodeFail">enter roles</span>
                         </div>
                         
                         <div class="dropdown">
@@ -561,27 +562,6 @@
                 <button class="btn btn-primary btn-lg m-3" type="submit" >Save</button>
                 <button class="btn btn-primary btn-lg m-3" type="button" (click)="cancel()">Cancel</button>
             </div>
-            <!-- <div class="row">
-                
-                    
-                <div class="col-sm-6">
-
-                </div>
-                <div class="col-sm-1">
-                    <button class="btn btn-primary btn-lg m-3" type="submit" >Save</button>
-                    
-                </div>
-                <div class="col-sm-1">
-
-                </div>
-                <div class="col-sm-1">
-                    
-                    <button class="btn btn-primary btn-lg m-3" type="button" (click)="cancel()">Cancel</button>
-                </div>
-                <div class="col-sm-3">
-
-                </div>
-            </div> -->
         </form>  
     </div>
 </div>  

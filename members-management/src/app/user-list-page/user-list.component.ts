@@ -85,8 +85,8 @@ export class UserListComponent implements OnInit {
     //   console.log(this.name)
     // }
     // )
-    this.http.get("http://localhost:3000/users").subscribe((data)=>{
 
+    this.userService.getUsers().subscribe((data)=>{
       this.fetchedData = data;
       this.fetchedData = this.fetchedData.slice(2)
       if(this.fetchedData.length>9){
@@ -96,6 +96,17 @@ export class UserListComponent implements OnInit {
         this.isPaginate = false;
       }
     });
+    // this.http.get("http://localhost:3000/users").subscribe((data)=>{
+
+    //   this.fetchedData = data;
+    //   this.fetchedData = this.fetchedData.slice(2)
+    //   if(this.fetchedData.length>9){
+    //     this.isPaginate = true; 
+    //   }
+    //   else{
+    //     this.isPaginate = false;
+    //   }
+    // });
   //  this.userService.userCreated.subscribe({
   //   next: (data) => { 
   //     console.log(data)
@@ -106,22 +117,13 @@ export class UserListComponent implements OnInit {
   //     console.log("success message");
   //   }})
   
-}
+  }
 
-addSingle() {
+  addSingle() {
   this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
-}
-  
-  //     if(data===true){
-  //       console.log("success message");
-  //       // this.showSuccess();  
-  //     }
-  //  },)
+  }
 
-  
-  
- 
-onSelected(value:any){
+  onSelected(value:any){
   if(this.pageNumSelected===undefined){
 
   }else{
@@ -129,26 +131,25 @@ onSelected(value:any){
   }
   // console.log(this.pageNumSelected)
   
-}
+  }
 
-showSuccess() {
+  showSuccess() {
   
   this.messageService.add({severity:'success', summary: 'Success', detail: 'User Created'});
   
-}
+  }
 
-userDeleted(){
+  userDeleted(){
   this.messageService.add({severity:'success', summary: 'User Deleted!', detail: 'User Successfully deleted'});
-}
+  }
 
-userAlreadyExist(){
+  userAlreadyExist(){
   this.messageService.add({severity:'warn', summary: 'Username Already Exists!', detail: 'Enter a Unique Username'});
-}
+  }
 
-fieldCannotBeEmpty(){
+  fieldCannotBeEmpty(){
   this.messageService.add({severity:'warn', summary: 'Input Field Cannot be empty', detail: 'Input Username Field'});
-}
-
+  }
 
   openPop(){
     this.pop.nativeElement.style.visibility = 'visible';
@@ -156,6 +157,7 @@ fieldCannotBeEmpty(){
   }
   closePopup(){
     this.pop.nativeElement.style.visibility = 'hidden';
+    
   }
   clear(){
     this.username.nativeElement.value = "";
@@ -177,13 +179,13 @@ fieldCannotBeEmpty(){
                   break
                 }
               }
-              
-              this.http.delete('http://localhost:3000/users/'+this.dobj.id).subscribe((data)=>{
+
+              this.userService.deleteUser(this.dobj.id).subscribe((data)=>{
                 console.log("deleted");
                 this.userDeleted()
                 
                 setTimeout(()=>{
-                  this.http.get("http://localhost:3000/users").subscribe((data)=>{
+                  this.userService.getUsers().subscribe((data)=>{
                     this.fetchedData = data;
                     this.fetchedData = this.fetchedData.slice(2);
                     console.log('getting after delete')
@@ -193,8 +195,38 @@ fieldCannotBeEmpty(){
                       console.log('paginate to false')
                     }
                   })
+
+
+                  // this.http.get("http://localhost:3000/users").subscribe((data)=>{
+                  //   this.fetchedData = data;
+                  //   this.fetchedData = this.fetchedData.slice(2);
+                  //   console.log('getting after delete')
+                  //   console.log(this.fetchedData)
+                  //   if(this.fetchedData.length<11){
+                  //     this.isPaginate = false;
+                  //     console.log('paginate to false')
+                  //   }
+                  // })
                 },200)
-             })
+              })
+              
+            //   this.http.delete('http://localhost:3000/users/'+this.dobj.id).subscribe((data)=>{
+            //     console.log("deleted");
+            //     this.userDeleted()
+                
+            //     setTimeout(()=>{
+            //       this.http.get("http://localhost:3000/users").subscribe((data)=>{
+            //         this.fetchedData = data;
+            //         this.fetchedData = this.fetchedData.slice(2);
+            //         console.log('getting after delete')
+            //         console.log(this.fetchedData)
+            //         if(this.fetchedData.length<11){
+            //           this.isPaginate = false;
+            //           console.log('paginate to false')
+            //         }
+            //       })
+            //     },200)
+            //  })
               
               // let obj = arr.find((o:any)=>{
               //   o.username=== this.cdata.username
@@ -206,34 +238,62 @@ fieldCannotBeEmpty(){
     
 }
   addUser(){
+    this.userExist = false;
     const exp = new RegExp("^[a-zA-Z0-9_]*$");
     if(this.username.nativeElement.value.match(exp) && this.username.nativeElement.value.length>0){
-        this.http.get("http://localhost:3000/users").subscribe((data)=>{
-        this.users = data;
-        for (let i=0;i< this.users.length;i++){
-          if(this.users[i].username === this.username.nativeElement.value){
-            this.userExist = true
-            break
-          }
-        }
-        if(!this.userExist){
-        this.router.navigate(['/main/userDetails'])
-        localStorage.setItem('newUser',this.username.nativeElement.value)
-        // localStorage.setItem('description',this.description.nativeElement.value)
-        }
-        else{
-          // this.userExist=true;
-        
-          // setTimeout(()=>{
-          //   this.userExist = false;
+
+        this.userService.getUsers().subscribe((data)=>{
+            this.users = data;
+            for (let i=0;i< this.users.length;i++){
+              if(this.users[i].username === this.username.nativeElement.value){
+                this.userExist = true
+                break
+              }
+            }
+            if(!this.userExist){
+            this.router.navigate(['/main/userDetails'])
+            localStorage.setItem('newUser',this.username.nativeElement.value)
+            // localStorage.setItem('description',this.description.nativeElement.value)
+            }
+            else{
+              // this.userExist=true;
             
-          // }, 2000) 
-          this.userAlreadyExist()
-        }
-        this.clear();
-        // this.user = this.users.find((o:any)=>{o.username === this.username.nativeElement.value})
-        // console.log(this.user)
-      })
+              // setTimeout(()=>{
+              //   this.userExist = false;
+                
+              // }, 2000) 
+              this.userAlreadyExist()
+            }
+            this.clear();
+            // this.user = this.users.find((o:any)=>{o.username === this.username.nativeElement.value})
+            // console.log(this.user)
+        })
+      //   this.http.get("http://localhost:3000/users").subscribe((data)=>{
+      //   this.users = data;
+      //   for (let i=0;i< this.users.length;i++){
+      //     if(this.users[i].username === this.username.nativeElement.value){
+      //       this.userExist = true
+      //       break
+      //     }
+      //   }
+      //   if(!this.userExist){
+      //   this.router.navigate(['/main/userDetails'])
+      //   localStorage.setItem('newUser',this.username.nativeElement.value)
+      //   // localStorage.setItem('description',this.description.nativeElement.value)
+      //   }
+      //   else{
+      //     // this.userExist=true;
+        
+      //     // setTimeout(()=>{
+      //     //   this.userExist = false;
+            
+      //     // }, 2000) 
+      //     this.userAlreadyExist()
+      //   }
+      //   this.clear();
+      //   // this.user = this.users.find((o:any)=>{o.username === this.username.nativeElement.value})
+      //   // console.log(this.user)
+      // })
     }
     else{
         // this.userExist=true;
@@ -248,15 +308,13 @@ fieldCannotBeEmpty(){
   }
 
   
-
-
   gotoEdit(data:any) {
     
     localStorage.setItem('userEdit',data.username)
     
     this.userService.editMode.next(true);
 }
-
+  
 
   displayModal: boolean;
 
