@@ -65,7 +65,7 @@
     <div class="col-12">
       <p-table  [value]="fetchedData" [style]="{'padding': '0 10px 0 10px'}"  #dt2 styleClass="p-datatable-striped" [paginator]="isPaginate"  [tableStyle]="{'min-width': '50rem'}" 
       [rows]="rows" [showCurrentPageReport]="true" [(first)]="first"
-      [globalFilterFields]="['username','firstname','lastname','email','status','createdate']">  
+      [globalFilterFields]="['username','firstname','lastname','email','status','age','createdate']">  
         <ng-template pTemplate="header"  >
             <tr>
                 <th pSortableColumn="username" style="width:15%">Username<p-sortIcon field="username"></p-sortIcon></th>
@@ -73,6 +73,7 @@
                 <th pSortableColumn="lastname" style="width:15%">Last name<p-sortIcon field="lastname"></p-sortIcon></th>
                 <th pSortableColumn="email" style="width:15%">Email id<p-sortIcon field="email"></p-sortIcon></th>
                 <th pSortableColumn="status" style="width:15%">status<p-sortIcon field="status"></p-sortIcon></th>
+                <th pSortableColumn="age" style="width:15%">Age</th>
                 <th pSortableColumn="createdate" style="width:15%">Created Date</th>
                 <th></th>
                 <th></th>
@@ -99,6 +100,7 @@
               <th></th>
               <th></th>
               <th></th>
+              <th></th>
           </tr>
         </ng-template>
           <ng-template pTemplate="body" let-data>
@@ -108,10 +110,13 @@
                   <td>{{data.lastname}}</td>
                   <td>{{data.email}}</td>
                   <td>
-                    <span [ngClass]="data.status==='available'?'good':'bad'">{{data.status}}</span>
+                    <span [ngClass]="data.status==='Active'?'good':'bad'">{{data.status}}</span>
+                  </td>
+                  <td>
+                    {{data.birthday | age}}
                   </td>
                   <td>{{data.createdTime | datepipe}}</td>  
-                  <td><button pButton type="button" routerLink="/main/userEdit" label="Details" [disabled]="!permissions.canEdit" (click)="gotoEdit(data)" class="p-button-info"></button></td>
+                  <td><button pButton type="button" routerLink="/main/userEdit" label="Details" (click)="gotoEdit(data)" class="p-button-info"></button></td>
                   <td><button pButton type="button" [disabled]="!permissions.canDelete" (click)="deleteConfirm(data)" label="" icon="pi pi-trash"></button></td>
               </tr>
           </ng-template>

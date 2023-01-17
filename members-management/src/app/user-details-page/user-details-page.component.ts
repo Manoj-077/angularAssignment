@@ -21,12 +21,14 @@ interface Roles {
 })
 export class UserDetailsPageComponent implements OnInit {
 
-  @ViewChild('f') form : NgForm;
+  // @ViewChild('f') form : NgForm;
+  
+  // @ViewChild('username') usrname : ElementRef;
+  // @ViewChild('confirmPass') confirmpassword: ElementRef;
+  // @ViewChild('confirmpassword') cnfrmPass : NgForm;
+  // @ViewChild('lname') lastnameRef : NgForm;
+
   @ViewChild('img') inputImage : ElementRef;
-  @ViewChild('username') usrname : ElementRef;
-  @ViewChild('confirmPass') confirmpassword: ElementRef;
-  @ViewChild('confirmpassword') cnfrmPass : NgForm;
-  @ViewChild('lname') lastnameRef : NgForm;
   gnder : any ="";
   user : any;
   pass: any = ""
@@ -56,6 +58,12 @@ export class UserDetailsPageComponent implements OnInit {
   genderFail : any = false;
   bdayDate : any = "";
   bdayFail:any = false;
+  timezone : any;
+  locale : any;
+  zipcode : any;
+  cntry : any;
+  state : any;
+  submitted : any = false;
   // ig:any;
   constructor(private title: Title, private http:HttpClient, private router : Router, private userService: UserService,
     private autoLogoutService: AutoLogoutService, private bnIdle:BnNgIdleService) {
@@ -85,19 +93,9 @@ export class UserDetailsPageComponent implements OnInit {
       }
     }
     )
-    // console.log(this.usrname.nativeElement.value)
-    // this.usrname.nativeElement.value= this.user;
-    // this.form.patchValue({
-    //   username: this.user
-    // })
-  //  this.http.get("http://localhost:3000/users").subscribe((data)=>{
-  //   let arr:any = []
-  //   arr = data;
-  //   this.ig = arr.find((o:any)=>o.username==="abcd")
-  //   console.log(this.ig.image)
-  //  })
   }
   
+  phoneNumberPattern: any = '^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$';
   validatePhnNum(){
     const expression = new RegExp('^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$');
     if(this.phnNum.match(expression)){
@@ -108,6 +106,7 @@ export class UserDetailsPageComponent implements OnInit {
     }
   }
   
+  firstnamePattern : any = '^[a-zA-Z\s]+$';
   validateFirstname(){
     const expression = new RegExp('^[a-zA-Z\s]+$');
     if(this.fn.match(expression)){
@@ -118,6 +117,7 @@ export class UserDetailsPageComponent implements OnInit {
     }
   }
 
+  lastnamePattern: any = '^[a-zA-Z\s]+$';
   validateLastname(){
     const expression = new RegExp('^[a-zA-Z\s]+$');
     if(this.lastname.length>0 && !this.lastname.match(expression)){
@@ -128,6 +128,7 @@ export class UserDetailsPageComponent implements OnInit {
     }
   }
 
+  
   validateAddress(){
     if(this.addres.length < 1){
       this.addresFail = true;
@@ -136,6 +137,7 @@ export class UserDetailsPageComponent implements OnInit {
       this.addresFail = false;
     }
   }
+
 
   validateStatus(){
     if(this.selectedStatus.length === 0){
@@ -146,6 +148,7 @@ export class UserDetailsPageComponent implements OnInit {
     }
   }
 
+  emailPattern : any = '^[a-z0-9]+@[a-z]+\.com$';
   validateEmail(){
     const expression = new RegExp('^[a-z0-9]+@[a-z]+\.com$');
     if(this.emailId.match(expression)){
@@ -165,6 +168,7 @@ export class UserDetailsPageComponent implements OnInit {
     }
   }
 
+
   validateRoles(){
     if(!this.selectedRolesCode){
         this.selectedRolesCodeFail = true;
@@ -174,6 +178,7 @@ export class UserDetailsPageComponent implements OnInit {
     }
   }
 
+  passwordPattern : any = '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$';
   validatepassword(){
     const expression = new RegExp('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$');
     if(this.pass.match(expression)){
@@ -184,14 +189,14 @@ export class UserDetailsPageComponent implements OnInit {
     }
   }
 
-  validateConfirmPassword(){
-    if(this.cnfrmPass.errors?.['empty'] || this.cnfrmPass.errors?.['notEqual']){
-      this.confirmpassFail = true;
-    }
-    else{
-      this.confirmpassFail = false;
-    }
-  }
+  // validateConfirmPassword(){
+  //   if(this.cnfrmPass.errors?.['empty'] || this.cnfrmPass.errors?.['notEqual']){
+  //     this.confirmpassFail = true;
+  //   }
+  //   else{
+  //     this.confirmpassFail = false;
+  //   }
+  // }
 
   validateBday(){
     const thisYear = new Date();
@@ -218,7 +223,7 @@ export class UserDetailsPageComponent implements OnInit {
 		this.states = this.Countries.find((cntry: any) => cntry.name == country.target.value).states;
 	}
 
-  tdata = {
+  userData = {
     username : "",
     firstname : "",
     lastname : "",
@@ -239,58 +244,72 @@ export class UserDetailsPageComponent implements OnInit {
     description:"",
     createdTime: "" 
   }
-  onSubmit(){
-      this.validatePhnNum();
-      this.validateFirstname();
-      this.validateAddress();
-      this.validateStatus();
-      this.validateEmail();
-      this.validatepassword();
-      this.validateRoles();
-      this.validateConfirmPassword();
-      this.validateLastname();
-      this.validateGender()
+ 
+  change(){
+    this.submitted = false;
+  }
+
+  onSubmit(f:NgForm){
+      // this.validatePhnNum();
+      // this.validateFirstname();
+      // this.validateAddress();
+      // this.validateStatus();
+      // this.validateEmail();
+      // this.validatepassword();
+      // this.validateRoles();
+      // this.validateConfirmPassword();
+      // this.validateLastname();
+      // this.validateGender()
       this.validateBday();
-
-      if(!this.phnNumFail && !this.firstnameFail && !this.addresFail && !this.selectedStatusFail && !this.emailFail && !this.passwordregexfail && !this.selectedRolesCodeFail 
-        && !this.confirmpassFail && !this.lastnameFail && !this.genderFail && !this.bdayFail){
-        this.tdata.username = this.user;
-        this.tdata.firstname = this.form.value.firstname;
-        this.tdata.lastname = this.form.value.lastname;
-        this.tdata.email = this.form.value.email;
-        this.tdata.country = this.form.value.country;
-        this.tdata.state = this.form.value.state;
-        this.tdata.mobile = this.form.value.mobile;
-        this.tdata.status = this.form.value.status;
-        this.tdata.birthday = this.bdayDate;
-        // this.tdata.birthday = this.form.value.birthday;
-        this.tdata.address = this.form.value.address;
-        this.tdata.zipcode = this.form.value.zipcode;
-        this.tdata.timezone = this.form.value.timezone;
-        this.tdata.locale = this.form.value.locale;
-        this.tdata.gender = this.form.value.gender;
-        this.tdata.roles = this.selectedRolesCode;
-        console.log(this.selectedRolesCode)
-        this.tdata.image = this.image;
-        this.tdata.password = this.form.value.confirmpassword;
-        this.tdata.description = this.description;
-        this.tdata.createdTime = this.createdTime.toString();
-        console.log(this.tdata)
-        this.userService.userCreated.next(true)
-        this.userService.addUser(this.tdata).subscribe((data)=>{
-
-        })
-        // this.http.post("http://localhost:3000/users",this.tdata).subscribe(data=>{})
-        
+      this.submitted = true;
+      if(!this.bdayFail && f.valid){
+        this.userData.username = this.user;
+        this.userData.birthday = this.bdayDate;
+        this.userData.image = this.image;
+        this.userData.createdTime = this.createdTime.toString();
+        this.userService.addUser(this.userData).subscribe((data)=>{})
         this.router.navigate(['main/userList'])
         setTimeout(()=>{
           this.userService.userCreated.next(true);
         },2000)
-        console.log(this.form.errors)
       }
-      else{
+
+      // if(!this.phnNumFail && !this.firstnameFail && !this.addresFail && !this.selectedStatusFail && !this.emailFail && !this.passwordregexfail && !this.selectedRolesCodeFail 
+      //   && !this.confirmpassFail && !this.lastnameFail && !this.genderFail && !this.bdayFail){
+      //   this.userData.username = this.user;
+      //   this.userData.firstname = this.fn;
+      //   this.userData.lastname = this.lastname;
+      //   this.userData.email = this.emailId;
+      //   this.userData.country = this.cntry;
+      //   this.userData.state = this.state;
+      //   this.userData.mobile = this.phnNum;
+      //   this.userData.status = this.selectedStatus;
+      //   this.userData.birthday = this.bdayDate;
+      //   this.userData.address = this.addres;
+      //   this.userData.zipcode = this.zipcode;
+      //   this.userData.timezone = this.timezone;
+      //   this.userData.locale = this.locale;
+      //   this.userData.gender = this.gnder;
+      //   this.userData.roles = this.selectedRolesCode;
+      //   console.log(this.selectedRolesCode)
+      //   this.userData.image = this.image;
+      //   this.userData.password = this.confirmpass;
+      //   this.userData.description = this.description;
+      //   this.userData.createdTime = this.createdTime.toString();
+      //   console.log(this.userData)
+      //   this.userService.userCreated.next(true)
+      //   this.userService.addUser(this.userData).subscribe((data)=>{})
+      //   // this.http.post("http://localhost:3000/users",this.tdata).subscribe(data=>{})
+        
+      //   this.router.navigate(['main/userList'])
+      //   setTimeout(()=>{
+      //     this.userService.userCreated.next(true);
+      //   },2000)
+      //   console.log(this.form.errors)
+      // }
+      // else{
           
-      }
+      // }
       
       
   }
@@ -298,7 +317,7 @@ export class UserDetailsPageComponent implements OnInit {
   
    this.router.navigate(['main/userList']);
    
-   this.form.reset();
+  //  this.form.reset();
  }
  
  onfileselected(event:any){

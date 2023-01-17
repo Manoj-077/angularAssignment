@@ -8,12 +8,15 @@ export class AuthService {
 
   constructor(private router:Router) { }
   loggedIn = false;
+  
   login(){
     this.loggedIn = true;
+    sessionStorage.setItem('isLoggedIn','true')
     this.router.navigate(['main/home'])
   }
   logout(){
     this.loggedIn = false;
+    sessionStorage.clear();
   }
   log(){
     return this.loggedIn;

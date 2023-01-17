@@ -35,6 +35,7 @@ import { BnNgIdleService } from 'bn-ng-idle'
 import {InputSwitchModule} from 'primeng/inputswitch';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ColorChangerDirective } from './shared/color-changer.directive';
+import { AgePipe } from './shared/age.pipe';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { ColorChangerDirective } from './shared/color-changer.directive';
     UserEditComponent,
     ProfilePageComponent,
     PageNotFoundComponent,
-    ColorChangerDirective
+    ColorChangerDirective,
+    AgePipe
   ],
   imports: [
     BrowserModule,
