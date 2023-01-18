@@ -35,7 +35,7 @@ export class UserEditComponent {
   selectedRole : any = "";
   addres:any=""
   addresFail:any= false;
-  selectedRolesCodeFail : any = false;
+  
   isEditModeOn : any = false;
 
   
@@ -55,6 +55,8 @@ export class UserEditComponent {
   status : any;
   bdayFail : any = false;
   zipcodePattern : any = "^[0-9]+$";
+  submitted : any = false;
+  x = this.autoLogoutService.logoutTime;
   constructor(private http: HttpClient, private router:Router, private autoLogoutService: AutoLogoutService,
     private bnIdle:BnNgIdleService, private userService : UserService){
       this.roles = [
@@ -77,10 +79,9 @@ export class UserEditComponent {
     }
 		
 	}
-  x = this.autoLogoutService.logoutTime;
+  
 
   ngOnInit(){
-
     this.role = localStorage.getItem('roles');
     this.role = JSON.parse(this.role);
     this.bnIdle.startWatching(this.x).subscribe((isTimedOut: boolean) => {
@@ -132,29 +133,6 @@ export class UserEditComponent {
       this.confirmPassword = this.detailsObj.password
       this.status = this.detailsObj.status;
       this.selectedRolesCode = this.selectedRolesCode[0].name;
-      // this.form.setValue({
-      //   username : this.detailsObj.username,
-      //   firstname : this.detailsObj.firstname,
-      //   lastname : this.detailsObj.lastname,
-      //   birthday : this.detailsObj.birthday,
-      //   mobile : detailsObj.birthday,
-      //   address : this.detailsObj.address,
-      //   zipcode : this.detailsObj.zipcode,
-      //   country : this.detailsObj.country,
-      //   state : this.detailsObj.state,
-      //   timezone : this.detailsObj.timezone,
-      //   locale : this.detailsObj.locale,
-      //   gender : this.detailsObj.gender,
-      //   email : this.detailsObj.email,
-      //   password : this.detailsObj.password,
-      //   confirmpassword : this.detailsObj.password,
-        
-      //   status : this.detailsObj.status,
-      //   roles : this.selectedRolesCode[0].name
-        
-      // })
-      
-
       this.userId = this.detailsObj.id;
       this.image = this.detailsObj.image
     })
@@ -192,23 +170,7 @@ export class UserEditComponent {
   }
   }
 
-  validateAddress(){
-  if(this.addres.length < 1){
-    this.addresFail = true;
-  }
-  else{
-    this.addresFail = false;
-  }
-  }
-  validateRoles(){
-    if(!this.selectedRolesCode){
-        this.selectedRolesCodeFail = true;
-    }
-    else{
-      this.selectedRolesCodeFail = false;
-    }
-  }
-
+ 
   
   validateBday(){
     const thisYear = new Date();
@@ -221,7 +183,7 @@ export class UserEditComponent {
       }
     }
   }
-  submitted : any = false;
+  
   onSubmit(f:NgForm){
     this.validateBday()
     this.submitted = true;
@@ -240,45 +202,13 @@ export class UserEditComponent {
       }
       else{
         this.detailsObj.image = this.newImage;
-      }
-      
+      } 
       this.editedDetails = this.detailsObj;
       this.isEditModeOn = false;
       this.userService.editUser(this.userId,this.editedDetails).subscribe((data)=>{
         this.router.navigate(['main/userList'])
       })
     }
-
-
-
-
-  //   this.validateAddress();
-  //   this.validateRoles()
-  //   if(!this.addresFail && !this.selectedRolesCodeFail && !this.bdayFail){
-  //   this.detailsObj.address = this.addres;
-  //   this.detailsObj.zipcode = this.zipcode;
-  //   this.detailsObj.country = this.cntry;
-  //   this.detailsObj.state = this.state;
-  //   this.detailsObj.timezone = this.timezone;
-  //   this.detailsObj.locale = this.locale;
-  //   this.detailsObj.roles = this.selectedRolesCode;
-  //   this.detailsObj.status = this.status;
-  //   this.detailsObj.birthday = this.birthday;
-  //   if(!this.newImage){
-  //     this.detailsObj.image = this.image
-  //   }
-  //   else{
-  //     this.detailsObj.image = this.newImage;
-  //   }
-    
-  //   this.editedDetails = this.detailsObj;
-  //   this.isEditModeOn = false;
-  //   this.userService.editUser(this.userId,this.editedDetails).subscribe((data)=>{
-  //     this.router.navigate(['main/userList'])
-  //   })
-    
-  // }
-
   }
 
   cancel(){

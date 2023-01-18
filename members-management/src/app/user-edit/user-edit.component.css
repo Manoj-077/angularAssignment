@@ -110,10 +110,7 @@ input{
 #leftColumn{
     
 }
-/* #imageDiv{
-    margin-top: 50px;
-    margin-bottom: 20px;
-} */
+
 hr{
     width: 100%;
     
@@ -123,4 +120,8 @@ hr{
     display: inline-block;
     padding-right: 70px;
     padding-bottom: 30px;
+}
+
+.redFont{
+    color: red;
 }

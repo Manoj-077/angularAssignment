@@ -131,7 +131,7 @@
 <div class="topnav" id="myTopnav">
   <a class="navItem" id="homeLink" routerLink="/main/home" routerLinkActive = "act" >Home</a>
   <a class="navItem" routerLink="/main/userList" routerLinkActive = "act">User List</a>
-  <a class="navItem" routerLink="/main/roles" [ngStyle]="{'display': this.role === 'ITOuser' ? 'none': 'content'}" routerLinkActive = "act">Roles</a>
+  <a class="navItem" routerLink="/main/roles" [ngStyle]="{'display': role === 'ITOuser' ? 'none': 'content'}" routerLinkActive = "act">Roles</a>
   <!-- <a href="#about">About</a> -->
   <div style="text-align: right;">
     <!-- <p id="dateTime" >{{d | datepipe}}</p> -->

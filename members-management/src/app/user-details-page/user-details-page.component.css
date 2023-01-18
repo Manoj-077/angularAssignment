@@ -121,9 +121,11 @@ input{
 #phnNum{
     margin-top: 25px;
 }
-#addUser{
-    
+
+#imageError{
+    width: 300px
 }
-/* #dp{
-    z-index: ;
-} */
+
+.redFont{
+    color: red;
+}

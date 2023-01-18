@@ -32,11 +32,6 @@ ngOnInit(){
     this.fetchedData = data;
     this.fetchedData = this.fetchedData.slice(1)
   })
-
-  // this.http.get("http://localhost:3000/roles").subscribe((data)=>{
-  //   this.fetchedData = data;
-  //   this.fetchedData = this.fetchedData.slice(1)
-  // })
 }
 
 ngOnDestroy(){

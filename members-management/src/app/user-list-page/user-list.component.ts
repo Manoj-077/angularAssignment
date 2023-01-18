@@ -24,9 +24,9 @@ interface Page {
 
 
 export class UserListComponent implements OnInit {
-  @ViewChild('popup') pop :ElementRef;
-  @ViewChild('username') username : ElementRef;
-  @ViewChild('description') description : ElementRef;
+  
+  username : any;
+ 
   loggedUser : string;
   userExist : boolean =false;
   users : any
@@ -47,6 +47,7 @@ export class UserListComponent implements OnInit {
   isPaginate : any = false;
   isUserCreated : any = false;
   userCreatedSubcription : Subscription;
+  x = this.autoLogoutService.logoutTime;
   constructor(private http: HttpClient, private router: Router, private userService : UserService,
     private confirmationService: ConfirmationService, private route:ActivatedRoute, private messageService: MessageService,
     private autoLogoutService : AutoLogoutService, private bnIdle: BnNgIdleService){
@@ -55,21 +56,15 @@ export class UserListComponent implements OnInit {
         { name: '15', records: 15 },
         { name: '20', records: 20 }
     ];
-    console.log("hello")
-    // this.userService.userCreated.subscribe((data)=>{
-    //   this.userCreated = data;
-    //   this.showSuccess();
-    //   // console.log(data)
-    //   // this.router.navigate(["main/userList"])
-    // })
+    
   }
-  x = this.autoLogoutService.logoutTime;
+  
   ngOnInit(): void {
     
     this.permissions = localStorage.getItem('permissions');
     this.permissions = JSON.parse(this.permissions)
     this.userCreatedSubcription  =  this.userService.userCreated.subscribe((data)=>{
-      // this.showSuccess()
+     
       this.showSuccess();
       console.log("created users")
     })
@@ -78,13 +73,7 @@ export class UserListComponent implements OnInit {
       this.autoLogoutService.logout() 
       }
     });
-    // this.roles = localStorage.getItem('roles');
-    // this.roles = JSON.parse(this.roles)
-    // this.userService.loggedIn.subscribe((data)=>{
-    //   this.name = data
-    //   console.log(this.name)
-    // }
-    // )
+    
 
     this.userService.getUsers().subscribe((data)=>{
       this.fetchedData = data;
@@ -96,27 +85,6 @@ export class UserListComponent implements OnInit {
         this.isPaginate = false;
       }
     });
-    // this.http.get("http://localhost:3000/users").subscribe((data)=>{
-
-    //   this.fetchedData = data;
-    //   this.fetchedData = this.fetchedData.slice(2)
-    //   if(this.fetchedData.length>9){
-    //     this.isPaginate = true; 
-    //   }
-    //   else{
-    //     this.isPaginate = false;
-    //   }
-    // });
-  //  this.userService.userCreated.subscribe({
-  //   next: (data) => { 
-  //     console.log(data)
-  //     }, 
-  //   error: () => {},
-  //   complete: () => {
-  //     this.showSuccess()
-  //     console.log("success message");
-  //   }})
-  
   }
 
   addSingle() {
@@ -129,7 +97,7 @@ export class UserListComponent implements OnInit {
   }else{
     this.rows = this.pageNumSelected.records;
   }
-  // console.log(this.pageNumSelected)
+ 
   
   }
 
@@ -151,24 +119,17 @@ export class UserListComponent implements OnInit {
   this.messageService.add({severity:'warn', summary: 'Invalid', detail: 'Input Username Field'});
   }
 
-  openPop(){
-    this.pop.nativeElement.style.visibility = 'visible';
-    
-  }
-  closePopup(){
-    this.pop.nativeElement.style.visibility = 'hidden';
-    
-  }
+ 
   clear(){
-    this.username.nativeElement.value = "";
-    // this.description.nativeElement.value = "";
+    this.username = "";
+    
   }
   deleteConfirm(data:any) {
     this.cdata = data;
     this.confirmationService.confirm({
         message: 'Are you sure that you want to delete '+"'"+this.cdata.username+"'"+'?',
         accept: () => {
-            //Actual logic to perform a confirmation
+            
             this.http.get("http://localhost:3000/users").subscribe((data)=>{
               let arr:any = [];
               arr = data;
@@ -195,43 +156,8 @@ export class UserListComponent implements OnInit {
                       console.log('paginate to false')
                     }
                   })
-
-
-                  // this.http.get("http://localhost:3000/users").subscribe((data)=>{
-                  //   this.fetchedData = data;
-                  //   this.fetchedData = this.fetchedData.slice(2);
-                  //   console.log('getting after delete')
-                  //   console.log(this.fetchedData)
-                  //   if(this.fetchedData.length<11){
-                  //     this.isPaginate = false;
-                  //     console.log('paginate to false')
-                  //   }
-                  // })
                 },200)
               })
-              
-            //   this.http.delete('http://localhost:3000/users/'+this.dobj.id).subscribe((data)=>{
-            //     console.log("deleted");
-            //     this.userDeleted()
-                
-            //     setTimeout(()=>{
-            //       this.http.get("http://localhost:3000/users").subscribe((data)=>{
-            //         this.fetchedData = data;
-            //         this.fetchedData = this.fetchedData.slice(2);
-            //         console.log('getting after delete')
-            //         console.log(this.fetchedData)
-            //         if(this.fetchedData.length<11){
-            //           this.isPaginate = false;
-            //           console.log('paginate to false')
-            //         }
-            //       })
-            //     },200)
-            //  })
-              
-              // let obj = arr.find((o:any)=>{
-              //   o.username=== this.cdata.username
-              // })
-              // console.log("this is obj"+obj)
             })
         }
     });
@@ -240,69 +166,27 @@ export class UserListComponent implements OnInit {
   addUser(){
     this.userExist = false;
     const exp = new RegExp("^[a-zA-Z0-9_]*$");
-    if(this.username.nativeElement.value.match(exp) && this.username.nativeElement.value.length>0){
+    if(this.username.match(exp) && this.username.length>0){
 
         this.userService.getUsers().subscribe((data)=>{
             this.users = data;
             for (let i=0;i< this.users.length;i++){
-              if(this.users[i].username === this.username.nativeElement.value){
+              if(this.users[i].username === this.username){
                 this.userExist = true
                 break
               }
             }
             if(!this.userExist){
             this.router.navigate(['/main/userDetails'])
-            localStorage.setItem('newUser',this.username.nativeElement.value)
-            // localStorage.setItem('description',this.description.nativeElement.value)
+            localStorage.setItem('newUser',this.username)
             }
             else{
-              // this.userExist=true;
-            
-              // setTimeout(()=>{
-              //   this.userExist = false;
-                
-              // }, 2000) 
               this.userAlreadyExist()
             }
             this.clear();
-            // this.user = this.users.find((o:any)=>{o.username === this.username.nativeElement.value})
-            // console.log(this.user)
         })
-      //   this.http.get("http://localhost:3000/users").subscribe((data)=>{
-      //   this.users = data;
-      //   for (let i=0;i< this.users.length;i++){
-      //     if(this.users[i].username === this.username.nativeElement.value){
-      //       this.userExist = true
-      //       break
-      //     }
-      //   }
-      //   if(!this.userExist){
-      //   this.router.navigate(['/main/userDetails'])
-      //   localStorage.setItem('newUser',this.username.nativeElement.value)
-      //   // localStorage.setItem('description',this.description.nativeElement.value)
-      //   }
-      //   else{
-      //     // this.userExist=true;
-        
-      //     // setTimeout(()=>{
-      //     //   this.userExist = false;
-            
-      //     // }, 2000) 
-      //     this.userAlreadyExist()
-      //   }
-      //   this.clear();
-      //   // this.user = this.users.find((o:any)=>{o.username === this.username.nativeElement.value})
-      //   // console.log(this.user)
-      // })
     }
     else{
-        // this.userExist=true;
-        
-        // setTimeout(()=>{
-        //   this.userExist = false;
-         
-        // }, 2000)  
-
         this.fieldCannotBeEmpty()
     }
   }
@@ -353,7 +237,6 @@ export class UserListComponent implements OnInit {
 
     showResponsiveDialog() {
         this.displayResponsive = true;
-        // console.log(this.pageNumSelected)
     }
 
 

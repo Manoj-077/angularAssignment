@@ -1,6 +1,4 @@
-<head>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&family=Poppins:wght@600&display=swap" rel="stylesheet">
-</head>
+
 <div class="container-fluid" id="greet">
     <h1 id="addUser">Add user</h1>
 </div>
@@ -23,26 +21,26 @@
                             <input type="file" style="width: 50%;" class="form-control" id="customFile" name="image" (change)="onfileselected($event)" accept="image/jpg, image/png" #img />
                             <span *ngIf="nonImage"> 
                                 <br>
-                                <div class="alert alert-danger" style="width: 300px"  role="alert">
+                                <div class="alert alert-danger" id="imageError"  role="alert">
                                     Unsupported file
                                 </div> 
                             </span>     
                         </div>
                         
                         <div class="">
-                            <label>UserName<span style="color: red;">*</span></label>
+                            <label>UserName<span class="redFont">*</span></label>
                             <input type="text" class="form-control" disabled [ngClass]="{'is-invalid': username.invalid && username.touched}"
                             #username="ngModel" maxlength="20" [placeholder]='user'  [(ngModel)]="user" value="" required name="username" >
-                            <span *ngIf="username.invalid && username.touched"  style="color: red;">enter valid username</span>
+                            <span *ngIf="username.invalid && username.touched" class="redFont">enter valid username</span>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-6">
-                                <label >First Name:<span style="color: red;">*</span></label>
+                                <label >First Name:<span class="redFont">*</span></label>
                                 <input type="text" class="form-control" placeholder="firstname" maxlength="30" [ngClass]="{'is-invalid': f.controls['firstname']?.invalid && submitted}" 
                                 required name="firstname" [(ngModel)]="userData.firstname" [pattern]="firstnamePattern">
                                 <div *ngIf="submitted">
-                                    <span *ngIf="f.controls['firstname'].invalid && submitted"  style="color: red;">
+                                    <span *ngIf="f.controls['firstname'].invalid && submitted"  class="redFont">
                                     enter valid username</span>
                                 </div>    
                             </div>
@@ -52,7 +50,7 @@
                                 <input  [ngClass]="{'is-invalid': f.controls['lastname']?.invalid && lastname.dirty && submitted}"   type="text" class="form-control" [(ngModel)]="userData.lastname" value=""
                                  placeholder="lastname" [pattern]="lastnamePattern"  maxlength="30" name="lastname" >
                                 <div *ngIf="submitted"> 
-                                    <span *ngIf="f.controls['lastname']?.invalid && f.controls['lastname']?.dirty && submitted"  style="color: red;">Invalid last name</span>
+                                    <span *ngIf="f.controls['lastname']?.invalid && f.controls['lastname']?.dirty && submitted"  class="redFont">Invalid last name</span>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +80,7 @@
                             <input type="text" class="form-control" [pattern]="zipcodePattern" maxlength="20" placeholder="zipcode" 
                             [(ngModel)]="userData.zipcode" name="zipcode">
                             <div *ngIf="submitted">
-                                <span *ngIf="f.controls['zipcode'].invalid && submitted"  style="color: red;">
+                                <span *ngIf="f.controls['zipcode'].invalid && submitted"  class="redFont">
                                 enter valid zipcode</span>
                             </div>
                         </div>
@@ -94,11 +92,11 @@
                     <div class="ml-3 px-3">
                         
                         <div class="" >
-                            <label >Address :<span style="color: red;">*</span></label>
+                            <label >Address :<span class="redFont">*</span></label>
                             <input type="text" class="form-control" maxlength="100" placeholder="enter address" required name="address" 
                             [(ngModel)]="userData.address" [ngClass]="{'is-invalid': f.controls['address']?.invalid && submitted}">
                             <div *ngIf="submitted">
-                                <span *ngIf="f.controls['address']?.invalid || f.controls['address'].pristine && f.controls['address'].touched" style="color: red;">enter valid address</span>
+                                <span *ngIf="f.controls['address']?.invalid || f.controls['address'].pristine && f.controls['address'].touched" class="redFont">enter valid address</span>
                             </div>  
                         </div>
 
@@ -120,11 +118,11 @@
                         </div> 
 
                         <div class="" >
-                            <label >Mobile Number:<span style="color: red;">*</span></label>
+                            <label >Mobile Number:<span class="redFont">*</span></label>
                             <input type="text" class="form-control" placeholder="enter phone number" value="" [pattern]="phoneNumberPattern" [ngClass]="{'is-invalid': f.controls['mobile']?.invalid && submitted}" 
                             [(ngModel)]="userData.mobile" required name="mobile" >
                             <div *ngIf="submitted">
-                                <span *ngIf="f.controls['mobile']?.invalid || f.controls['mobile'].pristine && f.controls['mobile'].touched" style="color: red;">enter valid mobile number</span>
+                                <span *ngIf="f.controls['mobile']?.invalid || f.controls['mobile'].pristine && f.controls['mobile'].touched" class="redFont">enter valid mobile number</span>
                             </div>  
                         </div>
 
@@ -132,13 +130,13 @@
                             <label for="birthdayDate">Birthday:</label>
                             <input type="date" [(ngModel)]="bdayDate" class="form-control" name="birthday" id="birthdayDate" (change)="validateBday()">
                             <div *ngIf="submitted">
-                                <span *ngIf="bdayFail" style="color: red;">DOB year invalid</span>
+                                <span *ngIf="bdayFail" class="redFont">DOB year invalid</span>
                             </div> 
                         </div>
 
                         <div class="radio">
                             <label>
-                                Genders: <span style="color:red">*</span>
+                                Genders: <span class="redFont">*</span>
                             </label>
                             <br>
                             <label class="g">
@@ -151,24 +149,24 @@
                                 Female
                             </label>
                             <div *ngIf="submitted" class="m-0">
-                                <span *ngIf="f.controls['gender']?.pristine" style="color: red;">select a gender</span>
+                                <span *ngIf="f.controls['gender']?.pristine" class="redFont">select a gender</span>
                             </div>     
                         </div>
                         <div>
-                            <label >Email ID: <span style="color: red;">*</span></label>
+                            <label >Email ID: <span class="redFont">*</span></label>
                             <input type="text" class="form-control" maxlength="100" placeholder="enter email id" value="" [(ngModel)]="userData.email"
                             [ngClass]="{'is-invalid': submitted && f.controls['email']?.invalid}" required name="email" [pattern]="emailPattern">
                             <div *ngIf="submitted">
-                                <span *ngIf="f.controls['email']?.invalid" style="color: red;">enter a valid email id</span>
+                                <span *ngIf="f.controls['email']?.invalid" class="redFont">enter a valid email id</span>
                             </div>         
                         </div>  
                         <div>
-                            <label>password:<span style="color: red;">*</span></label>
+                            <label>password:<span class="redFont">*</span></label>
                             <input [ngClass]="{'is-invalid': f.controls['password']?.invalid && submitted}" type="password" class="form-control"
                             placeholder="password" minlength="8" maxlength="20" required [pattern]="passwordPattern"
                             name="password" value="" [(ngModel)]="userData.password">
                             <div *ngIf="submitted">
-                                <span *ngIf="f.controls['password']?.invalid" style="color: red;">enter a valid password</span>
+                                <span *ngIf="f.controls['password']?.invalid" class="redFont">enter a valid password</span>
                             </div>
                             <span *ngIf="f.controls['password']?.invalid && f.controls['password']?.dirty">
                                 <br>
@@ -178,57 +176,43 @@
                             </span>
                         </div>
                         <div>
-                            <label>confirm password:<span style="color: red;">*</span></label>
+                            <label>confirm password:<span class="redFont">*</span></label>
                             <input type="password"  class="form-control" PasswordValidator="password" minlength="8" maxlength="20"  placeholder="confirm password"
                             value="" name="confirmpassword" [ngClass]="{'is-invalid': (f.controls['confirmpassword']?.errors?.['notEqual'] && submitted) || (f.controls['confirmpassword']?.invalid && submitted)}" required
-                                [(ngModel)]="confirmpass">
-                                
-                                <span  *ngIf="f.controls['confirmpassword']?.errors?.['notEqual']" 
-                                style="color:red">password not matching</span>
-                                <!-- <span *ngIf="confirmpassword.touched && confirmpassword.errors?.['empty']" 
-                                style="color:red">invalid field input</span> -->
-                                <div *ngIf="submitted">
+                            [(ngModel)]="confirmpass">
+                            <span  *ngIf="f.controls['confirmpassword']?.errors?.['notEqual']" 
+                                class="redFont">password not matching</span>
+                            <div *ngIf="submitted">
                                     <span *ngIf="f.controls['confirmpassword']?.invalid" 
-                                    style="color:red">invalid field input</span>
-                                </div>
-                                
-                                <!-- <span *ngIf="confirmpassword.errors?.['notEqual'] && confirmpassword.dirty" 
-                                style="color:red"><br>Enter same password before saving</span> -->
-                                <!-- <span *ngIf="confirmpassword.errors?.['regexfail']">
-                                    <br>
-                                    <div class="alert alert-danger"  role="alert">
-                                        password must contain atleast 1 upper and 1 lower case with atleast 1 number (must have minimum 8 characters)
-                                    </div>
-                                </span> -->
+                                    class="redFont">
+                                    invalid field input
+                                </span>
+                            </div>       
                         </div>
                         
                         <div class="">
                             <br>
-                            <label style="margin-right: 10px;">Select Roles:<span style="color: red;">*</span></label>
+                            <label class="mr-2">Select Roles:<span class="redFont">*</span></label>
                             <p-dropdown [options]="roles" [ngClass]="{'is-invalid': f.controls['roles']?.invalid && submitted }"
                              [(ngModel)]="userData.roles" placeholder="Select role" name="roles"  [required]="true"
                              optionValue="code"  optionLabel="name"></p-dropdown>
                                 <div *ngIf="submitted">
-                                    <span *ngIf="f.controls['roles']?.invalid" style="color: red;">Select a role</span>
+                                    <span *ngIf="f.controls['roles']?.invalid" class="redFont">Select a role</span>
                                 </div>
                                      
                         </div> 
                         
                         <div class="dropdown mb-2" >
-                            <label>Status:<span style="color: red;">*</span></label>
+                            <label>Status:<span class="redFont">*</span></label>
                             <select class="form-select" name="status" [ngClass]="{'is-invalid': f.controls['status']?.invalid && submitted}"
-                            [(ngModel)]="userData.status" required  >
-                                
+                            [(ngModel)]="userData.status" required>
                                     <option value="Active" >Active</option>
                                     <option value="Disabled" >Disabled</option>
                             </select>
                             <div *ngIf="submitted">
-                                <span *ngIf="f.controls['status']?.invalid" style="color: red;">Select a status</span>
-                            </div>
-                            
-                        </div>
-                            
-                       
+                                <span *ngIf="f.controls['status']?.invalid" class="redFont">Select a status</span>
+                            </div>   
+                        </div>   
                     </div>   
                 </div>
                 <hr style="width: 95%; margin-left: 35px;">
