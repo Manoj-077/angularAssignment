@@ -3,7 +3,7 @@
 </div>
 <div class="container">                                                  
     <div class="container-fluid rounded bg-white mt-5 mb-5 " class="d1">
-        <form #f="ngForm" (ngSubmit)="onSubmit()" >
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" >
             <div class="row" >
                 <div class="col-sm-6 border-right" >
                     <div class="ml-3 px-3">
@@ -46,13 +46,16 @@
                         <div class="form-outline datepicker w-100">
                             <label for="birthdayDate">Birthday:</label>
                             <input type="date" 
-                            [disabled]="!isEditModeOn" class="form-control" name="birthday" [(ngModel)]="birthday" id="birthdayDate"/>
+                            [disabled]="!isEditModeOn" class="form-control" name="birthday" [(ngModel)]="birthday" id="birthdayDate">
+                            <div *ngIf="submitted">
+                                <span *ngIf="bdayFail" style="color: red;">DOB year invalid</span>
+                            </div>
                         </div>    
                         
                         
                         <div class="">
                             <label >Mobile Number:<span style="color: red;">*</span></label>
-                            <input [disabled]="!isEditModeOn" type="text" disabled class="form-control"
+                            <input disabled type="text" class="form-control"
                             placeholder="enter phone number" value="" [(ngModel)]="mobile" 
                             name="mobile">
                         </div>
@@ -60,7 +63,9 @@
                             <label >Address :<span style="color: red;">*</span></label>
                             <input [disabled]="!isEditModeOn" type="text" class="form-control" maxlength="100" 
                             placeholder="enter address" value="" required name="address"  [(ngModel)]="addres">
-                            <span *ngIf="addresFail" style="color: red;">enter valid address</span>
+                            <div *ngIf="submitted">
+                                <span *ngIf="f.controls['address']?.invalid || f.controls['address'].pristine && f.controls['address'].touched" style="color: red;">enter valid address</span>
+                            </div>  
                         </div>
                     </div>    
                 </div>
@@ -72,8 +77,13 @@
                     <div class="ml-3 px-3">
                         <div class="">
                             <label>zipcode:</label>
-                            <input [disabled]="!isEditModeOn" type="text" class="form-control" maxlength="20" placeholder="zipcode" [(ngModel)]="zipcode"
-                            value="" name="zipcode">  
+                            <input [disabled]="!isEditModeOn" type="text" class="form-control" [pattern]="zipcodePattern"
+                             maxlength="20" placeholder="zipcode" [(ngModel)]="zipcode"
+                            value="" name="zipcode">
+                            <div *ngIf="submitted">
+                                <span *ngIf="f.controls['zipcode'].invalid && submitted"  style="color: red;">
+                                enter valid zipcode</span>
+                            </div>  
                         </div>
                         <div class="row">
                             <div class="col-sm-6 dropdown">
@@ -160,8 +170,10 @@
                         <div>
                             <br>
                             <label>Select Roles: </label>
-                            <p-dropdown [disabled]="!isEditModeOn" [options]="roles" [(ngModel)]="selectedRolesCode" name="roles" placeholder="Select role"   optionValue="code" optionLabel="name" [showClear]="true"></p-dropdown>
-                            <span style="color:red" *ngIf="selectedRolesCodeFail">enter roles</span>
+                            <p-dropdown [disabled]="!isEditModeOn" [options]="roles" [(ngModel)]="selectedRolesCode" name="roles" placeholder="Select role"   optionValue="code" optionLabel="name"></p-dropdown>
+                            <div *ngIf="submitted">
+                                <span *ngIf="f.controls['roles']?.invalid" style="color: red;">Select a role</span>
+                            </div>
                         </div>
                         
                         <div class="dropdown">

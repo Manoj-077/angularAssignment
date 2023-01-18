@@ -5,247 +5,6 @@
     <h1 id="addUser">Add user</h1>
 </div>
 
-<!-- <div class="container" id="dp">
-    <div class="container rounded bg-white mt-5 mb-5" class="d1">
-        <form #f="ngForm" (ngSubmit)="onSubmit()">
-            <div class="row" >
-                <div class="col-md-5 border-right" id="imageSection">
-
-                    <div class="d-flex flex-column align-items-center text-center">
-                        <img class="rounded-circle mt-5" [src]="image" width="150px" height="150px">
-                    
-                       
-                        <label class="form-label" for="customFile">only .jpg and .png images allowed</label>
-                        <input type="file" style="width: 50%;" class="form-control" id="customFile" name="image" 
-                        (change)="onfileselected($event)" 
-                        accept="image/jpg, image/png" #img
-                        />
-                            
-                            
-                        <span *ngIf="nonImage"> 
-                            <br>
-                            <div class="alert alert-danger" style="width: 300px"  role="alert">
-                                Unsupported file
-                            </div> 
-                        </span>     
-                    </div>
-                    
-                    <div class="col-md-12" class="leftFields" id="phnNum">
-                        <label >Mobile Number:<span style="color: red;">*</span></label>
-                        <input type="text" class="form-control" minlength="10" maxlength="10" #mobile="ngModel" 
-                        placeholder="enter phone number" value="" 
-                        [ngClass]="{'is-invalid': phnNumFail}" [(ngModel)]="phnNum" 
-                        required name="mobile" ngModel>
-                        <span *ngIf="phnNumFail" style="color: red;">enter valid mobile number</span>
-                    </div>
-
-                    <div class="col-md-12" class="leftFields">
-                        <label >Address :<span style="color: red;">*</span></label>
-                        <input type="text" class="form-control" maxlength="100" #address="ngModel" 
-                        placeholder="enter address" value="" required name="address" [(ngModel)]="addres"
-                        [ngClass]="{'is-invalid': addresFail}"
-                        ngModel>
-                        <span *ngIf="addresFail" style="color: red;">enter valid address</span>
-                    </div>
-
-                    <div class="col-md-12" class="leftFields">
-                        <label>zipcode:</label>
-                        <input type="text" class="form-control" 
-                        maxlength="20" placeholder="zipcode" value="" name="zipcode"
-                        ngModel>
-                    </div>
-                    
-                        <div class="col-md-6 dropdown" class="leftFields">
-                            <label>Country:</label>
-                            <select placeholder="Country" class="form-select"  (change)="changeCountry($event)" name="country" ngModel>
-                               
-                                <option *ngFor="let country of Countries">{{country.name}}</option>
-                            </select>
-                            
-                        </div>
-                        <div class="col-md-6" class="leftFields">
-                            <label>State/Region:</label>
-                            <select placeholder="State" class="form-select" name="state" ngModel>
-                                <option value="">--Choose State--</option>
-                                <option *ngFor="let state of states">{{state}}</option>
-                            </select>
-                            
-                        </div>
-                
-                    <div class="col-md-12" class="leftFields" >
-                        <label>Timezone:</label>
-                        <select class="form-select" name="timezone" ngModel>
-                          
-                        
-                            <option value="AST" >AST</option>
-                            <option value="EST">EST</option>
-                            <option value="CST">CST</option>
-                            <option value="UTC+10">UTC+10</option>
-                        </select>
-                        
-                    </div>
-
-                </div>
-                <div class="col-md-6 border-right" id="title">
-                    <div class="p-3 py-5">
-                        <div class="d-flex justify-content-between align-items-center mb-3" >
-                            <h2 style="font-family: 'Poppins', sans-serif;">User Details</h2>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <label>UserName<span style="color: red;">*</span></label>
-                                <input type="text" class="form-control" disabled [ngClass]="{'is-invalid': username.invalid && username.touched}"
-                                #username="ngModel" maxlength="20" [placeholder]='user'  
-                                value="" required name="username" ngModel>
-                                
-                                <span *ngIf="username.invalid && username.touched"  style="color: red;">enter valid username</span>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label >First Name:<span style="color: red;">*</span></label>
-                                <input type="text" class="form-control" #firstname="ngModel" placeholder="firstname" 
-                                maxlength="30" value=""
-                                [ngClass]="{'is-invalid': firstnameFail}" 
-                                required name="firstname" [(ngModel)]="fn" (keyup)="validateFirstname()" ngModel>
-                                <span *ngIf="firstnameFail"  style="color: red;">enter valid username</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label>Last name:</label>
-                                <input type="text" class="form-control" #lastname="ngModel" value="" placeholder="lastname" maxlength="30" name="lastname" ngModel>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-outline datepicker w-100 col-md-12">
-                                <label for="birthdayDate">Birthday:</label>
-                                <input type="date" class="form-control" name="birthday" id="birthdayDate" ngModel/>
-                        </div>    
-                        </div>
-                        <div class="row">
-                            
-                            
-                            <div class="col-md-12">
-                                <label>Locales:</label>
-                                <select class="form-select" name="locale" ngModel>
-                                    <option selected></option>
-                                    <option value="us" >en_US</option>
-                                    <option value="india">kn_IN</option>
-                                    <option value="ireland">en_IE</option>
-                                </select>
-                            </div>
-                            
-                            <div class="radio">
-                                <label>
-                                    Genders:
-                                </label>
-                                <br>
-                                <label class="g">
-                                <input type="radio" name="gender" ngModel value="male">
-                                    Male
-                                </label>
-                                
-                                <label class="g">
-                                    <input type="radio" name="gender" ngModel value="female" style="margin-left: 10px;">
-                                    Female
-                                </label>
-                            </div>
-                            <div class="col-md-12">
-                                <label >Email ID: <span style="color: red;">*</span></label>
-                                <input type="text" class="form-control" maxlength="100" 
-                                #email="ngModel" placeholder="enter email id" value="" [(ngModel)]="emailId"
-                                [ngClass]="{'is-invalid': emailFail}"
-                                required name="email" ngModel>
-                                <span *ngIf="emailFail" style="color: red;">enter a valid email id</span>
-                            </div>  
-
-                            <div class="col-md-12">
-                                <label>password:<span style="color: red;">*</span></label>
-                                <input [ngClass]="{'is-invalid': password.invalid && password.touched}"  
-                                [ngClass]="{'is-invalid': passwordregexfail}"
-                                type="text" class="form-control"
-                                placeholder="password" minlength="8" maxlength="20"
-                                required 
-                                #password="ngModel" name="password" value=""
-                                [(ngModel)]="pass"  ngModel  >
-                                <span *ngIf="passwordregexfail">
-                                    <br>
-                                    <div class="alert alert-danger"  role="alert">
-                                        password must contain atleast 1 upper and 1 lower case with atleast 1 number
-                                    </div>
-                                </span>
-                            </div>
-
-                            <div class="col-md-12">
-                                <label>confirm password:<span style="color: red;">*</span></label>
-                                <input type="text" [ngClass]="{'is-invalid': confirmpassword.invalid && confirmpassword.touched}" class="form-control" PasswordValidator="password" minlength="8" maxlength="20"  placeholder="confirm password"
-                                value="" required name="confirmpassword" #confirmpassword = "ngModel"
-                                [ngClass]="{'is-invalid': confirmpassword.errors?.['notEqual'] || confirmpassFail}"
-                                [(ngModel)]="confirmpass"
-                                ngModel>
-                                
-                                <span  *ngIf="confirmpassword.errors?.['notEqual']" 
-                                style="color:red">password not matching</span>
-                                <span *ngIf="confirmpassword.touched && confirmpassword.errors?.['empty']" 
-                                style="color:red">invalid field input</span>
-                                <span *ngIf="confirmpassFail && confirmpassword.pristine" 
-                                style="color:red">Enter same password before saving</span>
-                                <span *ngIf="confirmpassword.errors?.['regexfail']">
-                                    <br>
-                                <div class="alert alert-danger"  role="alert">
-                                    password must contain atleast 1 upper and 1 lower case with atleast 1 number
-                                </div>
-                                </span>
-                            </div>
-        
-                            
-                            <label>Select Roles:<span style="color: red;">*</span></label>
-                            <div class="field-checkbox">
-                                <p-dropdown [options]="roles" [(ngModel)]="selectedRolesCode" placeholder="Select role" name="roles"  optionValue="code" optionLabel="name" [showClear]="true"></p-dropdown>
-                                <div *ngIf="selectedRolesCodeFail">
-                                    <span  style="color: red;">Select a role</span>
-                                </div>
-                                
-                            </div>
-                            
-
-
-
-                            <div class="col-md-12 dropdown">
-                                <label>Status:<span style="color: red;">*</span></label>
-                                <select class="form-select" name="status" [ngClass]="{'is-invalid': selectedStatusFail}"
-                                [(ngModel)]="selectedStatus" #status="ngModel" required ngModel>
-                                
-                                    <option value="available">Available</option>
-                                    <option value="unavailable">Unavailable</option>
-                                </select>
-                                <span *ngIf="selectedStatusFail" style="color: red;">Select a status</span>
-                            </div>
-                            
-                            
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <hr style="width: 95%; margin-left: 35px;">
-                <div id="buttons">
-                    <button class="btn btn-primary btn-lg m-3" type="submit">Save</button>
-                    <button class="btn btn-primary btn-lg" type="button" (click)="onCancel()">Cancel</button>
-                </div>
-            </div>
-            
-        </form>  
-    </div>
-</div>  
- -->
-
-
-
-
-
-
-
 
 
 <div class="container" id="dp">
@@ -261,8 +20,7 @@
                         <div class="d-flex flex-column align-items-center text-center">
                             <img class="rounded-circle mt-5" [src]="image" width="150px" height="150px">
                             <label class="form-label" for="customFile">only .jpg and .png images allowed</label>
-                            <input type="file" style="width: 50%;" class="form-control" id="customFile" name="image" 
-                            (change)="onfileselected($event)" accept="image/jpg, image/png" #img />
+                            <input type="file" style="width: 50%;" class="form-control" id="customFile" name="image" (change)="onfileselected($event)" accept="image/jpg, image/png" #img />
                             <span *ngIf="nonImage"> 
                                 <br>
                                 <div class="alert alert-danger" style="width: 300px"  role="alert">
@@ -271,53 +29,47 @@
                             </span>     
                         </div>
                         
-                        
                         <div class="">
                             <label>UserName<span style="color: red;">*</span></label>
                             <input type="text" class="form-control" disabled [ngClass]="{'is-invalid': username.invalid && username.touched}"
-                            #username="ngModel" maxlength="20" [placeholder]='user'  [(ngModel)]="user"
-                            value="" required name="username" >
+                            #username="ngModel" maxlength="20" [placeholder]='user'  [(ngModel)]="user" value="" required name="username" >
                             <span *ngIf="username.invalid && username.touched"  style="color: red;">enter valid username</span>
                         </div>
 
-                       
                         <div class="row">
                             <div class="col-sm-6">
                                 <label >First Name:<span style="color: red;">*</span></label>
-                                <input type="text" class="form-control" #firstname="ngModel" placeholder="firstname" maxlength="30" value=""
-                                [ngClass]="{'is-invalid': firstname.invalid && submitted}" required name="firstname" [(ngModel)]="userData.firstname" 
-                                (keyup)="validateFirstname()" [pattern]="firstnamePattern">
+                                <input type="text" class="form-control" placeholder="firstname" maxlength="30" [ngClass]="{'is-invalid': f.controls['firstname']?.invalid && submitted}" 
+                                required name="firstname" [(ngModel)]="userData.firstname" [pattern]="firstnamePattern">
                                 <div *ngIf="submitted">
-                                    <span *ngIf="firstname.invalid && submitted"  style="color: red;">
+                                    <span *ngIf="f.controls['firstname'].invalid && submitted"  style="color: red;">
                                     enter valid username</span>
                                 </div>    
                             </div>
 
                             <div class="col-sm-6">
                                 <label>Last name:</label>
-                                <input  [ngClass]="{'is-invalid': lastnameFail}" #lname = "ngModel"  type="text" class="form-control" [(ngModel)]="userData.lastname" value=""
-                                 placeholder="lastname" #lastname="ngModel" [pattern]="lastnamePattern"  maxlength="30" name="lastname" >
+                                <input  [ngClass]="{'is-invalid': f.controls['lastname']?.invalid && lastname.dirty && submitted}"   type="text" class="form-control" [(ngModel)]="userData.lastname" value=""
+                                 placeholder="lastname" [pattern]="lastnamePattern"  maxlength="30" name="lastname" >
                                 <div *ngIf="submitted"> 
-                                    <span *ngIf="lastname.invalid && lastname.dirty && submitted"  style="color: red;">Invalid last name</span>
+                                    <span *ngIf="f.controls['lastname']?.invalid && f.controls['lastname']?.dirty && submitted"  style="color: red;">Invalid last name</span>
                                 </div>
                             </div>
                         </div>
 
   
-                        <div class=""  >
+                        <div>
                             <label>Timezone:</label>
-                            <select class="form-select" name="timezone"
-                            [(ngModel)]="userData.timezone" >
+                            <select class="form-select" name="timezone" [(ngModel)]="userData.timezone" >
                                 <option value="AST" >AST</option>
                                 <option value="EST">EST</option>
                                 <option value="CST">CST</option>
                                 <option value="UTC+10">UTC+10</option>
                             </select>   
                         </div>
-                        <div class="">
+                        <div>
                             <label>Locales:</label>
-                            <select class="form-select" name="locale"
-                            [(ngModel)]="userData.locale" >
+                            <select class="form-select" name="locale" [(ngModel)]="userData.locale" >
                                 <option selected></option>
                                 <option value="us" >en_US</option>
                                 <option value="india">kn_IN</option>
@@ -327,136 +79,116 @@
 
                         <div class="" >
                             <label>zipcode:</label>
-                            <input type="text" class="form-control" 
-                            maxlength="20" placeholder="zipcode" value=""
-                            [(ngModel)]="userData.zipcode" name="zipcode"
-                            >
+                            <input type="text" class="form-control" [pattern]="zipcodePattern" maxlength="20" placeholder="zipcode" 
+                            [(ngModel)]="userData.zipcode" name="zipcode">
+                            <div *ngIf="submitted">
+                                <span *ngIf="f.controls['zipcode'].invalid && submitted"  style="color: red;">
+                                enter valid zipcode</span>
+                            </div>
                         </div>
                     </div>    
                 </div>
+
 
                 <div class="col-sm-6 border-right">
                     <div class="ml-3 px-3">
                         
                         <div class="" >
                             <label >Address :<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" maxlength="100" #address="ngModel"
-                            placeholder="enter address" value="" required name="address" [(ngModel)]="userData.address"
-                            [ngClass]="{'is-invalid': address.invalid && submitted}" (keyup)="validateAddress()"
-                            >
+                            <input type="text" class="form-control" maxlength="100" placeholder="enter address" required name="address" 
+                            [(ngModel)]="userData.address" [ngClass]="{'is-invalid': f.controls['address']?.invalid && submitted}">
                             <div *ngIf="submitted">
-                                <span *ngIf="address.invalid || address.pristine && address.touched" style="color: red;">enter valid address</span>
+                                <span *ngIf="f.controls['address']?.invalid || f.controls['address'].pristine && f.controls['address'].touched" style="color: red;">enter valid address</span>
                             </div>  
                         </div>
 
                         <div class="row">
                             <div class="col-sm-6 dropdown" >
                                 <label>Country:</label>
-                                <select placeholder="Country" class="form-select"  (change)="changeCountry($event)"
-                                [(ngModel)]="userData.country" name="country" >
-                                    <!-- <option>--Choose Country--</option> -->
+                                <select placeholder="Country" class="form-select"  (change)="changeCountry($event)" [(ngModel)]="userData.country"
+                                 name="country" >
                                     <option *ngFor="let country of Countries">{{country.name}}</option>
                                 </select>
-                                <!-- <input type="text" class="form-control" placeholder="country" value=""> -->
                             </div>
                             <div class="col-sm-6" >
                                 <label>State/Region:</label>
-                                <select placeholder="State" class="form-select" name="state"
-                                [(ngModel)]="userData.state" >
+                                <select placeholder="State" class="form-select" name="state" [(ngModel)]="userData.state">
                                     <option value="">--Choose State--</option>
                                     <option *ngFor="let state of states">{{state}}</option>
                                 </select>
-                                <!-- <input type="text" class="form-control" value="" placeholder="state"> -->
                             </div>
                         </div> 
 
                         <div class="" >
                             <label >Mobile Number:<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" #mobile="ngModel" 
-                            placeholder="enter phone number" value="" [pattern]="phoneNumberPattern"
-                            [ngClass]="{'is-invalid': mobile.invalid && submitted}" [(ngModel)]="userData.mobile" 
-                            (keyup)="validatePhnNum()"
-                            required name="mobile" >
+                            <input type="text" class="form-control" placeholder="enter phone number" value="" [pattern]="phoneNumberPattern" [ngClass]="{'is-invalid': f.controls['mobile']?.invalid && submitted}" 
+                            [(ngModel)]="userData.mobile" required name="mobile" >
                             <div *ngIf="submitted">
-                                <span *ngIf="mobile.invalid || mobile.pristine && mobile.touched" style="color: red;">enter valid mobile number</span>
-                            </div>
-                            
+                                <span *ngIf="f.controls['mobile']?.invalid || f.controls['mobile'].pristine && f.controls['mobile'].touched" style="color: red;">enter valid mobile number</span>
+                            </div>  
                         </div>
 
                         <div class="form-outline datepicker w-100 ">
                             <label for="birthdayDate">Birthday:</label>
-                            <input type="date" [(ngModel)]="bdayDate" class="form-control"
-                             name="birthday" id="birthdayDate" />
+                            <input type="date" [(ngModel)]="bdayDate" class="form-control" name="birthday" id="birthdayDate" (change)="validateBday()">
                             <div *ngIf="submitted">
                                 <span *ngIf="bdayFail" style="color: red;">DOB year invalid</span>
                             </div> 
-                            
-                        </div>    
+                        </div>
+
                         <div class="radio">
-                                <label>
-                                    Genders: <span style="color:red">*</span>
-                                </label>
-                                <br>
-                                <label class="g">
-                                <input type="radio" name="gender" [(ngModel)]="userData.gender" required  value="male">
-                                    Male
-                                </label>
+                            <label>
+                                Genders: <span style="color:red">*</span>
+                            </label>
+                            <br>
+                            <label class="g">
+                            <input type="radio" name="gender" [(ngModel)]="userData.gender" required  value="male">
+                                Male
+                            </label>
                                 
-                                <label class="g">
-                                    <input type="radio" name="gender" [(ngModel)]="userData.gender" required value="female" style="margin-left: 10px;">
-                                    Female
-                                </label>
-                                <div *ngIf="submitted" class="m-0">
-                                    <span *ngIf="f.controls['gender']?.pristine" style="color: red;">select a gender</span>
-                                </div>
-                                
-                                
+                            <label class="g">
+                                <input type="radio" name="gender" [(ngModel)]="userData.gender" required value="female" style="margin-left: 10px;">
+                                Female
+                            </label>
+                            <div *ngIf="submitted" class="m-0">
+                                <span *ngIf="f.controls['gender']?.pristine" style="color: red;">select a gender</span>
+                            </div>     
                         </div>
-                        <div class="">
-                                <label >Email ID: <span style="color: red;">*</span></label>
-                                <input type="text" class="form-control" maxlength="100" 
-                                #email="ngModel" placeholder="enter email id" value="" [(ngModel)]="userData.email"
-                                [ngClass]="{'is-invalid': submitted && email.invalid}" (keyup)="validateEmail()"
-                                required name="email" [pattern]="emailPattern">
-                                <div *ngIf="submitted">
-                                    <span *ngIf="email.invalid" style="color: red;">enter a valid email id</span>
-                                </div>
-                                
+                        <div>
+                            <label >Email ID: <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" maxlength="100" placeholder="enter email id" value="" [(ngModel)]="userData.email"
+                            [ngClass]="{'is-invalid': submitted && f.controls['email']?.invalid}" required name="email" [pattern]="emailPattern">
+                            <div *ngIf="submitted">
+                                <span *ngIf="f.controls['email']?.invalid" style="color: red;">enter a valid email id</span>
+                            </div>         
                         </div>  
-                        <div class="">
-                                <label>password:<span style="color: red;">*</span></label>
-                                <input [ngClass]="{'is-invalid': password.invalid && submitted}"  
-                                [ngClass]="{'is-invalid': passwordregexfail}"
-                                type="password" class="form-control"
-                                placeholder="password" minlength="8" maxlength="20"
-                                required [pattern]="passwordPattern"
-                                #password="ngModel" name="password" value="" 
-                                [(ngModel)]="userData.password">
-                                <div *ngIf="submitted">
-                                    
-                                    <span *ngIf="password.invalid" style="color: red;">enter a valid password</span>
+                        <div>
+                            <label>password:<span style="color: red;">*</span></label>
+                            <input [ngClass]="{'is-invalid': f.controls['password']?.invalid && submitted}" type="password" class="form-control"
+                            placeholder="password" minlength="8" maxlength="20" required [pattern]="passwordPattern"
+                            name="password" value="" [(ngModel)]="userData.password">
+                            <div *ngIf="submitted">
+                                <span *ngIf="f.controls['password']?.invalid" style="color: red;">enter a valid password</span>
+                            </div>
+                            <span *ngIf="f.controls['password']?.invalid && f.controls['password']?.dirty">
+                                <br>
+                                <div class="alert alert-danger"  role="alert">
+                                    password must contain atleast 1 upper and 1 lower case with atleast 1 number (must have minimum 8 characters)
                                 </div>
-                                <span *ngIf="password.invalid && password.dirty">
-                                    <br>
-                                    <div class="alert alert-danger"  role="alert">
-                                        password must contain atleast 1 upper and 1 lower case with atleast 1 number (must have minimum 8 characters)
-                                    </div>
-                                </span>
-                                
+                            </span>
                         </div>
-                        <div class="">
-                                <label>confirm password:<span style="color: red;">*</span></label>
-                                <input type="password"  class="form-control" PasswordValidator="password" minlength="8" maxlength="20"  placeholder="confirm password"
-                                value="" name="confirmpassword" #confirmpassword = "ngModel" 
-                                [ngClass]="{'is-invalid': (confirmpassword.errors?.['notEqual'] && submitted) || (confirmpassword.invalid && submitted)}" required
+                        <div>
+                            <label>confirm password:<span style="color: red;">*</span></label>
+                            <input type="password"  class="form-control" PasswordValidator="password" minlength="8" maxlength="20"  placeholder="confirm password"
+                            value="" name="confirmpassword" [ngClass]="{'is-invalid': (f.controls['confirmpassword']?.errors?.['notEqual'] && submitted) || (f.controls['confirmpassword']?.invalid && submitted)}" required
                                 [(ngModel)]="confirmpass">
                                 
-                                <span  *ngIf="confirmpassword.errors?.['notEqual']" 
+                                <span  *ngIf="f.controls['confirmpassword']?.errors?.['notEqual']" 
                                 style="color:red">password not matching</span>
                                 <!-- <span *ngIf="confirmpassword.touched && confirmpassword.errors?.['empty']" 
                                 style="color:red">invalid field input</span> -->
                                 <div *ngIf="submitted">
-                                    <span *ngIf="confirmpassword.invalid" 
+                                    <span *ngIf="f.controls['confirmpassword']?.invalid" 
                                     style="color:red">invalid field input</span>
                                 </div>
                                 
@@ -473,25 +205,25 @@
                         <div class="">
                             <br>
                             <label style="margin-right: 10px;">Select Roles:<span style="color: red;">*</span></label>
-                            <p-dropdown [options]="roles" [ngClass]="{'is-invalid': rles.invalid && submitted }"
+                            <p-dropdown [options]="roles" [ngClass]="{'is-invalid': f.controls['roles']?.invalid && submitted }"
                              [(ngModel)]="userData.roles" placeholder="Select role" name="roles"  [required]="true"
-                             optionValue="code" #rles="ngModel" (onChange)="validateRoles()" optionLabel="name" [showClear]="true"></p-dropdown>
+                             optionValue="code"  optionLabel="name"></p-dropdown>
                                 <div *ngIf="submitted">
-                                    <span *ngIf="rles.invalid" style="color: red;">Select a role</span>
+                                    <span *ngIf="f.controls['roles']?.invalid" style="color: red;">Select a role</span>
                                 </div>
                                      
                         </div> 
                         
                         <div class="dropdown mb-2" >
                             <label>Status:<span style="color: red;">*</span></label>
-                            <select class="form-select" name="status" [ngClass]="{'is-invalid': status.invalid && submitted}"
-                            [(ngModel)]="userData.status" required (change)="validateStatus()" #status="ngModel" >
+                            <select class="form-select" name="status" [ngClass]="{'is-invalid': f.controls['status']?.invalid && submitted}"
+                            [(ngModel)]="userData.status" required  >
                                 
                                     <option value="Active" >Active</option>
                                     <option value="Disabled" >Disabled</option>
                             </select>
                             <div *ngIf="submitted">
-                                <span *ngIf="status.invalid" style="color: red;">Select a status</span>
+                                <span *ngIf="f.controls['status']?.invalid" style="color: red;">Select a status</span>
                             </div>
                             
                         </div>

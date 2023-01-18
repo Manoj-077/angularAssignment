@@ -134,6 +134,7 @@
   <a class="navItem" routerLink="/main/roles" [ngStyle]="{'display': this.role === 'ITOuser' ? 'none': 'content'}" routerLinkActive = "act">Roles</a>
   <!-- <a href="#about">About</a> -->
   <div style="text-align: right;">
-    <p id="dateTime" >{{d | datepipe}}</p>
+    <!-- <p id="dateTime" >{{d | datepipe}}</p> -->
+    <p id="dateTime" >{{inbuiltDate| date:'dd'}}-{{inbuiltDate|date:'LLL'}}-{{inbuiltDate| date:'yyyy'}} {{inbuiltDate| date:'h'}}:{{inbuiltDate| date:'mm'}}{{inbuiltDate| date:'aaa'}}</p>
   </div>
 </div>

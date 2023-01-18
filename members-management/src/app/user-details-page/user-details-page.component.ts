@@ -21,12 +21,6 @@ interface Roles {
 })
 export class UserDetailsPageComponent implements OnInit {
 
-  // @ViewChild('f') form : NgForm;
-  
-  // @ViewChild('username') usrname : ElementRef;
-  // @ViewChild('confirmPass') confirmpassword: ElementRef;
-  // @ViewChild('confirmpassword') cnfrmPass : NgForm;
-  // @ViewChild('lname') lastnameRef : NgForm;
 
   @ViewChild('img') inputImage : ElementRef;
   gnder : any ="";
@@ -40,22 +34,22 @@ export class UserDetailsPageComponent implements OnInit {
   createdTime : Date = new Date()
   roles: Roles[];
   selectedRolesCode: any = "";
-  selectedRolesCodeFail : any = false;
+ 
   fn : any = ""
-  firstnameFail : any = false;
+ 
   emailId : any = "";
-  emailFail : any = false;
+ 
   phnNum : any = "";
-  phnNumFail : any = false;
+
   addres:any=""
-  addresFail:any= false;
+
   selectedStatus : any = "";
-  selectedStatusFail : any = false;
+
   confirmpass : any = "";
-  confirmpassFail : any = false;
+  
   lastname : any = "";
-  lastnameFail:any = "";
-  genderFail : any = false;
+ 
+  
   bdayDate : any = "";
   bdayFail:any = false;
   timezone : any;
@@ -64,6 +58,12 @@ export class UserDetailsPageComponent implements OnInit {
   cntry : any;
   state : any;
   submitted : any = false;
+  zipcodePattern : any = "^[0-9]+$";
+  phoneNumberPattern: any = '^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$';
+  lastnamePattern: any = '^[a-zA-Z\s]+$';
+  firstnamePattern : any = '^[a-zA-Z\s]+$';
+  emailPattern : any = '^[a-z0-9]+@[a-z]+\.com$';
+  passwordPattern : any = '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$';
   // ig:any;
   constructor(private title: Title, private http:HttpClient, private router : Router, private userService: UserService,
     private autoLogoutService: AutoLogoutService, private bnIdle:BnNgIdleService) {
@@ -95,108 +95,6 @@ export class UserDetailsPageComponent implements OnInit {
     )
   }
   
-  phoneNumberPattern: any = '^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$';
-  validatePhnNum(){
-    const expression = new RegExp('^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$');
-    if(this.phnNum.match(expression)){
-      this.phnNumFail = false
-    }
-    else{
-      this.phnNumFail = true;
-    }
-  }
-  
-  firstnamePattern : any = '^[a-zA-Z\s]+$';
-  validateFirstname(){
-    const expression = new RegExp('^[a-zA-Z\s]+$');
-    if(this.fn.match(expression)){
-        this.firstnameFail = false
-    }
-    else{
-      this.firstnameFail = true;
-    }
-  }
-
-  lastnamePattern: any = '^[a-zA-Z\s]+$';
-  validateLastname(){
-    const expression = new RegExp('^[a-zA-Z\s]+$');
-    if(this.lastname.length>0 && !this.lastname.match(expression)){
-      this.lastnameFail = true;
-    }
-    else if(this.lastname.match(expression)){
-      this.lastnameFail = false;
-    }
-  }
-
-  
-  validateAddress(){
-    if(this.addres.length < 1){
-      this.addresFail = true;
-    }
-    else{
-      this.addresFail = false;
-    }
-  }
-
-
-  validateStatus(){
-    if(this.selectedStatus.length === 0){
-      this.selectedStatusFail = true;
-    }
-    else{
-      this.selectedStatusFail = false;
-    }
-  }
-
-  emailPattern : any = '^[a-z0-9]+@[a-z]+\.com$';
-  validateEmail(){
-    const expression = new RegExp('^[a-z0-9]+@[a-z]+\.com$');
-    if(this.emailId.match(expression)){
-        this.emailFail = false
-    }
-    else{
-      this.emailFail = true;
-    }
-  }
-  
-  validateGender(){
-    if(this.gnder ===""){
-        this.genderFail = true;
-    }
-    else{
-      this.genderFail = false;
-    }
-  }
-
-
-  validateRoles(){
-    if(!this.selectedRolesCode){
-        this.selectedRolesCodeFail = true;
-    }
-    else{
-      this.selectedRolesCodeFail = false;
-    }
-  }
-
-  passwordPattern : any = '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$';
-  validatepassword(){
-    const expression = new RegExp('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$');
-    if(this.pass.match(expression)){
-      this.passwordregexfail = false
-    }
-    else{
-      this.passwordregexfail = true;
-    }
-  }
-
-  // validateConfirmPassword(){
-  //   if(this.cnfrmPass.errors?.['empty'] || this.cnfrmPass.errors?.['notEqual']){
-  //     this.confirmpassFail = true;
-  //   }
-  //   else{
-  //     this.confirmpassFail = false;
-  //   }
-  // }
 
   validateBday(){
     const thisYear = new Date();
@@ -250,16 +148,7 @@ export class UserDetailsPageComponent implements OnInit {
   }
 
   onSubmit(f:NgForm){
-      // this.validatePhnNum();
-      // this.validateFirstname();
-      // this.validateAddress();
-      // this.validateStatus();
-      // this.validateEmail();
-      // this.validatepassword();
-      // this.validateRoles();
-      // this.validateConfirmPassword();
-      // this.validateLastname();
-      // this.validateGender()
+     console.log(f)
       this.validateBday();
       this.submitted = true;
       if(!this.bdayFail && f.valid){
@@ -274,42 +163,6 @@ export class UserDetailsPageComponent implements OnInit {
         },2000)
       }
 
-      // if(!this.phnNumFail && !this.firstnameFail && !this.addresFail && !this.selectedStatusFail && !this.emailFail && !this.passwordregexfail && !this.selectedRolesCodeFail 
-      //   && !this.confirmpassFail && !this.lastnameFail && !this.genderFail && !this.bdayFail){
-      //   this.userData.username = this.user;
-      //   this.userData.firstname = this.fn;
-      //   this.userData.lastname = this.lastname;
-      //   this.userData.email = this.emailId;
-      //   this.userData.country = this.cntry;
-      //   this.userData.state = this.state;
-      //   this.userData.mobile = this.phnNum;
-      //   this.userData.status = this.selectedStatus;
-      //   this.userData.birthday = this.bdayDate;
-      //   this.userData.address = this.addres;
-      //   this.userData.zipcode = this.zipcode;
-      //   this.userData.timezone = this.timezone;
-      //   this.userData.locale = this.locale;
-      //   this.userData.gender = this.gnder;
-      //   this.userData.roles = this.selectedRolesCode;
-      //   console.log(this.selectedRolesCode)
-      //   this.userData.image = this.image;
-      //   this.userData.password = this.confirmpass;
-      //   this.userData.description = this.description;
-      //   this.userData.createdTime = this.createdTime.toString();
-      //   console.log(this.userData)
-      //   this.userService.userCreated.next(true)
-      //   this.userService.addUser(this.userData).subscribe((data)=>{})
-      //   // this.http.post("http://localhost:3000/users",this.tdata).subscribe(data=>{})
-        
-      //   this.router.navigate(['main/userList'])
-      //   setTimeout(()=>{
-      //     this.userService.userCreated.next(true);
-      //   },2000)
-      //   console.log(this.form.errors)
-      // }
-      // else{
-          
-      // }
       
       
   }

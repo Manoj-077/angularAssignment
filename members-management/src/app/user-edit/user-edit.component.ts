@@ -54,6 +54,7 @@ export class UserEditComponent {
   confirmPassword : any;
   status : any;
   bdayFail : any = false;
+  zipcodePattern : any = "^[0-9]+$";
   constructor(private http: HttpClient, private router:Router, private autoLogoutService: AutoLogoutService,
     private bnIdle:BnNgIdleService, private userService : UserService){
       this.roles = [
@@ -220,34 +221,63 @@ export class UserEditComponent {
       }
     }
   }
+  submitted : any = false;
+  onSubmit(f:NgForm){
+    this.validateBday()
+    this.submitted = true;
+    if(!this.bdayFail && f.valid){
+      this.detailsObj.address = this.addres;
+      this.detailsObj.zipcode = this.zipcode;
+      this.detailsObj.country = this.cntry;
+      this.detailsObj.state = this.state;
+      this.detailsObj.timezone = this.timezone;
+      this.detailsObj.locale = this.locale;
+      this.detailsObj.roles = this.selectedRolesCode;
+      this.detailsObj.status = this.status;
+      this.detailsObj.birthday = this.birthday;
+      if(!this.newImage){
+        this.detailsObj.image = this.image
+      }
+      else{
+        this.detailsObj.image = this.newImage;
+      }
+      
+      this.editedDetails = this.detailsObj;
+      this.isEditModeOn = false;
+      this.userService.editUser(this.userId,this.editedDetails).subscribe((data)=>{
+        this.router.navigate(['main/userList'])
+      })
+    }
 
-  onSubmit(){
-    this.validateAddress();
-    this.validateRoles()
-    if(!this.addresFail && !this.selectedRolesCodeFail && !this.bdayFail){
-    this.detailsObj.address = this.addres;
-    this.detailsObj.zipcode = this.zipcode;
-    this.detailsObj.country = this.cntry;
-    this.detailsObj.state = this.state;
-    this.detailsObj.timezone = this.timezone;
-    this.detailsObj.locale = this.locale;
-    this.detailsObj.roles = this.selectedRolesCode;
-    this.detailsObj.status = this.status;
-    this.detailsObj.birthday = this.birthday;
-    if(!this.newImage){
-      this.detailsObj.image = this.image
-    }
-    else{
-      this.detailsObj.image = this.newImage;
-    }
+
+
+
+  //   this.validateAddress();
+  //   this.validateRoles()
+  //   if(!this.addresFail && !this.selectedRolesCodeFail && !this.bdayFail){
+  //   this.detailsObj.address = this.addres;
+  //   this.detailsObj.zipcode = this.zipcode;
+  //   this.detailsObj.country = this.cntry;
+  //   this.detailsObj.state = this.state;
+  //   this.detailsObj.timezone = this.timezone;
+  //   this.detailsObj.locale = this.locale;
+  //   this.detailsObj.roles = this.selectedRolesCode;
+  //   this.detailsObj.status = this.status;
+  //   this.detailsObj.birthday = this.birthday;
+  //   if(!this.newImage){
+  //     this.detailsObj.image = this.image
+  //   }
+  //   else{
+  //     this.detailsObj.image = this.newImage;
+  //   }
     
-    this.editedDetails = this.detailsObj;
-    this.isEditModeOn = false;
-    this.userService.editUser(this.userId,this.editedDetails).subscribe((data)=>{
-      this.router.navigate(['main/userList'])
-    })
+  //   this.editedDetails = this.detailsObj;
+  //   this.isEditModeOn = false;
+  //   this.userService.editUser(this.userId,this.editedDetails).subscribe((data)=>{
+  //     this.router.navigate(['main/userList'])
+  //   })
     
-  }
+  // }
 
   }
 

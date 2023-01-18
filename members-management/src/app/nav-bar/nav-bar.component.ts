@@ -25,11 +25,12 @@ export class NavBarComponent  {
     private http: HttpClient){
     
   }
+  inbuiltDate : Date; 
   ngOnInit(){
     console.log(this.ITOuser)
     this.username = localStorage.getItem('username');
     this.timeUpdate();
-
+    // this.inbuiltDate = new Date();
     this.userService.getUsers().subscribe((data)=>{
       this.userData = data;
       for (let i=0;i<this.userData.length;i++){
@@ -70,13 +71,19 @@ export class NavBarComponent  {
   dis(){
     console.log(this.checked)
   }
-  
   timeUpdate(){
     setInterval(()=>{
-      this.date = new Date();
-      this.d = this.date.toString();
+      this.inbuiltDate = new Date();
+      // this.d = this.date.toString();
     },1000)
   }
+  
+  // timeUpdate(){
+  //   setInterval(()=>{
+  //     this.date = new Date();
+  //     this.d = this.date.toString();
+  //   },1000)
+  // }
  logout(){
   this.userService.logDelete();
   this.authService.logout();

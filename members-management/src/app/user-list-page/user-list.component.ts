@@ -148,7 +148,7 @@ export class UserListComponent implements OnInit {
   }
 
   fieldCannotBeEmpty(){
-  this.messageService.add({severity:'warn', summary: 'Input Field Cannot be empty', detail: 'Input Username Field'});
+  this.messageService.add({severity:'warn', summary: 'Invalid', detail: 'Input Username Field'});
   }
 
   openPop(){
