@@ -30,7 +30,7 @@ export class NavBarComponent  {
     console.log(this.ITOuser)
     this.username = localStorage.getItem('username');
     this.timeUpdate();
-    // this.inbuiltDate = new Date();
+  
     this.userService.getUsers().subscribe((data)=>{
       this.userData = data;
       for (let i=0;i<this.userData.length;i++){
@@ -43,29 +43,11 @@ export class NavBarComponent  {
         }
       }
     })
-    
-    // this.http.get("http://localhost:3000/users").subscribe((data)=>{
-    //   this.userData = data;
-    //   for (let i=0;i<this.userData.length;i++){
-    //     if(this.username === this.userData[i].username){
-    //       this.userData = this.userData[i];
-    //       this.userLogo = this.userData.image;
-    //       this.firstname = this.userData.firstname;
-    //       this.lastname = this.userData.lastname;
-
-    //     }
-    //   }
-    // })
-    
-    // if(this.role === 'ITOuser'){
-    //   this.ITOuser = true;
-    //   console.log(this.ITOuser)
-    // }
     setTimeout(()=>{
       this.role = localStorage.getItem('roles');
       this.role = JSON.parse(this.role)
       console.log(this.role)
-      this.router.navigate(['main/home'])
+      // this.router.navigate(['main/home'])
     },100)
   }
   dis(){
@@ -74,16 +56,9 @@ export class NavBarComponent  {
   timeUpdate(){
     setInterval(()=>{
       this.inbuiltDate = new Date();
-      // this.d = this.date.toString();
     },1000)
   }
   
-  // timeUpdate(){
-  //   setInterval(()=>{
-  //     this.date = new Date();
-  //     this.d = this.date.toString();
-  //   },1000)
-  // }
  logout(){
   this.userService.logDelete();
   this.authService.logout();

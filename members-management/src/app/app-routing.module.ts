@@ -2,6 +2,7 @@ import { compileClassMetadata } from '@angular/compiler';
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './gaurd/auth.guard';
+import { AdminGuard } from './gaurd/admin.guard';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginComponent } from './login-page/login.component';
 import { MainComponent } from './main-page/main.component';
@@ -23,10 +24,10 @@ const routes: Routes = [
    children: [
     {path:"home",component: HomePageComponent},
     {path: "userList", component : UserListComponent},
-    {path:"userDetails", component: UserDetailsPageComponent},
-    {path:"userEdit",component: UserEditComponent},
+    {path:"userDetails", component: UserDetailsPageComponent , canActivate:[AdminGuard]} ,
+    {path:"userEdit",component: UserEditComponent,  canActivate:[AdminGuard]},
     {path:"userProfile",component: ProfilePageComponent},
-    {path : "roles", component : RolesComponent}
+    {path : "roles", component : RolesComponent,canActivate:[AdminGuard]}
   ]},
    {path: "**", component: PageNotFoundComponent}
   

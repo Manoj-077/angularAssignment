@@ -67,10 +67,10 @@ export class UserDetailsPageComponent implements OnInit {
   // ig:any;
   constructor(private title: Title, private http:HttpClient, private router : Router, private userService: UserService,
     private autoLogoutService: AutoLogoutService, private bnIdle:BnNgIdleService) {
-    this.roles = [
-      {name: 'Admin', code: 'Admin'},
-      {name: 'ITOuser', code: 'ITOuser'},
-        ];
+    // this.roles = [
+    //   {name: 'Admin', code: 'Admin'},
+    //   {name: 'ITOuser', code: 'ITOuser'},
+    //     ];
   }
 
   x = this.autoLogoutService.logoutTime;

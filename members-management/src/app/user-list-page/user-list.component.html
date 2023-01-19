@@ -43,7 +43,7 @@
     <div class="col-12">
       <p-table  [value]="fetchedData" [style]="{'padding': '0 10px 0 10px'}"  #dt2 styleClass="p-datatable-striped" [paginator]="isPaginate"  [tableStyle]="{'min-width': '50rem'}" 
       [rows]="rows" [showCurrentPageReport]="true" [(first)]="first"
-      [globalFilterFields]="['username','firstname','lastname','email','status','age','createdate']">  
+      [globalFilterFields]="['username','firstname','lastname','email','status','birthday','createdTime']">  
         <ng-template pTemplate="header"  >
             <tr>
                 <th pSortableColumn="username" style="width:15%">Username<p-sortIcon field="username"></p-sortIcon></th>
@@ -51,8 +51,8 @@
                 <th pSortableColumn="lastname" style="width:15%">Last name<p-sortIcon field="lastname"></p-sortIcon></th>
                 <th pSortableColumn="email" style="width:15%">Email id<p-sortIcon field="email"></p-sortIcon></th>
                 <th pSortableColumn="status" style="width:15%">status<p-sortIcon field="status"></p-sortIcon></th>
-                <th pSortableColumn="age" style="width:15%">Age</th>
-                <th pSortableColumn="createdate" style="width:15%">Created Date</th>
+                <th pSortableColumn="birthday" style="width:15%">Age<p-sortIcon field="birthday"></p-sortIcon></th>
+                <th pSortableColumn="createdTime" style="width:15%">Created Date<p-sortIcon field="createdTime"></p-sortIcon></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -72,8 +72,12 @@
               <th>
                 <p-columnFilter type="text" field="status"></p-columnFilter>
               </th>
-              <th></th>
-              <th></th>
+              <th>
+                
+              </th>
+              <th>
+                
+              </th>
               <th></th>
               <th></th>
           </tr>

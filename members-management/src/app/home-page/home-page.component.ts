@@ -4,7 +4,7 @@ import { AutoLogoutService } from '../services/auto-logout.service';
 import { AuthService } from '../gaurd/auth.service';
 import { Router } from '@angular/router';
 import { BnNgIdleService } from 'bn-ng-idle';
-import { DarkModeService } from 'angular-dark-mode';
+
 import { UserService } from '../services/user.service';
 
 
@@ -26,7 +26,7 @@ export class HomePageComponent {
   counts:any = {}
   constructor(private http:HttpClient, private autoLogoutService : AutoLogoutService,
     private authService : AuthService, private router:Router, private bnIdle: BnNgIdleService,
-    private darkModeService: DarkModeService, private userService: UserService){
+     private userService: UserService){
 
   }
   x = this.autoLogoutService.logoutTime;
@@ -103,11 +103,7 @@ export class HomePageComponent {
   //  })
   }
 
-  autologout(){
-    
-    //  
-    // this.autoLogoutService.logout()
-  }
+
   ngOnDestroy(){
     this.bnIdle.stopTimer();
     console.log('destroyed home c')

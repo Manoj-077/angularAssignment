@@ -35,7 +35,7 @@ export class UserEditComponent {
   selectedRole : any = "";
   addres:any=""
   addresFail:any= false;
-  
+  userRole : any;
   isEditModeOn : any = false;
 
   
@@ -132,9 +132,10 @@ export class UserEditComponent {
       this.password = this.detailsObj.password;
       this.confirmPassword = this.detailsObj.password
       this.status = this.detailsObj.status;
-      this.selectedRolesCode = this.selectedRolesCode[0].name;
+      this.selectedRolesCode = this.selectedRolesCode;
       this.userId = this.detailsObj.id;
-      this.image = this.detailsObj.image
+      this.image = this.detailsObj.image;
+      this.userRole = this.detailsObj.roles;
     })
 
    
@@ -194,7 +195,7 @@ export class UserEditComponent {
       this.detailsObj.state = this.state;
       this.detailsObj.timezone = this.timezone;
       this.detailsObj.locale = this.locale;
-      this.detailsObj.roles = this.selectedRolesCode;
+      this.detailsObj.roles = this.userRole;
       this.detailsObj.status = this.status;
       this.detailsObj.birthday = this.birthday;
       if(!this.newImage){

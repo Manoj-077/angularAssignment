@@ -31,13 +31,13 @@
                             <input [(ngModel)]="username" type="text" disabled class="form-control"  name="username">
                         </div>
                         
-                        <div class="row">
-                            <div class="col-sm-6">
+                        <div class="row m-0">
+                            <div class="col-sm-6 pl-0 pr-1">
                                 <label >First Name:<span class="redFont">*</span></label>
                                 <input type="text" [(ngModel)]="firstname" disabled class="form-control"  placeholder="firstname" 
                                 maxlength="30"  name="firstname">
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 p-0">
                                 <label>Last name:</label>
                                 <input type="text" [(ngModel)]="lastname" disabled class="form-control"  placeholder="" maxlength="30" name="lastname">
                             </div>
@@ -85,8 +85,8 @@
                                 enter valid zipcode</span>
                             </div>  
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6 dropdown">
+                        <div class="row m-0">
+                            <div class="col-sm-6 pl-0 pr-1 dropdown">
                                 <label>Country:</label>
                                 <select [(ngModel)]="cntry" [disabled]="!isEditModeOn" placeholder="Country"
                                  class="form-select" (change)="changeCountry($event)" name="country">
@@ -95,7 +95,7 @@
                                 </select>
                                         
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 p-0">
                                 <label>State/Region:</label>
                                 <select [disabled]="!isEditModeOn" placeholder="State" [(ngModel)]="state" class="form-select" name="state">
                                     <option >--Choose State--</option>
@@ -168,11 +168,16 @@
                         </div>
                         
                         <div>
-                            <br>
-                            <label>Select Roles: </label>
-                            <p-dropdown [disabled]="!isEditModeOn" [options]="roles" [(ngModel)]="selectedRolesCode" name="roles" placeholder="Select role"   optionValue="code" optionLabel="name"></p-dropdown>
+                            
+                            <label>Select Roles:<span class="redFont">*</span> </label>
+                            <!-- <p-dropdown [disabled]="!isEditModeOn" [options]="roles" [(ngModel)]="selectedRolesCode" name="roles" placeholder="Select role"   optionValue="code" optionLabel="name"></p-dropdown> -->
+                            <select [disabled]="!isEditModeOn"
+                            [(ngModel)]="userRole" class="form-select" name="roles">
+                                <option value="Admin">Admin</option>
+                                <option value="ITOuser">ITOuser</option>
+                            </select>
                             <div *ngIf="submitted">
-                                <span *ngIf="f.controls['roles']?.invalid" class="redFont">Select a role</span>
+                                <span *ngIf="f.controls['roles']?.invalid" class="redFont">Select a roles</span>
                             </div>
                         </div>
                         

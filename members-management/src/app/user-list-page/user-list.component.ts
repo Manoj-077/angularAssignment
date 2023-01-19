@@ -11,6 +11,7 @@ import {MessageService} from 'primeng/api';
 import {DropdownModule} from 'primeng/dropdown';
 import { AutoLogoutService } from '../services/auto-logout.service';
 import { BnNgIdleService } from 'bn-ng-idle';
+import { SortEvent } from 'primeng/api';
 
 interface Page {
   name: string;
@@ -85,6 +86,7 @@ export class UserListComponent implements OnInit {
         this.isPaginate = false;
       }
     });
+ 
   }
 
   addSingle() {
@@ -199,6 +201,8 @@ export class UserListComponent implements OnInit {
     this.userService.editMode.next(true);
 }
   
+
+
 
   displayModal: boolean;
 

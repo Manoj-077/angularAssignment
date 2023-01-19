@@ -34,8 +34,8 @@
                             <span *ngIf="username.invalid && username.touched" class="redFont">enter valid username</span>
                         </div>
 
-                        <div class="row">
-                            <div class="col-sm-6">
+                        <div class="row m-0">
+                            <div class="col-sm-6 pl-0 pr-1">
                                 <label >First Name:<span class="redFont">*</span></label>
                                 <input type="text" class="form-control" placeholder="firstname" maxlength="30" [ngClass]="{'is-invalid': f.controls['firstname']?.invalid && submitted}" 
                                 required name="firstname" [(ngModel)]="userData.firstname" [pattern]="firstnamePattern">
@@ -45,7 +45,7 @@
                                 </div>    
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 p-0">
                                 <label>Last name:</label>
                                 <input  [ngClass]="{'is-invalid': f.controls['lastname']?.invalid && lastname.dirty && submitted}"   type="text" class="form-control" [(ngModel)]="userData.lastname" value=""
                                  placeholder="lastname" [pattern]="lastnamePattern"  maxlength="30" name="lastname" >
@@ -100,15 +100,15 @@
                             </div>  
                         </div>
 
-                        <div class="row">
-                            <div class="col-sm-6 dropdown" >
+                        <div class="row m-0">
+                            <div class="col-sm-6 dropdown pl-0 pr-1" >
                                 <label>Country:</label>
                                 <select placeholder="Country" class="form-select"  (change)="changeCountry($event)" [(ngModel)]="userData.country"
                                  name="country" >
                                     <option *ngFor="let country of Countries">{{country.name}}</option>
                                 </select>
                             </div>
-                            <div class="col-sm-6" >
+                            <div class="col-sm-6 p-0" >
                                 <label>State/Region:</label>
                                 <select placeholder="State" class="form-select" name="state" [(ngModel)]="userData.state">
                                     <option value="">--Choose State--</option>
@@ -191,11 +191,15 @@
                         </div>
                         
                         <div class="">
-                            <br>
+                            
                             <label class="mr-2">Select Roles:<span class="redFont">*</span></label>
-                            <p-dropdown [options]="roles" [ngClass]="{'is-invalid': f.controls['roles']?.invalid && submitted }"
+                            <!-- <p-dropdown [options]="roles" [ngClass]="{'is-invalid': f.controls['roles']?.invalid && submitted }"
                              [(ngModel)]="userData.roles" placeholder="Select role" name="roles"  [required]="true"
-                             optionValue="code"  optionLabel="name"></p-dropdown>
+                             optionValue="code"  optionLabel="name"></p-dropdown> -->
+                             <select [(ngModel)]="userData.roles" [ngClass]="{'is-invalid': f.controls['roles']?.invalid && submitted}"  required class="form-select" name="roles">
+                                <option value="Admin">Admin</option>
+                                <option value="ITOuser">ITOuser</option>
+                            </select>
                                 <div *ngIf="submitted">
                                     <span *ngIf="f.controls['roles']?.invalid" class="redFont">Select a role</span>
                                 </div>
