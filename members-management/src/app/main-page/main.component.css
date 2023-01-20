@@ -1,16 +1,4 @@
 
-
-/* #footer, #content::after{
-   
-    display: block;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-} */
-
-/* html{
-    height: 100%;
-} */
 html,body{
     min-height: 100vh;
     

@@ -13,13 +13,13 @@ import { identifierName } from '@angular/compiler';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  @ViewChild('f') formData : NgForm ;
+ 
   usernameCheck : boolean =false
   passwordCheck : boolean = false;
   usersArr : any;
   showalert : boolean = false;
-  enteredUsername : string;
-  enteredPassword : string;
+  enteredUsername : string = "";
+  enteredPassword : string = "";
   usernameFail: any = false;
   passwordFail : any = false;
   usernameEmpty : any = false;
@@ -27,26 +27,22 @@ export class LoginComponent {
   
    constructor(private router : Router,private authService : AuthService, private http : HttpClient, 
     private userService : UserService, private messageService: MessageService){
-
-   }
+    }
    noUserFound() {
     this.messageService.add({severity:'error', summary:'Invalid !', detail:'Inputs NOT FOUND!'});
-  }
+       }
     noInput() {
       this.messageService.add({severity:'error', summary:'Invalid !', detail:'Username or Password cannot be empty'});
     }
 
     login(){
-      
-      
-      if(this.formData.value.username ==="" && this.formData.value.password !==""){
-        this.usernameEmpty = true;
-        
+      if(this.enteredUsername ==="" && this.enteredPassword !==""){
+        this.usernameEmpty = true;  
       }
-      else if(this.formData.value.password ==="" && this.formData.value.username !==""){
+      else if(this.enteredPassword ==="" && this.enteredUsername !==""){
         this.passwordEmpty = true;
       }
-      else if(this.formData.value.password ==="" && this.formData.value.username ===""){
+      else if(this.enteredUsername ==="" && this.enteredPassword ===""){
         this.usernameEmpty = true;
         this.passwordEmpty = true;
       }
@@ -54,8 +50,8 @@ export class LoginComponent {
         {   
           this.userService.getUsers().subscribe((data)=>{
             this.usersArr = data;
-            this.enteredUsername = this.formData.value.username;
-            this.enteredPassword = this.formData.value.password
+            // this.enteredUsername = this.formData.value.username;
+            // this.enteredPassword = this.formData.value.password
             for (let i=0;i< this.usersArr.length;i++){
             if(this.usersArr[i].username === this.enteredUsername && this.usersArr[i].password === this.enteredPassword ){
               this.usernameCheck = true;
@@ -63,46 +59,15 @@ export class LoginComponent {
             }
           }
             if(this.usernameCheck && this.passwordCheck){
-            // this.userService.loggedIn.next(this.enteredUsername);
             this.usernameEmpty = false;
         this.passwordEmpty = false;
             this.authService.login();
             this.userService.logSave(this.enteredUsername)
             this.userService.rolesSave()
-            // this.userService.loggedIn.next(this.userService.roles())
             }else{
-              // this.showalert = true;
-              // this.formData.reset()
               this.noUserFound();
-              // setTimeout(()=>{this.showalert=false; this.router.navigate([''])},2000)
             }
           })
-        //   this.http.get("http://localhost:3000/users").subscribe((data)=>{ 
-        //     this.usersArr = data;
-        //     this.enteredUsername = this.formData.value.username;
-        //     this.enteredPassword = this.formData.value.password
-        //     for (let i=0;i< this.usersArr.length;i++){
-        //     if(this.usersArr[i].username === this.enteredUsername && this.usersArr[i].password === this.enteredPassword ){
-        //       this.usernameCheck = true;
-        //       this.passwordCheck = true
-        //     }
-        //   }
-        //     if(this.usernameCheck && this.passwordCheck){
-        //     // this.userService.loggedIn.next(this.enteredUsername);
-        //     this.usernameEmpty = false;
-        // this.passwordEmpty = false;
-        //     this.authService.login();
-        //     this.userService.logSave(this.enteredUsername)
-        //     this.userService.rolesSave()
-        //     // this.userService.loggedIn.next(this.userService.roles())
-        //     }else{
-        //       // this.showalert = true;
-        //       // this.formData.reset()
-        //       this.noUserFound();
-        //       // setTimeout(()=>{this.showalert=false; this.router.navigate([''])},2000)
-        //     }
-        //   })
-          
         }
      
       

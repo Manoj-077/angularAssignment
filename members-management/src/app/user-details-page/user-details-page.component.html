@@ -37,11 +37,13 @@
                         <div class="row m-0">
                             <div class="col-sm-6 pl-0 pr-1">
                                 <label >First Name:<span class="redFont">*</span></label>
-                                <input type="text" class="form-control" placeholder="firstname" maxlength="30" [ngClass]="{'is-invalid': f.controls['firstname']?.invalid && submitted}" 
+                                <input type="text" class="form-control" placeholder="firstname" maxlength="30" [ngClass]="{'is-invalid': f.controls['firstname']?.invalid && submitted && f.controls['firstname'].touched}" 
                                 required name="firstname" [(ngModel)]="userData.firstname" [pattern]="firstnamePattern">
                                 <div *ngIf="submitted">
-                                    <span *ngIf="f.controls['firstname'].invalid && submitted"  class="redFont">
-                                    enter valid username</span>
+                                    <span *ngIf="f.controls['firstname'].errors?.['required'] && submitted"  class="redFont">
+                                        Name cannot be empty</span>
+                                    <span *ngIf="f.controls['firstname'].errors?.['pattern'] && submitted && f.controls['firstname'].touched"  class="redFont">
+                                        enter valid name</span>
                                 </div>    
                             </div>
 
@@ -96,14 +98,14 @@
                             <input type="text" class="form-control" maxlength="100" placeholder="enter address" required name="address" 
                             [(ngModel)]="userData.address" [ngClass]="{'is-invalid': f.controls['address']?.invalid && submitted}">
                             <div *ngIf="submitted">
-                                <span *ngIf="f.controls['address']?.invalid || f.controls['address'].pristine && f.controls['address'].touched" class="redFont">enter valid address</span>
+                                <span *ngIf="f.controls['address']?.invalid || (f.controls['address'].pristine && f.controls['address'].touched)" class="redFont">enter valid address</span>
                             </div>  
                         </div>
 
                         <div class="row m-0">
                             <div class="col-sm-6 dropdown pl-0 pr-1" >
                                 <label>Country:</label>
-                                <select placeholder="Country" class="form-select"  (change)="changeCountry($event)" [(ngModel)]="userData.country"
+                                <select placeholder="Country" class="form-select"  (change)="changeCountry($event)" [(ngModel)]="selectedCountry"
                                  name="country" >
                                     <option *ngFor="let country of Countries">{{country.name}}</option>
                                 </select>
@@ -122,7 +124,8 @@
                             <input type="text" class="form-control" placeholder="enter phone number" value="" [pattern]="phoneNumberPattern" [ngClass]="{'is-invalid': f.controls['mobile']?.invalid && submitted}" 
                             [(ngModel)]="userData.mobile" required name="mobile" >
                             <div *ngIf="submitted">
-                                <span *ngIf="f.controls['mobile']?.invalid || f.controls['mobile'].pristine && f.controls['mobile'].touched" class="redFont">enter valid mobile number</span>
+                                <span *ngIf="f.controls['mobile'].errors?.['required'] || (f.controls['mobile'].pristine && f.controls['mobile'].touched)" class="redFont">Mobile number cannot be empty</span>
+                                <span *ngIf="f.controls['mobile'].errors?.['pattern'] || (f.controls['mobile'].pristine && f.controls['mobile'].touched)" class="redFont">enter valid mobile number</span>
                             </div>  
                         </div>
 
@@ -143,7 +146,6 @@
                             <input type="radio" name="gender" [(ngModel)]="userData.gender" required  value="male">
                                 Male
                             </label>
-                                
                             <label class="g">
                                 <input type="radio" name="gender" [(ngModel)]="userData.gender" required value="female" style="margin-left: 10px;">
                                 Female
@@ -157,7 +159,8 @@
                             <input type="text" class="form-control" maxlength="100" placeholder="enter email id" value="" [(ngModel)]="userData.email"
                             [ngClass]="{'is-invalid': submitted && f.controls['email']?.invalid}" required name="email" [pattern]="emailPattern">
                             <div *ngIf="submitted">
-                                <span *ngIf="f.controls['email']?.invalid" class="redFont">enter a valid email id</span>
+                                <span *ngIf="f.controls['email'].errors?.['required']" class="redFont">email id cannot be empty</span>
+                                <span *ngIf="f.controls['email'].errors?.['pattern']" class="redFont">enter a valid email</span>
                             </div>         
                         </div>  
                         <div>
@@ -166,9 +169,9 @@
                             placeholder="password" minlength="8" maxlength="20" required [pattern]="passwordPattern"
                             name="password" value="" [(ngModel)]="userData.password">
                             <div *ngIf="submitted">
-                                <span *ngIf="f.controls['password']?.invalid" class="redFont">enter a valid password</span>
+                                <span *ngIf="f.controls['password'].errors?.['required']" class="redFont">passwrod cannot be empty</span>
                             </div>
-                            <span *ngIf="f.controls['password']?.invalid && f.controls['password']?.dirty">
+                            <span *ngIf="f.controls['password'].errors?.['pattern'] && f.controls['password'].dirty">
                                 <br>
                                 <div class="alert alert-danger"  role="alert">
                                     password must contain atleast 1 upper and 1 lower case with atleast 1 number (must have minimum 8 characters)
@@ -180,12 +183,12 @@
                             <input type="password"  class="form-control" PasswordValidator="password" minlength="8" maxlength="20"  placeholder="confirm password"
                             value="" name="confirmpassword" [ngClass]="{'is-invalid': (f.controls['confirmpassword']?.errors?.['notEqual'] && submitted) || (f.controls['confirmpassword']?.invalid && submitted)}" required
                             [(ngModel)]="confirmpass">
-                            <span  *ngIf="f.controls['confirmpassword']?.errors?.['notEqual']" 
+                            <span *ngIf="f.controls['confirmpassword']?.errors?.['notEqual'] && f.controls['confirmpassword']?.touched" 
                                 class="redFont">password not matching</span>
                             <div *ngIf="submitted">
-                                    <span *ngIf="f.controls['confirmpassword']?.invalid" 
+                                    <span *ngIf="f.controls['confirmpassword'].errors?.['required']" 
                                     class="redFont">
-                                    invalid field input
+                                    confirm password cannot be empty
                                 </span>
                             </div>       
                         </div>
@@ -193,9 +196,6 @@
                         <div class="">
                             
                             <label class="mr-2">Select Roles:<span class="redFont">*</span></label>
-                            <!-- <p-dropdown [options]="roles" [ngClass]="{'is-invalid': f.controls['roles']?.invalid && submitted }"
-                             [(ngModel)]="userData.roles" placeholder="Select role" name="roles"  [required]="true"
-                             optionValue="code"  optionLabel="name"></p-dropdown> -->
                              <select [(ngModel)]="userData.roles" [ngClass]="{'is-invalid': f.controls['roles']?.invalid && submitted}"  required class="form-select" name="roles">
                                 <option value="Admin">Admin</option>
                                 <option value="ITOuser">ITOuser</option>

@@ -70,37 +70,6 @@ export class HomePageComponent {
                 ]
         };  
     })
-      
-      
-  //   this.http.get("http://localhost:3000/users").subscribe((data)=>{
-  //       this.fetchedData = data;
-  //       for(let i=2;i<this.fetchedData.length;i++){
-  //         let fullDate = new Date(this.fetchedData[i].createdTime)
-  //         let createdDate:any = fullDate;
-  //         if(Math.round((this.todayDate - createdDate)/(1000*60*60*24))<7){
-  //             this.arr.push(Math.round((this.todayDate - createdDate)/(1000*60*60*24))) // getting and pushing data of last 7 days
-  //         }
-  //       }
-        
-  //       this.arr = this.arr.sort((a:any, b:any) => b - a); 
-  //       // console.log(this.arr)
-  //       for (const num of this.arr) {
-  //         this.counts[num] = this.counts[num] ? this.counts[num] + 1 : 1; 
-  //       }
-  //       // console.log(this.counts)
-  //       this.basicData = {
-  //         labels: ['lastSeventhDay', 'lastSixthDay', 'lastFifthDay', 'lastFourthDay', 'lastThirdDay', 'yesterday', 'today'],
-  //         datasets: [
-  //             {
-  //                 label: 'First Dataset',
-  //                 data: [this.counts[6], this.counts[5], this.counts[4], this.counts[3], this.counts[2], this.counts[1], this.counts[0]],
-  //                 fill: false,
-  //                 borderColor: '#42A5F5',
-  //                 tension: .4
-  //             },
-  //         ]
-  //     };
-  //  })
   }
 
 

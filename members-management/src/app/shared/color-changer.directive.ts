@@ -17,19 +17,11 @@ export class ColorChangerDirective {
         elementRef.nativeElement.style.color = 'green';
       }
     }
-    // function bgColorChanger(){
-    //   if(bgc){
-    //     elementRef.nativeElement.style.backgroundColor = 'blue'
-    //   }
-    //   else{
-    //     elementRef.nativeElement.style.backgroundColor = 'red'
-    //   }
-    // }
     setInterval(()=>{
       c= !c;
       bgc = !bgc;
       colorChanger();
-      // bgColorChanger()
+    
     },500)
     
 

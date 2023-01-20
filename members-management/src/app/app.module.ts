@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main-page/main.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { FooterComponent } from './footer/footer.component';
+
 import { HomePageComponent } from './home-page/home-page.component';
 import { UserListComponent } from './user-list-page/user-list.component';
 import { RolesComponent } from './roles-page/roles.component';
@@ -43,7 +43,6 @@ import { AgePipe } from './shared/age.pipe';
     AppComponent,
     MainComponent,
     NavBarComponent,
-    FooterComponent,
     HomePageComponent,
     UserListComponent,
     RolesComponent,

@@ -15,11 +15,12 @@ export class ProfilePageComponent {
   username : any;
   userImage :any;
   roles: any ="";
+  x = this.autoLogoutService.logoutTime;
   constructor(private http: HttpClient, private autoLogoutService: AutoLogoutService,
      private bnIdle:BnNgIdleService, private userService:UserService){
 
   }
-  x = this.autoLogoutService.logoutTime;
+  
   ngOnInit() {
     this.bnIdle.startWatching(this.x).subscribe((isTimedOut: boolean) => {
       if(isTimedOut){
@@ -43,20 +44,6 @@ export class ProfilePageComponent {
       console.log(this.loggedInUserInfo)
       console.log(this.roles)
     })
-
-    // this.http.get('http://localhost:3000/users').subscribe((data)=>{
-    //   this.allUsers = data;
-    //   for(let i=1;i<this.allUsers.length;i++){
-    //     if(this.allUsers[i].username === this.username){
-    //       this.loggedInUserInfo = this.allUsers[i];
-          
-    //       break;
-    //       }
-    //     }
-    //   this.userImage = this.loggedInUserInfo.image;
-    //   console.log(this.loggedInUserInfo)
-    //   console.log(this.roles)
-    // })
   }
   ngOnDestroy(){
     this.bnIdle.stopTimer();

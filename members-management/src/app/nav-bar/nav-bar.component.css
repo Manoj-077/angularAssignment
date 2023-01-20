@@ -1,29 +1,5 @@
 
 
-/* #nav{
-    background-color: rgba(24, 102, 219, 0.956);
-    font-family: 'Noto Sans', sans-serif;
-}
-
-@media screen and (max-width: 1000px) {
-    #navbar{
-        display: inline-block;
-        width: 800px;
-    }
-    #navbarSupportedContent{
-        display: flex;
-        width: 600px;
-    }
-} */
-
-/* @media screen and (max-width: 700px) {
-    #navbar{
-        display: inline-block;
-        width: 400px;
-    }
-} */
-
-
 
 #navbar{
     background-color: rgb(2, 90, 158);
@@ -63,18 +39,7 @@
     margin-top: 15px;
 }
 
-/* 
-@media (max-width:320px) {
 
-    .navLink {
-
-        margin: 0%;
-
-        padding: 1%;
-
-    }
-
-} */
 
 
 
@@ -94,22 +59,6 @@
     font-size: 17px;
   }
   
-  /* Change the color of links on hover */
-  /* .topnav a:hover {
-    background-color:  rgb(4, 130, 226);
-    color: rgb(255, 255, 255);
-  } */
-  
-  /* Add an active class to highlight the current page */
-  /* .topnav a.active {
-    background-color: #04AA6D;
-    color: white;
-  } */
-  
-  /* Hide the link that should open and close the topnav on small screens */
-  /* .topnav .icon {
-    display: none;
-  } */
   #itorizon{
     height: 50px; 
     width: 170px; 

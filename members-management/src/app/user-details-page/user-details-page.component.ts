@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { UserDetail } from '../shared/userDetail.model';
+
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
@@ -58,22 +58,20 @@ export class UserDetailsPageComponent implements OnInit {
   cntry : any;
   state : any;
   submitted : any = false;
+  countrySelected:any;
+  x = this.autoLogoutService.logoutTime;
   zipcodePattern : any = "^[0-9]+$";
   phoneNumberPattern: any = '^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$';
   lastnamePattern: any = '^[a-zA-Z\s]+$';
   firstnamePattern : any = '^[a-zA-Z\s]+$';
   emailPattern : any = '^[a-z0-9]+@[a-z]+\.com$';
   passwordPattern : any = '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$';
-  // ig:any;
+
   constructor(private title: Title, private http:HttpClient, private router : Router, private userService: UserService,
     private autoLogoutService: AutoLogoutService, private bnIdle:BnNgIdleService) {
-    // this.roles = [
-    //   {name: 'Admin', code: 'Admin'},
-    //   {name: 'ITOuser', code: 'ITOuser'},
-    //     ];
   }
 
-  x = this.autoLogoutService.logoutTime;
+
   ngOnInit() {
     this.bnIdle.startWatching(this.x).subscribe((isTimedOut: boolean) => {
       if(isTimedOut){
@@ -119,6 +117,7 @@ export class UserDetailsPageComponent implements OnInit {
 	cities: Array<any> = []; 
 	changeCountry(country: any) { 
 		this.states = this.Countries.find((cntry: any) => cntry.name == country.target.value).states;
+    this.countrySelected =country.target.value
 	}
 
   userData = {
@@ -146,7 +145,7 @@ export class UserDetailsPageComponent implements OnInit {
   change(){
     this.submitted = false;
   }
-
+  
   onSubmit(f:NgForm){
      console.log(f)
       this.validateBday();
@@ -154,6 +153,7 @@ export class UserDetailsPageComponent implements OnInit {
       if(!this.bdayFail && f.valid){
         this.userData.username = this.user;
         this.userData.birthday = this.bdayDate;
+        this.userData.country = this.countrySelected;
         this.userData.image = this.image;
         this.userData.createdTime = this.createdTime.toString();
         this.userService.addUser(this.userData).subscribe((data)=>{})
@@ -169,8 +169,6 @@ export class UserDetailsPageComponent implements OnInit {
  onCancel(){
   
    this.router.navigate(['main/userList']);
-   
-  //  this.form.reset();
  }
  
  onfileselected(event:any){

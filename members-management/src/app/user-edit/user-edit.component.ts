@@ -18,10 +18,10 @@ interface Roles {
   styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent {
-  @ViewChild('f') form : NgForm;
+ 
   @ViewChild('img') inputImage : ElementRef;
   username:any;
-  detailsObj: any;
+  detailsObj: any = "";
   image : any;
   newImage : any;
   states : any;
@@ -33,16 +33,16 @@ export class UserEditComponent {
   role : any = "";
   selectedRolesCode: any = "";
   selectedRole : any = "";
-  addres:any=""
-  addresFail:any= false;
+
+
   userRole : any;
   isEditModeOn : any = false;
 
   
-  timezone : any;
-  locale : any;
+
+
   zipcode : any;
-  cntry : any;
+  country : any;
   state : any;
   firstname: any;
   lastname : any;
@@ -114,25 +114,9 @@ export class UserEditComponent {
       }
       else if(this.detailsObj.roles === 'ITOuser'){
         this.selectedRolesCode = [{name: 'ITOuser', code: 'ITOuser'}]
-      }
-      
-      this.username = this.detailsObj.username;
-      this.firstname = this.detailsObj.firstname;
-      this.lastname = this.detailsObj.lastname;
-      this.birthday = this.detailsObj.birthday;
-      this.mobile = this.detailsObj.mobile;
-      this.addres =  this.detailsObj.address;
-      this.zipcode = this.detailsObj.zipcode;
-      this.cntry = this.detailsObj.country;
+      } 
+      this.country = this.detailsObj.country;
       this.state = this.detailsObj.state;
-      this.timezone = this.detailsObj.timezone;
-      this.locale = this.detailsObj.locale;
-      this.gender = this.detailsObj.gender;
-      this.email = this.detailsObj.email;
-      this.password = this.detailsObj.password;
-      this.confirmPassword = this.detailsObj.password
-      this.status = this.detailsObj.status;
-      this.selectedRolesCode = this.selectedRolesCode;
       this.userId = this.detailsObj.id;
       this.image = this.detailsObj.image;
       this.userRole = this.detailsObj.roles;
@@ -175,8 +159,8 @@ export class UserEditComponent {
   
   validateBday(){
     const thisYear = new Date();
-    let bdayYear = this.birthday.slice(0,4) 
-    if(this.birthday){
+    let bdayYear = this.detailsObj.birthday.slice(0,4) 
+    if(this.detailsObj.birthday){
       if(bdayYear>=thisYear.getFullYear()){
       this.bdayFail = true;
       }else{
@@ -189,15 +173,8 @@ export class UserEditComponent {
     this.validateBday()
     this.submitted = true;
     if(!this.bdayFail && f.valid){
-      this.detailsObj.address = this.addres;
-      this.detailsObj.zipcode = this.zipcode;
-      this.detailsObj.country = this.cntry;
+      this.detailsObj.country = this.country;
       this.detailsObj.state = this.state;
-      this.detailsObj.timezone = this.timezone;
-      this.detailsObj.locale = this.locale;
-      this.detailsObj.roles = this.userRole;
-      this.detailsObj.status = this.status;
-      this.detailsObj.birthday = this.birthday;
       if(!this.newImage){
         this.detailsObj.image = this.image
       }

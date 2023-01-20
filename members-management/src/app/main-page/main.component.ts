@@ -11,15 +11,5 @@ export class MainComponent {
   constructor(private autoLogoutService : AutoLogoutService, private bnIdle: BnNgIdleService){
 
   }
-  // x = this.autoLogoutService.logoutTime;
-  // ngOnInit(){
-  //   this.bnIdle.startWatching(this.x).subscribe((isTimedOut: boolean) => {
-  //      this.autoLogoutService.logout()  
-  //     });
-  // }
-  // ngOnDestroy(){
-  //   this.bnIdle.stopTimer();
-  //   console.log('destroyed home c')
-  // }
  
 }

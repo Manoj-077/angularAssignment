@@ -25,7 +25,7 @@ const routes: Routes = [
     {path:"home",component: HomePageComponent},
     {path: "userList", component : UserListComponent},
     {path:"userDetails", component: UserDetailsPageComponent , canActivate:[AdminGuard]} ,
-    {path:"userEdit",component: UserEditComponent,  canActivate:[AdminGuard]},
+    {path:"userEdit",component: UserEditComponent},
     {path:"userProfile",component: ProfilePageComponent},
     {path : "roles", component : RolesComponent,canActivate:[AdminGuard]}
   ]},

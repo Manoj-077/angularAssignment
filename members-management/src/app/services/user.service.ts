@@ -32,7 +32,6 @@ export class UserService {
         }
       }
 
-      // return this.role
       localStorage.setItem('roles',JSON.stringify(this.role))
       this.http.get("http://localhost:3000/roles").subscribe((data)=>{
       this.rolesData = data;
