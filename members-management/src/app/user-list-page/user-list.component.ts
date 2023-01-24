@@ -48,6 +48,7 @@ export class UserListComponent implements OnInit {
   isPaginate : any = false;
   isUserCreated : any = false;
   userCreatedSubcription : Subscription;
+  userEditedSubscription: Subscription;
   x = this.autoLogoutService.logoutTime;
   constructor(private http: HttpClient, private router: Router, private userService : UserService,
     private confirmationService: ConfirmationService, private route:ActivatedRoute, private messageService: MessageService,
@@ -86,12 +87,16 @@ export class UserListComponent implements OnInit {
         this.isPaginate = false;
       }
     });
+
+    this.userEditedSubscription = this.userService.userEdited.subscribe((data)=>{
+      
+        this.userEdited();
+      
+    })
  
   }
 
-  addSingle() {
-  this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
-  }
+
 
   onSelected(value:any){
   if(this.pageNumSelected===undefined){
@@ -111,6 +116,10 @@ export class UserListComponent implements OnInit {
 
   userDeleted(){
   this.messageService.add({severity:'success', summary: 'User Deleted!', detail: 'User Successfully deleted'});
+  }
+
+  userEdited(){
+    this.messageService.add({severity:'success', summary: 'Success', detail: 'User Edited Successfully'})
   }
 
   userAlreadyExist(){
@@ -198,7 +207,7 @@ export class UserListComponent implements OnInit {
     
     localStorage.setItem('userEdit',data.username)
     
-    this.userService.editMode.next(true);
+   
 }
   
 
@@ -250,5 +259,6 @@ export class UserListComponent implements OnInit {
       console.log('destroyed userlist')
 
       this.userCreatedSubcription.unsubscribe();
+      this.userEditedSubscription.unsubscribe();
     }
 }

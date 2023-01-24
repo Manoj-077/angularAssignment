@@ -5,7 +5,6 @@ import { Title } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
-import {MultiSelectFilterOptions} from 'primeng/multiselect';
 import { AutoLogoutService } from '../services/auto-logout.service';
 import { BnNgIdleService } from 'bn-ng-idle';
 
@@ -23,40 +22,22 @@ export class UserDetailsPageComponent implements OnInit {
 
 
   @ViewChild('img') inputImage : ElementRef;
-  gnder : any ="";
+
   user : any;
-  pass: any = ""
-  editMode : boolean = false;
-  description : any;
-  passwordregexfail : boolean = false;
+
+
+
+
   image = 'https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg';
   nonImage : boolean = false;
   createdTime : Date = new Date()
   roles: Roles[];
   selectedRolesCode: any = "";
- 
-  fn : any = ""
- 
-  emailId : any = "";
- 
-  phnNum : any = "";
-
-  addres:any=""
-
   selectedStatus : any = "";
+  confirmpassword : any = ""; 
 
-  confirmpass : any = "";
-  
-  lastname : any = "";
- 
-  
   bdayDate : any = "";
   bdayFail:any = false;
-  timezone : any;
-  locale : any;
-  zipcode : any;
-  cntry : any;
-  state : any;
   submitted : any = false;
   countrySelected:any;
   x = this.autoLogoutService.logoutTime;
@@ -78,19 +59,7 @@ export class UserDetailsPageComponent implements OnInit {
       this.autoLogoutService.logout() 
       }
     });
-
     this.user = localStorage.getItem('newUser')
-    this.description = localStorage.getItem('description')
-    this.userService.editMode.subscribe((data)=>{
-      if(data === true){
-        this.editMode = true;
-        console.log(this.editMode)
-      }
-      else{
-        this.editMode = false;
-      }
-    }
-    )
   }
   
 
@@ -160,7 +129,7 @@ export class UserDetailsPageComponent implements OnInit {
         this.router.navigate(['main/userList'])
         setTimeout(()=>{
           this.userService.userCreated.next(true);
-        },2000)
+        },1000)
       }
 
       

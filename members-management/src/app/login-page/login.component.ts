@@ -2,10 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../gaurd/auth.service';
 import { HttpClient } from '@angular/common/http';
-import { NgForm } from '@angular/forms'
 import { UserService } from '../services/user.service';
 import { MessageService } from 'primeng/api';
-import { identifierName } from '@angular/compiler';
+
 
 @Component({
   selector: 'app-login',
@@ -38,9 +37,11 @@ export class LoginComponent {
     login(){
       if(this.enteredUsername ==="" && this.enteredPassword !==""){
         this.usernameEmpty = true;  
+        this.passwordEmpty = false;
       }
       else if(this.enteredPassword ==="" && this.enteredUsername !==""){
         this.passwordEmpty = true;
+        this.usernameEmpty = false; 
       }
       else if(this.enteredUsername ==="" && this.enteredPassword ===""){
         this.usernameEmpty = true;
@@ -50,8 +51,6 @@ export class LoginComponent {
         {   
           this.userService.getUsers().subscribe((data)=>{
             this.usersArr = data;
-            // this.enteredUsername = this.formData.value.username;
-            // this.enteredPassword = this.formData.value.password
             for (let i=0;i< this.usersArr.length;i++){
             if(this.usersArr[i].username === this.enteredUsername && this.usersArr[i].password === this.enteredPassword ){
               this.usernameCheck = true;

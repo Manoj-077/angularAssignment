@@ -73,23 +73,6 @@
     border: none;
   }
 
-  @media screen and (max-width:585px) {
-      #itorizon{
-          margin-top: 10px;
-          margin-left: 0;
-          height: 50px;
-          width: 140px;
-      }
-      #menu{
-        margin: 10px 0 0 0;
-        bottom: 50px;
-        
-      }
-      #dropdownMenu{
-        height: 10px;
-      }
-  }
-
   @media screen and (max-width:359px) {
     #dateTime{
       margin: 0 0 0 0;
@@ -99,8 +82,51 @@
     #homeLink{
         margin-left:0;
     }
+    #menu{
+      margin: 10px 0 0 0;
+      bottom: 50px;
+      
+    }
+    #menu a{
+      font-size: x-small;
+    }
+    
   }
 
+
+  @media screen and (max-width:585px) {
+      #itorizon{
+          margin-top: 20px;
+          margin-left: 0;
+          height: 30px;
+          width: 110px;
+      }
+      #menu{
+        margin: 10px 0 0 0;
+        bottom: 50px;
+        
+      }
+      #dropdownMenu{
+        height: 10px;
+      }
+      #menu a{
+        font-size: x-small;
+      }
+  }
+
+  @media screen and (max-width:360px){
+    #dateTime{
+      margin: 15px 0 0 0;
+     
+      font-size: x-small;
+
+  }
+  .topnav a {
+      
+    font-size: 10px;
+  }
+  }
+  
 
   @media screen and (min-width:360px) and (max-width:400px) {
     #dateTime{
@@ -112,20 +138,37 @@
     #homeLink{
         margin-left:0;
     }
-    .navItem{
-      font-size: smaller;
+    .topnav a {
+      
+      font-size: 13px;
     }
   }
 
   @media screen and (min-width:401px) and (max-width:510px) {
     #dateTime{
         margin: 15px 0 0 0 ;
+        font-size: small;
     }
     #homeLink{
         margin-left:0;
     }
-    .navItem{
-      font-size: small;
+    .topnav a {
+      
+      font-size: 15px;
+    }
+  }
+
+  @media screen and (min-width:511px) and (max-width:599px) {
+    #dateTime{
+        margin: 15px 0 0 0 ;
+        font-size: small;
+    }
+    #homeLink{
+        margin-left:0;
+    }
+    .topnav a {
+      
+      font-size: 15px;
     }
   }
 

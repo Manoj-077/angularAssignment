@@ -1,5 +1,4 @@
-import { compileClassMetadata } from '@angular/compiler';
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './gaurd/auth.guard';
 import { AdminGuard } from './gaurd/admin.guard';

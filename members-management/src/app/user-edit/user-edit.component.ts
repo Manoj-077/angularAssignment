@@ -184,6 +184,7 @@ export class UserEditComponent {
       this.editedDetails = this.detailsObj;
       this.isEditModeOn = false;
       this.userService.editUser(this.userId,this.editedDetails).subscribe((data)=>{
+        setTimeout(()=>this.userService.userEdited.next(true),1000)  
         this.router.navigate(['main/userList'])
       })
     }

@@ -4,13 +4,7 @@
     <div class="col-sm-1">
       <a><img id="itorizon" src="https://career.gatech.edu/sites/default/files/images/itorizon_logo.png" ></a>
     </div>
-    <div class="col-sm-1">
-      
-    </div>
-    <div class="col-sm-8">
-
-    </div>
-    <div class="col-sm-1">
+    <div class="col-sm-10">
       
     </div>
     <div class="col-sm-1" id="dropdownMenu">
@@ -32,9 +26,9 @@
 </div>
 
 <div class="topnav" id="myTopnav">
-  <a class="navItem" id="homeLink" routerLink="/main/home" routerLinkActive = "act" >Home</a>
-  <a class="navItem" routerLink="/main/userList" routerLinkActive = "act">User List</a>
-  <a class="navItem" routerLink="/main/roles" [ngStyle]="{'display': role === 'ITOuser' ? 'none': 'content'}" routerLinkActive = "act">Roles</a>
+  <a class="navItem navPaths"  id="homeLink" routerLink="/main/home" routerLinkActive = "act" >Home</a>
+  <a class="navItem navPaths" routerLink="/main/userList" routerLinkActive = "act">User List</a>
+  <a class="navItem navPaths" routerLink="/main/roles" [ngStyle]="{'display': role === 'ITOuser' ? 'none': 'content'}" routerLinkActive = "act">Roles</a>
   <div style="text-align: right;">
     <p id="dateTime" >{{inbuiltDate| date:'dd'}}-{{inbuiltDate|date:'LLL'}}-{{inbuiltDate| date:'yyyy'}} {{inbuiltDate| date:'h'}}:{{inbuiltDate| date:'mm'}}{{inbuiltDate| date:'aaa'}}</p>
   </div>

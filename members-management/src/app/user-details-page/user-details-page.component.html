@@ -1,12 +1,8 @@
-
-<div class="container-fluid" id="greet">
+<div class="container-fluid" id="mainTitle">
     <h1 id="addUser">Add user</h1>
 </div>
-
-
-
-<div class="container" id="dp">
-    <div class="container rounded bg-white mt-5 mb-5" class="d1">
+<div class="container">
+    <div class="container rounded bg-white mt-5 mb-5" class="div1">
         <form #f="ngForm"  (ngSubmit)="onSubmit(f)">
             <div class="row" >
                 <div class="col-sm-6 border-right">
@@ -14,10 +10,9 @@
                         <div class="d-flex justify-content-between align-items-center mt-4 mb-3" >
                             <h2 style="font-family: 'Poppins', sans-serif;">User Details</h2>
                         </div>
-
                         <div class="d-flex flex-column align-items-center text-center">
                             <img class="rounded-circle mt-5" [src]="image" width="150px" height="150px">
-                            <label class="form-label" for="customFile">only .jpg and .png images allowed</label>
+                            <label class="form-label">only .jpg and .png images allowed</label>
                             <input type="file" style="width: 50%;" class="form-control" id="customFile" name="image" (change)="onfileselected($event)" accept="image/jpg, image/png" #img />
                             <span *ngIf="nonImage"> 
                                 <br>
@@ -25,19 +20,15 @@
                                     Unsupported file
                                 </div> 
                             </span>     
-                        </div>
-                        
-                        <div class="">
+                        </div> 
+                        <div>
                             <label>UserName<span class="redFont">*</span></label>
-                            <input type="text" class="form-control" disabled [ngClass]="{'is-invalid': username.invalid && username.touched}"
-                            #username="ngModel" maxlength="20" [placeholder]='user'  [(ngModel)]="user" value="" required name="username" >
-                            <span *ngIf="username.invalid && username.touched" class="redFont">enter valid username</span>
+                            <input type="text" class="form-control" disabled maxlength="20"  [(ngModel)]="user" name="username">                           
                         </div>
-
                         <div class="row m-0">
                             <div class="col-sm-6 pl-0 pr-1">
                                 <label >First Name:<span class="redFont">*</span></label>
-                                <input type="text" class="form-control" placeholder="firstname" maxlength="30" [ngClass]="{'is-invalid': f.controls['firstname']?.invalid && submitted && f.controls['firstname'].touched}" 
+                                <input type="text" class="form-control" placeholder="firstname" maxlength="30" [ngClass]="{'is-invalid': f.controls['firstname']?.invalid && submitted && f.controls['firstname']?.errors?.['required']}" 
                                 required name="firstname" [(ngModel)]="userData.firstname" [pattern]="firstnamePattern">
                                 <div *ngIf="submitted">
                                     <span *ngIf="f.controls['firstname'].errors?.['required'] && submitted"  class="redFont">
@@ -46,18 +37,15 @@
                                         enter valid name</span>
                                 </div>    
                             </div>
-
                             <div class="col-sm-6 p-0">
                                 <label>Last name:</label>
-                                <input  [ngClass]="{'is-invalid': f.controls['lastname']?.invalid && lastname.dirty && submitted}"   type="text" class="form-control" [(ngModel)]="userData.lastname" value=""
+                                <input  [ngClass]="{'is-invalid': f.controls['lastname']?.invalid && f.controls['lastname'].dirty && submitted}"   type="text" class="form-control" [(ngModel)]="userData.lastname" value=""
                                  placeholder="lastname" [pattern]="lastnamePattern"  maxlength="30" name="lastname" >
                                 <div *ngIf="submitted"> 
                                     <span *ngIf="f.controls['lastname']?.invalid && f.controls['lastname']?.dirty && submitted"  class="redFont">Invalid last name</span>
                                 </div>
                             </div>
                         </div>
-
-  
                         <div>
                             <label>Timezone:</label>
                             <select class="form-select" name="timezone" [(ngModel)]="userData.timezone" >
@@ -76,8 +64,7 @@
                                 <option value="ireland">en_IE</option>
                             </select>
                         </div>
-
-                        <div class="" >
+                        <div>
                             <label>zipcode:</label>
                             <input type="text" class="form-control" [pattern]="zipcodePattern" maxlength="20" placeholder="zipcode" 
                             [(ngModel)]="userData.zipcode" name="zipcode">
@@ -89,11 +76,9 @@
                     </div>    
                 </div>
 
-
                 <div class="col-sm-6 border-right">
                     <div class="ml-3 px-3">
-                        
-                        <div class="" >
+                        <div>
                             <label >Address :<span class="redFont">*</span></label>
                             <input type="text" class="form-control" maxlength="100" placeholder="enter address" required name="address" 
                             [(ngModel)]="userData.address" [ngClass]="{'is-invalid': f.controls['address']?.invalid && submitted}">
@@ -101,7 +86,6 @@
                                 <span *ngIf="f.controls['address']?.invalid || (f.controls['address'].pristine && f.controls['address'].touched)" class="redFont">enter valid address</span>
                             </div>  
                         </div>
-
                         <div class="row m-0">
                             <div class="col-sm-6 dropdown pl-0 pr-1" >
                                 <label>Country:</label>
@@ -113,22 +97,20 @@
                             <div class="col-sm-6 p-0" >
                                 <label>State/Region:</label>
                                 <select placeholder="State" class="form-select" name="state" [(ngModel)]="userData.state">
-                                    <option value="">--Choose State--</option>
+                                    <option>--Choose State--</option>
                                     <option *ngFor="let state of states">{{state}}</option>
                                 </select>
                             </div>
                         </div> 
-
-                        <div class="" >
+                        <div>
                             <label >Mobile Number:<span class="redFont">*</span></label>
-                            <input type="text" class="form-control" placeholder="enter phone number" value="" [pattern]="phoneNumberPattern" [ngClass]="{'is-invalid': f.controls['mobile']?.invalid && submitted}" 
+                            <input type="text" class="form-control" placeholder="enter phone number" [pattern]="phoneNumberPattern" [ngClass]="{'is-invalid': f.controls['mobile']?.invalid && submitted}" 
                             [(ngModel)]="userData.mobile" required name="mobile" >
                             <div *ngIf="submitted">
                                 <span *ngIf="f.controls['mobile'].errors?.['required'] || (f.controls['mobile'].pristine && f.controls['mobile'].touched)" class="redFont">Mobile number cannot be empty</span>
-                                <span *ngIf="f.controls['mobile'].errors?.['pattern'] || (f.controls['mobile'].pristine && f.controls['mobile'].touched)" class="redFont">enter valid mobile number</span>
+                                <span *ngIf="f.controls['mobile'].errors?.['pattern'] && f.controls['mobile'].dirty" class="redFont">enter valid mobile number</span>
                             </div>  
                         </div>
-
                         <div class="form-outline datepicker w-100 ">
                             <label for="birthdayDate">Birthday:</label>
                             <input type="date" [(ngModel)]="bdayDate" class="form-control" name="birthday" id="birthdayDate" (change)="validateBday()">
@@ -136,17 +118,16 @@
                                 <span *ngIf="bdayFail" class="redFont">DOB year invalid</span>
                             </div> 
                         </div>
-
                         <div class="radio">
                             <label>
                                 Genders: <span class="redFont">*</span>
                             </label>
                             <br>
-                            <label class="g">
+                            <label class="gender">
                             <input type="radio" name="gender" [(ngModel)]="userData.gender" required  value="male">
                                 Male
                             </label>
-                            <label class="g">
+                            <label class="gender">
                                 <input type="radio" name="gender" [(ngModel)]="userData.gender" required value="female" style="margin-left: 10px;">
                                 Female
                             </label>
@@ -171,7 +152,7 @@
                             <div *ngIf="submitted">
                                 <span *ngIf="f.controls['password'].errors?.['required']" class="redFont">passwrod cannot be empty</span>
                             </div>
-                            <span *ngIf="f.controls['password'].errors?.['pattern'] && f.controls['password'].dirty">
+                            <span *ngIf="f.controls['password']?.errors?.['pattern'] && f.controls['password']?.dirty">
                                 <br>
                                 <div class="alert alert-danger"  role="alert">
                                     password must contain atleast 1 upper and 1 lower case with atleast 1 number (must have minimum 8 characters)
@@ -181,8 +162,8 @@
                         <div>
                             <label>confirm password:<span class="redFont">*</span></label>
                             <input type="password"  class="form-control" PasswordValidator="password" minlength="8" maxlength="20"  placeholder="confirm password"
-                            value="" name="confirmpassword" [ngClass]="{'is-invalid': (f.controls['confirmpassword']?.errors?.['notEqual'] && submitted) || (f.controls['confirmpassword']?.invalid && submitted)}" required
-                            [(ngModel)]="confirmpass">
+                            name="confirmpassword" [ngClass]="{'is-invalid': (f.controls['confirmpassword']?.errors?.['notEqual'] && submitted) || (f.controls['confirmpassword']?.invalid && submitted)}" required
+                            [(ngModel)]="confirmpassword">
                             <span *ngIf="f.controls['confirmpassword']?.errors?.['notEqual'] && f.controls['confirmpassword']?.touched" 
                                 class="redFont">password not matching</span>
                             <div *ngIf="submitted">
@@ -192,24 +173,19 @@
                                 </span>
                             </div>       
                         </div>
-                        
-                        <div class="">
-                            
+                        <div>
                             <label class="mr-2">Select Roles:<span class="redFont">*</span></label>
-                             <select [(ngModel)]="userData.roles" [ngClass]="{'is-invalid': f.controls['roles']?.invalid && submitted}"  required class="form-select" name="roles">
+                            <select [(ngModel)]="userData.roles" [ngClass]="{'is-invalid': f.controls['roles']?.invalid && submitted}"  required class="form-select" name="roles">
                                 <option value="Admin">Admin</option>
                                 <option value="ITOuser">ITOuser</option>
                             </select>
-                                <div *ngIf="submitted">
-                                    <span *ngIf="f.controls['roles']?.invalid" class="redFont">Select a role</span>
-                                </div>
-                                     
-                        </div> 
-                        
+                            <div *ngIf="submitted">
+                                <span *ngIf="f.controls['roles']?.invalid" class="redFont">Select a role</span>
+                            </div>             
+                        </div>                         
                         <div class="dropdown mb-2" >
                             <label>Status:<span class="redFont">*</span></label>
-                            <select class="form-select" name="status" [ngClass]="{'is-invalid': f.controls['status']?.invalid && submitted}"
-                            [(ngModel)]="userData.status" required>
+                            <select class="form-select" name="status" [ngClass]="{'is-invalid': f.controls['status']?.invalid && submitted}" [(ngModel)]="userData.status" required>
                                     <option value="Active" >Active</option>
                                     <option value="Disabled" >Disabled</option>
                             </select>
@@ -219,13 +195,12 @@
                         </div>   
                     </div>   
                 </div>
-                <hr style="width: 95%; margin-left: 35px;">
+                <hr>
                 <div id="buttons">
                     <button class="btn btn-primary btn-lg m-3" type="submit">Save</button>
                     <button class="btn btn-primary btn-lg" type="button" (click)="onCancel()">Cancel</button>
                 </div>
-            </div>
-            
+            </div>       
         </form>  
     </div>
 </div>  

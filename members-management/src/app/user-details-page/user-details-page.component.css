@@ -1,4 +1,4 @@
-#greet{
+#mainTitle{
     height: 150px;
     width: 100%;
     position: relative;
@@ -9,7 +9,7 @@
     background-color: rgb(59, 200, 255)
     
 }
-.d1{
+.div1{
     background-color: white;
     position: relative;
     z-index: 1;
@@ -71,7 +71,7 @@ input{
     margin-top: 5px;
     margin-left: 5px;
 }
-.g{
+.gender{
     margin-top: 5px;
 }
 
@@ -128,4 +128,9 @@ input{
 
 .redFont{
     color: red;
+}
+
+hr{
+    width: 95%; 
+    margin-left: 35px;
 }

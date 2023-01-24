@@ -10,7 +10,6 @@
                         <div class="d-flex justify-content-between align-items-center ml-5 mt-4 mb-3" >
                             <h2 style="font-family: 'Poppins', sans-serif;">Edit User</h2>
                         </div>
-
                         <div class="d-flex flex-column align-items-center text-center" id="imageDiv">
                             <img class="rounded-circle mt-5" *ngIf="!newImg"  width="150px" height="150px" src="{{image}}">
                             <img *ngIf="newImg" class="rounded-circle mt-5"  width="150px" height="150px" src="{{newImage}}">
@@ -23,14 +22,11 @@
                                     Unsupported file
                                 </div> 
                             </span>             
-                        </div>
-                        
-                        
+                        </div>                      
                         <div class="mt-3">
                             <label>UserName<span class="redFont">*</span></label>
                             <input [(ngModel)]="detailsObj.username" type="text" disabled class="form-control"  name="username">
-                        </div>
-                        
+                        </div>                       
                         <div class="row m-0">
                             <div class="col-sm-6 pl-0 pr-1">
                                 <label >First Name:<span class="redFont">*</span></label>
@@ -41,8 +37,7 @@
                                 <label>Last name:</label>
                                 <input type="text" [(ngModel)]="detailsObj.lastname" disabled class="form-control"  placeholder="" maxlength="30" name="lastname">
                             </div>
-                        </div>
-                       
+                        </div>                      
                         <div class="form-outline datepicker w-100">
                             <label for="birthdayDate">Birthday:</label>
                             <input type="date" 
@@ -50,9 +45,7 @@
                             <div *ngIf="submitted">
                                 <span *ngIf="bdayFail" class="redFont">DOB year invalid</span>
                             </div>
-                        </div>    
-                        
-                        
+                        </div>                           
                         <div class="">
                             <label >Mobile Number:<span class="redFont">*</span></label>
                             <input disabled type="text" class="form-control"
@@ -69,9 +62,6 @@
                         </div>
                     </div>    
                 </div>
-
-
-
 
                 <div class="col-sm-6 border-right" id="leftColumn">
                     <div class="ml-3 px-3">
@@ -102,10 +92,8 @@
                                     <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
                                 </select>
                             </div>
-                        </div>    
-                      
-                        
-                        <div class="">
+                        </div>                           
+                        <div>
                             <label>Timezone:</label>
                             <select [disabled]="!isEditModeOn"
                              class="form-select" [(ngModel)]="detailsObj.timezone" name="timezone">
@@ -115,7 +103,7 @@
                                 <option value="UTC+10">UTC+10</option>
                             </select>
                         </div>
-                        <div class="">
+                        <div>
                             <label>Locales:</label>
                             <select [disabled]="!isEditModeOn"
                             [(ngModel)]="detailsObj.locale" class="form-select" name="locale">
@@ -124,8 +112,7 @@
                                 <option value="india">kn_IN</option>
                                 <option value="ireland">en_IE</option>
                             </select>
-                        </div>  
-                        
+                        </div>                         
                         <div class="radio">
                             <label>
                                 Genders:
@@ -141,38 +128,31 @@
                                 Female
                             </label>
                         </div>
-                        <div class="">
+                        <div>
                             <label >Email ID: <span class="redFont">*</span></label>
                             <input type="text" disabled class="form-control" maxlength="100" 
                             [(ngModel)]="detailsObj.email"
                             placeholder="enter email id"  
                             name="email">
                         </div>
-
-                        <div class="">
+                        <div>
                             <label>password:<span class="redFont">*</span></label>
                             <input type="password" disabled class="form-control"
                             placeholder="password"
                             [(ngModel)]="detailsObj.password"
                             name="password" >
                         </div>
-
-                        <div class="">
+                        <div>
                             <label>confirm password:<span class="redFont">*</span></label>
                             <input type="password" class="form-control" 
                             disabled PasswordValidator="password" minlength="8"
                              maxlength="20" [(ngModel)]="detailsObj.password"
                             placeholder="confirm password"
-                             name="confirmpassword" 
-                           >
-                        </div>
-                        
-                        <div>
-                            
-                            <label>Select Roles:<span class="redFont">*</span> </label>
-                            
-                            <select [disabled]="!isEditModeOn"
-                            [(ngModel)]="detailsObj.roles" class="form-select" name="roles">
+                             name="confirmpassword">
+                        </div>                        
+                        <div>  
+                            <label>Select Roles:<span class="redFont">*</span></label>
+                            <select [disabled]="!isEditModeOn" [(ngModel)]="detailsObj.roles" class="form-select" name="roles">
                                 <option value="Admin">Admin</option>
                                 <option value="ITOuser">ITOuser</option>
                             </select>
@@ -180,19 +160,16 @@
                                 <span *ngIf="f.controls['roles']?.invalid" class="redFont">Select a roles</span>
                             </div>
                         </div>
-                        
                         <div class="dropdown">
                             <label>Status:<span class="redFont">*</span></label>
-                            <select [disabled]="!isEditModeOn"
-                            [(ngModel)]="detailsObj.status" class="form-select" name="status">
+                            <select [disabled]="!isEditModeOn" [(ngModel)]="detailsObj.status" class="form-select" name="status">
                                 <option value="Active">Active</option>
                                 <option value="Disabled">Disabled</option>
                             </select>
                         </div>
                     </div>    
                 </div>    
-            </div>
-            
+            </div>           
             <div class="container-fluid text-right">
                 <hr>
                 <button *ngIf="!isEditModeOn" class="btn btn-primary btn-lg m-3" type="submit" (click)="onEdit()" [ngStyle]="{'display': role ==='ITOuser'? 'none':'content'}" >Edit</button>

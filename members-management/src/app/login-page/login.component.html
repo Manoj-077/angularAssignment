@@ -21,7 +21,7 @@
             </div>
             <div class="col-sm-12">
               <input [(ngModel)]="enteredUsername"  type="text" id="login" class="fadeIn second" name="username" placeholder="login" ngModel>
-              <span *ngIf="usernameEmpty && f.controls['username'].pristine" style="color: red; text-align: left;" ><br>username cannot be empty<br></span>
+              <span *ngIf="usernameEmpty && f.controls['username'].pristine" class="errorMessages" ><br>username cannot be empty<br></span>
             </div>
           </div> 
           
@@ -33,14 +33,14 @@
             </div>
             <div class="col-sm-12">
               <input type="password" [(ngModel)]="enteredPassword" id="password" class="fadeIn third" name="password" placeholder="password" ngModel>
-              <span *ngIf="passwordEmpty && f.controls['password'].pristine" style="color: red; text-align: left;" ><br>password cannot be empty<br></span>
+              <span *ngIf="passwordEmpty && f.controls['password'].pristine" class="errorMessages" ><br>password cannot be empty<br></span>
             </div>
             
           </div> 
           <div class="row">
             
             <div class="col-sm-12 mt-2">
-              <input type="submit" class="fadeIn fourth" value="Log In">
+              <input id="loginButton" type="submit" class="fadeIn fourth" value="Log In">
             </div>
           </div>
         </div>

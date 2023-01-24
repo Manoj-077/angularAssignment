@@ -289,3 +289,21 @@
       #icon {
         width:60%;
       }
+      
+      
+      .errorMessages{
+        color: red;
+        text-align: left;
+      }
+
+      @media screen and (max-width:320px) {
+        #loginButton{
+          margin-left: 13px;
+        }
+      }
+
+      @media screen and (min-width:426px) and (max-width:768px) {
+        #formContent{
+          width: 400px;
+        }
+      }
