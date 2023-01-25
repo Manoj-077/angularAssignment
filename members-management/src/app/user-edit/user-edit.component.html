@@ -1,60 +1,68 @@
 <div class="container-fluid" id="greet">
     <h1 id="addUser">Edit User</h1>
 </div>
+<p-toast position="top-center"></p-toast>
 <div class="container">                                                  
-    <div class="container-fluid rounded bg-white mt-5 mb-5 " class="d1">
+    <div class="div1">
         <form #f="ngForm" (ngSubmit)="onSubmit(f)" >
             <div class="row" >
                 <div class="col-sm-6 border-right" >
                     <div class="ml-3 px-3">
                         <div class="d-flex justify-content-between align-items-center ml-5 mt-4 mb-3" >
-                            <h2 style="font-family: 'Poppins', sans-serif;">Edit User</h2>
+                            <h2 >Edit User</h2>
                         </div>
                         <div class="d-flex flex-column align-items-center text-center" id="imageDiv">
-                            <img class="rounded-circle mt-5" *ngIf="!newImg"  width="150px" height="150px" src="{{image}}">
-                            <img *ngIf="newImg" class="rounded-circle mt-5"  width="150px" height="150px" src="{{newImage}}">
-                            <label class="form-label" for="customFile">only .jpg and .png images allowed</label>
-                            <input [disabled]="!isEditModeOn" type="file" style="width: 50%;" (change)="onfileselected($event)" 
+                            <img class="rounded-circle mt-5" *ngIf="!newImg" src="{{image}}">
+                            <img *ngIf="newImg" class="rounded-circle mt-5" src="{{newImage}}">
+                            <label *ngIf="isEditModeOn" class="form-label" for="customFile">only .jpg and .png images allowed</label>
+                            
+                            <input *ngIf="isEditModeOn" [disabled]="!isEditModeOn" type="file" (change)="onfileselected($event)" 
                             accept="image/png , image/jpg"  class="form-control" id="customFile" name="image" #img/>
                             <span *ngIf="nonImage"> 
                                 <br>
-                                <div class="alert alert-danger" style="width: 300px"  role="alert">
+                                <div class="alert alert-danger"  role="alert">
                                     Unsupported file
                                 </div> 
                             </span>             
                         </div>                      
                         <div class="mt-3">
-                            <label>UserName<span class="redFont">*</span></label>
-                            <input [(ngModel)]="detailsObj.username" type="text" disabled class="form-control"  name="username">
+                            <label>UserName:<span class="redFont">*</span></label>
+                            <span *ngIf="!isEditModeOn" class="datas"><br>{{detailsObj.username}}</span>
+                            <input *ngIf="isEditModeOn"  [(ngModel)]="detailsObj.username" type="text" disabled class="form-control"  name="username">
                         </div>                       
                         <div class="row m-0">
                             <div class="col-sm-6 pl-0 pr-1">
                                 <label >First Name:<span class="redFont">*</span></label>
-                                <input type="text" [(ngModel)]="detailsObj.firstname" disabled class="form-control"  placeholder="firstname" 
+                                <span *ngIf="!isEditModeOn" class="datas"><br>{{detailsObj.firstname}}</span>
+                                <input *ngIf="isEditModeOn" type="text" [(ngModel)]="detailsObj.firstname" disabled class="form-control"  placeholder="firstname" 
                                 maxlength="30"  name="firstname">
                             </div>
                             <div class="col-sm-6 p-0">
                                 <label>Last name:</label>
-                                <input type="text" [(ngModel)]="detailsObj.lastname" disabled class="form-control"  placeholder="" maxlength="30" name="lastname">
+                                <span *ngIf="!isEditModeOn" class="datas"><br>{{detailsObj.lastname}}</span>
+                                <input *ngIf="isEditModeOn" type="text" [(ngModel)]="detailsObj.lastname" disabled class="form-control"  placeholder="" maxlength="30" name="lastname">
                             </div>
                         </div>                      
                         <div class="form-outline datepicker w-100">
                             <label for="birthdayDate">Birthday:</label>
-                            <input type="date" 
+                            <span *ngIf="!isEditModeOn" class="datas"><br>{{detailsObj.birthday}}</span>
+                            <input *ngIf="isEditModeOn" type="date" 
                             [disabled]="!isEditModeOn" class="form-control" name="birthday" [(ngModel)]="detailsObj.birthday" id="birthdayDate">
                             <div *ngIf="submitted">
                                 <span *ngIf="bdayFail" class="redFont">DOB year invalid</span>
                             </div>
                         </div>                           
-                        <div class="">
+                        <div>
                             <label >Mobile Number:<span class="redFont">*</span></label>
-                            <input disabled type="text" class="form-control"
+                            <span *ngIf="!isEditModeOn" class="datas"><br>{{detailsObj.mobile}}</span>
+                            <input *ngIf="isEditModeOn" disabled type="text" class="form-control"
                             placeholder="enter phone number"  [(ngModel)]="detailsObj.mobile" 
                             name="mobile">
                         </div>
-                        <div class="">
+                        <div>
                             <label >Address :<span class="redFont">*</span></label>
-                            <input [disabled]="!isEditModeOn" type="text" class="form-control" maxlength="100" 
+                            <span *ngIf="!isEditModeOn" class="datas"><br>{{detailsObj.address}}</span>
+                            <input *ngIf="isEditModeOn" [disabled]="!isEditModeOn" type="text" class="form-control" maxlength="100" 
                             placeholder="enter address"  required name="address"  [(ngModel)]="detailsObj.address">
                             <div *ngIf="submitted">
                                 <span *ngIf="f.controls['address']?.invalid || f.controls['address'].pristine && f.controls['address'].touched" class="redFont">enter valid address</span>
@@ -65,11 +73,11 @@
 
                 <div class="col-sm-6 border-right" id="leftColumn">
                     <div class="ml-3 px-3">
-                        <div class="">
+                        <div>
                             <label>zipcode:</label>
-                            <input [disabled]="!isEditModeOn" type="text" class="form-control" [pattern]="zipcodePattern"
-                             maxlength="20" placeholder="zipcode" [(ngModel)]="detailsObj.zipcode"
-                             name="zipcode">
+                            <span *ngIf="!isEditModeOn" class="datas"><br>{{detailsObj.zipcode}}</span>
+                            <input *ngIf="isEditModeOn" [disabled]="!isEditModeOn" type="text" class="form-control" [pattern]="zipcodePattern"
+                             maxlength="20" placeholder="zipcode" [(ngModel)]="detailsObj.zipcode" name="zipcode">
                             <div *ngIf="submitted">
                                 <span *ngIf="f.controls['zipcode'].invalid && submitted"  class="redFont">
                                 enter valid zipcode</span>
@@ -78,7 +86,8 @@
                         <div class="row m-0">
                             <div class="col-sm-6 pl-0 pr-1 dropdown">
                                 <label>Country:</label>
-                                <select [(ngModel)]="country" [disabled]="!isEditModeOn" placeholder="Country"
+                                <span *ngIf="!isEditModeOn" class="datas"><br>{{country}}</span>
+                                <select *ngIf="isEditModeOn" [(ngModel)]="country" [disabled]="!isEditModeOn" placeholder="Country"
                                  class="form-select" (change)="changeCountry($event)" name="country">
                                     <option value="USA">USA</option>
                                     <option value="India">India</option>
@@ -87,7 +96,8 @@
                             </div>
                             <div class="col-sm-6 p-0">
                                 <label>State/Region:</label>
-                                <select [disabled]="!isEditModeOn" placeholder="State" [(ngModel)]="state" class="form-select" name="state">
+                                <span *ngIf="!isEditModeOn" class="datas"><br>{{state}}</span>
+                                <select *ngIf="isEditModeOn" [disabled]="!isEditModeOn" placeholder="State" [(ngModel)]="state" class="form-select" name="state">
                                     <option >--Choose State--</option>
                                     <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
                                 </select>
@@ -95,7 +105,8 @@
                         </div>                           
                         <div>
                             <label>Timezone:</label>
-                            <select [disabled]="!isEditModeOn"
+                            <span *ngIf="!isEditModeOn" class="datas"><br>{{detailsObj.timezone}}</span>
+                            <select *ngIf="isEditModeOn" [disabled]="!isEditModeOn"
                              class="form-select" [(ngModel)]="detailsObj.timezone" name="timezone">
                                 <option value="AST" >AST</option>
                                 <option value="EST">EST</option>
@@ -105,8 +116,8 @@
                         </div>
                         <div>
                             <label>Locales:</label>
-                            <select [disabled]="!isEditModeOn"
-                            [(ngModel)]="detailsObj.locale" class="form-select" name="locale">
+                            <span *ngIf="!isEditModeOn" class="datas"><br>{{detailsObj.locale}}</span>
+                            <select *ngIf="isEditModeOn" [disabled]="!isEditModeOn" [(ngModel)]="detailsObj.locale" class="form-select" name="locale">
                                 <option selected></option>
                                 <option value="us" >en_US</option>
                                 <option value="india">kn_IN</option>
@@ -117,34 +128,38 @@
                             <label>
                                 Genders:
                             </label>
+                            <span *ngIf="!isEditModeOn" class="datas"><br>{{detailsObj.gender}}</span>
                             <br>
-                            <label class="g">
+                            <label *ngIf="isEditModeOn" class="gender">
                             <input type="radio" disabled [(ngModel)]="detailsObj.gender" name="gender" value="male">
                                 Male
                             </label>
                             
-                            <label class="g">
-                                <input type="radio" disabled [(ngModel)]="detailsObj.gender" name="gender" value="female" style="margin-left: 10px;">
+                            <label *ngIf="isEditModeOn" class="gender">
+                                <input type="radio" id="femaleOption" disabled [(ngModel)]="detailsObj.gender" name="gender" value="female">
                                 Female
                             </label>
                         </div>
                         <div>
                             <label >Email ID: <span class="redFont">*</span></label>
-                            <input type="text" disabled class="form-control" maxlength="100" 
+                            <span *ngIf="!isEditModeOn" class="datas"><br>{{detailsObj.email}}</span>
+                            <input *ngIf="isEditModeOn" type="text" disabled class="form-control" maxlength="100" 
                             [(ngModel)]="detailsObj.email"
                             placeholder="enter email id"  
                             name="email">
                         </div>
                         <div>
                             <label>password:<span class="redFont">*</span></label>
-                            <input type="password" disabled class="form-control"
+                            <span *ngIf="!isEditModeOn" class="datas"><br>********</span>
+                            <input *ngIf="isEditModeOn" type="password" disabled class="form-control"
                             placeholder="password"
                             [(ngModel)]="detailsObj.password"
                             name="password" >
                         </div>
                         <div>
                             <label>confirm password:<span class="redFont">*</span></label>
-                            <input type="password" class="form-control" 
+                            <span *ngIf="!isEditModeOn" class="datas"><br>********</span>
+                            <input *ngIf="isEditModeOn"  type="password" class="form-control" 
                             disabled PasswordValidator="password" minlength="8"
                              maxlength="20" [(ngModel)]="detailsObj.password"
                             placeholder="confirm password"
@@ -152,7 +167,8 @@
                         </div>                        
                         <div>  
                             <label>Select Roles:<span class="redFont">*</span></label>
-                            <select [disabled]="!isEditModeOn" [(ngModel)]="detailsObj.roles" class="form-select" name="roles">
+                            <span *ngIf="!isEditModeOn" class="datas"><br>{{detailsObj.roles}}</span>
+                            <select *ngIf="isEditModeOn" [disabled]="!isEditModeOn" [(ngModel)]="detailsObj.roles" class="form-select" name="roles">
                                 <option value="Admin">Admin</option>
                                 <option value="ITOuser">ITOuser</option>
                             </select>
@@ -162,7 +178,8 @@
                         </div>
                         <div class="dropdown">
                             <label>Status:<span class="redFont">*</span></label>
-                            <select [disabled]="!isEditModeOn" [(ngModel)]="detailsObj.status" class="form-select" name="status">
+                            <span *ngIf="!isEditModeOn" class="datas"><br>{{detailsObj.status}}</span>
+                            <select *ngIf="isEditModeOn" [disabled]="!isEditModeOn" [(ngModel)]="detailsObj.status" class="form-select" name="status">
                                 <option value="Active">Active</option>
                                 <option value="Disabled">Disabled</option>
                             </select>

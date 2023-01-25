@@ -1,17 +1,17 @@
+<div class="container-fluid" id="greet">
+  <div class="row text-center">
+    <h1 id="welcome">Welcome {{ username }}</h1>
+  </div>
+</div>
 
-
-        <div class="container-fluid" id="greet">
-            <div class="row text-center">
-                    <h1 id="welcome">Welcome {{username}}</h1>       
-            </div>
-        </div>
-        
-    
-
-<div id="graph-home" >
-    <div class="container-fluid" id="graph" >
-            <div class="card">
-                <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
-            </div>
+<div id="graph-home">
+  <div class="container-fluid" id="graph">
+    <div class="card">
+      <p-chart
+        type="line"
+        [data]="basicData"
+        [options]="basicOptions"
+      ></p-chart>
     </div>
+  </div>
 </div>

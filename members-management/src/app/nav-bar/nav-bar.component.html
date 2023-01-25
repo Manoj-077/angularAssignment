@@ -11,14 +11,14 @@
       
       <div class="dropdown" id="menu" >
           
-          <a class="btn dropdown-toggle" style="margin-left:0px"  role="menu" data-bs-toggle="dropdown">
-            <img src="{{userLogo}}" class="rounded-circle align-middle" style="height: 30px;  width: 30px;margin-right: 5px;">
+          <a class="btn dropdown-toggle" id="imageAnchor"  role="menu" data-bs-toggle="dropdown">
+            <img src="{{userLogo}}" class="rounded-circle align-middle">
             {{username}}
             <!-- <span>({{firstname}} {{lastname}})</span> -->
           </a>
         <ul class="dropdown-menu" >
-          <li><a class="dropdown-item" routerLink="userProfile" >Profile</a></li>
-          <li><a class="dropdown-item" (click)="logout()" style="cursor: pointer;">LogOut</a></li>
+          <li><a class="dropdown-item" routerLink="userProfile">Profile</a></li>
+          <li><a class="dropdown-item" (click)="logout()" id="logout">LogOut</a></li>
         </ul>
       </div>  
     </div>

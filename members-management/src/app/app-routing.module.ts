@@ -14,26 +14,31 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserListComponent } from './user-list-page/user-list.component';
 
 const routes: Routes = [
-  {path : "" , redirectTo : "login", pathMatch: 'full'},
-  {path : "login", component : LoginComponent},
-  
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+
   {
-    path: "main", component : MainComponent,
-  canActivate: [AuthGuard],
-   children: [
-    {path:"home",component: HomePageComponent},
-    {path: "userList", component : UserListComponent},
-    {path:"userDetails", component: UserDetailsPageComponent , canActivate:[AdminGuard]} ,
-    {path:"userEdit",component: UserEditComponent},
-    {path:"userProfile",component: ProfilePageComponent},
-    {path : "roles", component : RolesComponent,canActivate:[AdminGuard]}
-  ]},
-   {path: "**", component: PageNotFoundComponent}
-  
+    path: 'main',
+    component: MainComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'home', component: HomePageComponent },
+      { path: 'userList', component: UserListComponent },
+      {
+        path: 'userDetails',
+        component: UserDetailsPageComponent,
+        canActivate: [AdminGuard], 
+      },
+      { path: 'userEdit', component: UserEditComponent },
+      { path: 'userProfile', component: ProfilePageComponent },
+      { path: 'roles', component: RolesComponent, canActivate: [AdminGuard] },
+    ],
+  },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

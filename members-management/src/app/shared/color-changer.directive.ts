@@ -1,30 +1,24 @@
 import { Directive, ElementRef } from '@angular/core';
 
 @Directive({
-  selector: '[appColorChanger]'
+  selector: '[appColorChanger]',
 })
 export class ColorChangerDirective {
+  constructor(private elementRef: ElementRef) {
+    let bgc: boolean = false;
+    let c: Boolean = false;
 
-  constructor(private elementRef : ElementRef) {
-    let bgc : boolean = false;
-    let c : Boolean = false;
-    
-    function colorChanger(){
-      if(c){
+    function colorChanger() {
+      if (c) {
         elementRef.nativeElement.style.color = 'orange';
-      }
-      else{
+      } else {
         elementRef.nativeElement.style.color = 'green';
       }
     }
-    setInterval(()=>{
-      c= !c;
+    setInterval(() => {
+      c = !c;
       bgc = !bgc;
       colorChanger();
-    
-    },500)
-    
-
-   }
-
+    }, 500);
+  }
 }

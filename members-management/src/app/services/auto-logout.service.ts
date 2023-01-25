@@ -3,17 +3,15 @@ import { AuthService } from '../gaurd/auth.service';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AutoLogoutService {
   logoutTime = 600;
-  constructor(private authService: AuthService, private router:Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
-  logout(){
-
-      this.authService.logout();
-      localStorage.clear();
-      this.router.navigate(['login'])
-  
+  logout() {
+    this.authService.logout();
+    localStorage.clear();
+    this.router.navigate(['login']);
   }
 }

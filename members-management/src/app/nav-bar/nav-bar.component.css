@@ -48,6 +48,19 @@
     overflow: hidden;
   }
   
+img{
+  height: 30px;  
+  width: 30px;
+  margin-right: 5px;
+}  
+
+#imageAnchor{
+  margin-left:0px
+}
+#logout{
+  cursor: pointer;
+}
+
   /* Style the links inside the navigation bar */
   .topnav a {
     float: left;

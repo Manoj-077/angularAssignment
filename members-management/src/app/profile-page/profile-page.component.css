@@ -18,3 +18,19 @@
     margin-bottom: 50px;        
 }
 
+img{
+    width: 200px;
+    height: 200px;
+}
+
+#div1{
+    width: 90%;
+}
+
+.col-sm-4{
+    text-align: left;
+}
+
+div label{
+    margin-left: 2px;
+}

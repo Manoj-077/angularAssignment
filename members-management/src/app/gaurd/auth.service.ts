@@ -11,13 +11,13 @@ export class AuthService {
   
   login(){
     this.loggedIn = true;
-    sessionStorage.setItem('isLoggedIn','true')
+    localStorage.setItem('isLoggedIn','true')
     
     this.router.navigate(['main/home'])
   }
   logout(){
     this.loggedIn = false;
-    sessionStorage.clear();
+    localStorage.clear();
   }
   // log(){
   //   return this.loggedIn;

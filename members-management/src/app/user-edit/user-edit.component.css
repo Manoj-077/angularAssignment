@@ -64,7 +64,7 @@ input{
     margin-top: 5px;
     margin-left: 5px;
 }
-.g{
+.gender{
     margin-top: 5px;
 }
 
@@ -84,7 +84,7 @@ input{
 	justify-content: center;
 	margin-top: 16px;
 }
-.d1{
+.div1{
     
         background-color: white;
         position: relative;
@@ -124,4 +124,28 @@ hr{
 
 .redFont{
     color: red;
+}
+
+#imageDiv img{
+    width: 150px;
+    height: 150px;
+}
+#imageDiv input{
+    width: 50%;
+}
+#imageDiv div{
+    width: 300px
+}
+
+h2{
+    font-family: 'Poppins', sans-serif;
+}
+
+#femaleOption{
+    margin-left: 10px;
+}
+
+.datas{
+    margin-left: 10px;
+    font-weight: 600;
 }

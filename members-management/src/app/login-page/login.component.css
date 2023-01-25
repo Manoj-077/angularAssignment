@@ -296,6 +296,10 @@
         text-align: left;
       }
 
+      div span{
+        color: red;
+      }
+
       @media screen and (max-width:320px) {
         #loginButton{
           margin-left: 13px;
