@@ -8,15 +8,13 @@ import { MainComponent } from './main-page/main.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { RolesComponent } from './roles-page/roles.component';
-
 import { UserDetailsPageComponent } from './user-details-page/user-details-page.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserListComponent } from './user-list-page/user-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: "full" },
   { path: 'login', component: LoginComponent },
-
   {
     path: 'main',
     component: MainComponent,
